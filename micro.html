@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Microscopio</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+
+html,
+body{
+
+    margin:0;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+
+    background:#020202;
+
+    font-family:Arial,Helvetica,sans-serif;
+
+}
+
+/* Fondo */
+
+body{
+
+    background:
+        radial-gradient(circle at center,#111 0%,#000 70%);
+
+}
+
+/* Pantalla */
+
+#screen{
+
+    width:100vw;
+    height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    position:relative;
+
+}
+
+.hud{
+
+    position:fixed;
+
+    z-index:9999;
+
+    color:#55ff99;
+
+    font-family:"Courier New", monospace;
+
+    font-size:14px;
+
+    line-height:1.5;
+
+    letter-spacing:1px;
+
+    text-shadow:
+        0 0 6px #00ff66;
+
+    pointer-events:none;
+
+}
+
+
+/* arriba izquierda */
+
+#hud1{
+
+    top:30px;
+    left:35px;
+
+}
+
+
+/* arriba derecha */
+
+#hud2{
+
+    top:30px;
+    right:35px;
+
+    text-align:right;
+
+}
+
+
+/* abajo izquierda */
+
+#hud3{
+
+    bottom:30px;
+    left:35px;
+
+}
+
+
+/* abajo derecha */
+
+#hud4{
+
+    bottom:30px;
+    right:35px;
+
+    text-align:right;
+
+}
+
+
+/* Microscopio */
+
+#scope{
+
+    position:relative;
+
+    width:78vmin;
+    height:78vmin;
+
+    border-radius:50%;
+
+    overflow:hidden;
+
+    background:#e9e6db;
+
+    border:8px solid #555;
+
+    box-shadow:
+
+    0 0 0 6px #222,
+
+    inset 0 0 120px rgba(0,0,0,.45),
+
+    0 0 60px rgba(255,255,255,.08);
+
+}
+
+/* SVG */
+
+#sample{
+
+    position:absolute;
+
+    inset:0;
+
+    width:100%;
+    height:100%;
+
+}
+
+/* iluminación */
+
+.light{
+
+    position:absolute;
+    inset:0;
+
+    background:
+
+    radial-gradient(circle,
+        rgba(255,255,255,.22),
+        rgba(255,255,255,.04) 55%,
+        transparent 80%);
+
+    pointer-events:none;
+
+}
+
+/* viñeta */
+
+.vignette{
+
+    position:absolute;
+    inset:0;
+
+    background:
+
+    radial-gradient(circle,
+
+        transparent 56%,
+
+        rgba(0,0,0,.20) 75%,
+
+        rgba(0,0,0,.55) 92%,
+
+        black 100%);
+
+}
+
+/* scanlines */
+
+.scan{
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+    repeating-linear-gradient(
+
+        180deg,
+
+        transparent 0px,
+
+        transparent 3px,
+
+        rgba(255,255,255,.03) 4px
+
+    );
+
+    opacity:.35;
+
+}
+
+/* ruido */
+
+.noise{
+
+    position:absolute;
+
+    inset:0;
+
+    background-image:
+
+        radial-gradient(rgba(0,0,0,.25) .6px, transparent .6px);
+
+    background-size:4px 4px;
+
+    opacity:.25;
+
+}
+
+/* reflejo */
+
+.glass{
+
+    position:absolute;
+
+    width:45%;
+
+    height:45%;
+
+    left:12%;
+
+    top:8%;
+
+    border-radius:50%;
+
+    background:
+
+    radial-gradient(circle,
+
+        rgba(255,255,255,.22),
+
+        transparent 70%);
+
+    filter:blur(10px);
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="screen">
+
+
+    <!-- HUD SUPERIOR -->
+    <div id="hud1" class="hud">
+        SEM SYSTEM<br>
+        ACCEL VOLT: 15.0 kV<br>
+        MAG: 400x<br>
+        MODE: LIVE
+    </div>
+
+
+    <div id="hud2" class="hud">
+        SPECIMEN: BIO-042<br>
+        DETECTOR: SE<br>
+        VACUUM: OK
+    </div>
+
+
+    <!-- MICROSCOPIO -->
+
+    <div id="scope">
+
+        <svg 
+    id="sample"
+    viewBox="0 0 5000 5000"
+    preserveAspectRatio="xMidYMid meet">
+
+
+    <!-- Definiciones de filtros -->
+    <defs>
+
+        <!-- desenfoque suave -->
+        <filter id="blurSmall">
+
+            <feGaussianBlur
+                stdDeviation="3" />
+
+        </filter>
+
+
+        <!-- brillo celular -->
+        <filter id="cellGlow">
+
+            <feGaussianBlur
+                stdDeviation="8" />
+
+        </filter>
+
+
+    </defs>
+
+
+    <!-- Aquí se dibujan las células -->
+    <g id="cells"></g>
+
+
+    <!-- Aquí aparecen bacterias y partículas -->
+    <g id="particles"></g>
+
+
+</svg>
+
+        <div class="light"></div>
+        <div class="glass"></div>
+        <div class="noise"></div>
+        <div class="scan"></div>
+        <div class="vignette"></div>
+
+    </div>
+
+
+    <!-- HUD INFERIOR -->
+
+    <div id="hud3" class="hud">
+        SCALE 50 μm<br>
+        X: 12.482 mm<br>
+        Y: 08.921 mm
+    </div>
+
+
+    <div id="hud4" class="hud">
+        FOCUS AUTO<br>
+        SIGNAL 98%<br>
+        READY
+    </div>
+
+
+</div>
+
+<script>
+    const svg = document.getElementById("cells");
+const particles = document.getElementById("particles");
+
+const NS = "http://www.w3.org/2000/svg";
+
+/* ===========================
+   Utilidades
+=========================== */
+
+function rnd(min,max){
+    return Math.random()*(max-min)+min;
+}
+
+function create(tag){
+    return document.createElementNS(NS,tag);
+}
+
+/* ===========================
+   Células
+=========================== */
+
+function createCell(){
+
+    const g=create("g");
+
+    // NUEVO ESPACIO DE MUESTRA: 5000x5000
+    const cx=rnd(100,4900);
+    const cy=rnd(100,4900);
+
+    const radius=rnd(40,160);
+
+    const sides=12;
+
+    let d="";
+
+
+    for(let i=0;i<sides;i++){
+
+        const angle=(Math.PI*2/sides)*i;
+
+        const r=radius+rnd(-20,25);
+
+        const x=cx+Math.cos(angle)*r;
+        const y=cy+Math.sin(angle)*r;
+
+
+        if(i===0)
+            d=`M ${x} ${y}`;
+        else
+            d+=` L ${x} ${y}`;
+
+    }
+
+
+    d+=" Z";
+
+
+    const cell=create("path");
+
+
+    cell.setAttribute("d",d);
+
+
+    cell.setAttribute(
+        "fill",
+        `rgba(255,255,255,${rnd(.08,.22)})`
+    );
+
+
+    cell.setAttribute(
+        "stroke",
+        `rgba(170,170,255,${rnd(.15,.35)})`
+    );
+
+
+    cell.setAttribute(
+        "stroke-width",
+        rnd(2,5)
+    );
+
+
+    g.appendChild(cell);
+
+
+
+    // NÚCLEO
+
+    const nucleus=create("ellipse");
+
+
+    nucleus.setAttribute(
+        "cx",
+        cx+rnd(-20,20)
+    );
+
+
+    nucleus.setAttribute(
+        "cy",
+        cy+rnd(-20,20)
+    );
+
+
+    nucleus.setAttribute(
+        "rx",
+        radius*.25
+    );
+
+
+    nucleus.setAttribute(
+        "ry",
+        radius*.18
+    );
+
+
+    nucleus.setAttribute(
+        "fill",
+        `hsla(270,55%,45%,${rnd(.5,.85)})`
+    );
+
+
+    g.appendChild(nucleus);
+
+
+
+    g.setAttribute(
+        "transform",
+        `rotate(${rnd(0,360)} ${cx} ${cy})`
+    );
+
+
+    g.style.opacity=rnd(.5,1);
+
+
+    svg.appendChild(g);
+
+}
+
+/* ===========================
+   Bacterias
+=========================== */
+
+function createBacteria(){
+
+    const b=create("ellipse");
+
+
+    b.setAttribute(
+        "cx",
+        rnd(0,5000)
+    );
+
+
+    b.setAttribute(
+        "cy",
+        rnd(0,5000)
+    );
+
+
+    b.setAttribute(
+        "rx",
+        rnd(5,18)
+    );
+
+
+    b.setAttribute(
+        "ry",
+        rnd(2,7)
+    );
+
+
+    b.setAttribute(
+        "fill",
+        "rgba(100,70,160,.45)"
+    );
+
+
+    b.setAttribute(
+        "transform",
+        `
+        rotate(
+        ${rnd(0,360)}
+        ${b.getAttribute("cx")}
+        ${b.getAttribute("cy")}
+        )
+        `
+    );
+
+
+    particles.appendChild(b);
+
+}
+
+/* ===========================
+   Partículas
+=========================== */
+
+function createParticle(){
+
+    const p=create("circle");
+
+
+    p.setAttribute(
+        "cx",
+        rnd(0,5000)
+    );
+
+
+    p.setAttribute(
+        "cy",
+        rnd(0,5000)
+    );
+
+
+    p.setAttribute(
+        "r",
+        rnd(1,5)
+    );
+
+
+    p.setAttribute(
+        "fill",
+        "rgba(80,80,80,.25)"
+    );
+
+
+    particles.appendChild(p);
+
+}
+
+/* ===========================
+   Definiciones SVG
+=========================== */
+
+const defs=create("defs");
+
+const filter=create("filter");
+
+filter.setAttribute("id","blurSmall");
+
+const blur=create("feGaussianBlur");
+
+blur.setAttribute("stdDeviation","1");
+
+filter.appendChild(blur);
+
+defs.appendChild(filter);
+
+document
+.getElementById("sample")
+.prepend(defs);
+
+/* ===========================
+   Generación
+=========================== */
+
+for(let i=0;i<170;i++)
+    createCell();
+
+for(let i=0;i<500;i++)
+    createParticle();
+
+for(let i=0;i<250;i++)
+    createBacteria();
+ 
+/* ===========================
+   Controles del microscopio
+=========================== */
+
+const scope = document.getElementById("scope");
+const sample = document.getElementById("sample");
+
+let zoom = 1;
+
+let posX = 0;
+let posY = 0;
+
+let dragging = false;
+
+let startX = 0;
+let startY = 0;
+
+
+/* ===========================
+   Zoom con rueda
+=========================== */
+
+scope.addEventListener(
+"wheel",
+function(e){
+
+    e.preventDefault();
+
+    if(e.deltaY < 0){
+
+        zoom += 0.08;
+
+    }else{
+
+        zoom -= 0.08;
+
+    }
+
+
+    if(zoom < 1)
+        zoom = 1;
+
+
+    if(zoom > 3)
+        zoom = 3;
+
+
+    updateView();
+
+
+},
+{passive:false}
+);
+
+
+
+/* ===========================
+   Movimiento de muestra
+=========================== */
+
+scope.addEventListener(
+"mousedown",
+function(e){
+
+    dragging=true;
+
+    startX=e.clientX-posX;
+    startY=e.clientY-posY;
+
+});
+
+
+window.addEventListener(
+"mouseup",
+function(){
+
+    dragging=false;
+
+});
+
+
+
+window.addEventListener(
+"mousemove",
+function(e){
+
+    if(!dragging)
+        return;
+
+
+    posX=e.clientX-startX;
+    posY=e.clientY-startY;
+
+
+    updateView();
+
+});
+
+
+
+/* ===========================
+   Aplicar transformación
+=========================== */
+
+function updateView(){
+
+    sample.style.transform=
+
+    `
+    translate(${posX}px,${posY}px)
+    scale(${zoom})
+    `;
+
+}
+
+
+
+/* ===========================
+   Animación microscópica
+=========================== */
+
+let drift=0;
+
+
+function microscopeMotion(){
+
+    drift+=0.02;
+
+
+    const movementX=
+        Math.sin(drift)*2;
+
+    const movementY=
+        Math.cos(drift*.8)*2;
+
+
+    if(!dragging){
+
+        sample.style.transform=
+
+        `
+        translate(
+        ${posX+movementX}px,
+        ${posY+movementY}px)
+
+        scale(${zoom})
+        `;
+
+    }
+
+
+    requestAnimationFrame(
+        microscopeMotion
+    );
+
+}
+
+
+microscopeMotion();
+
+
+
+/* ===========================
+   Enfoque dinámico
+=========================== */
+
+
+let focus=0;
+
+
+function autoFocus(){
+
+    focus+=0.03;
+
+
+    const blur=
+    0.25+
+    Math.sin(focus)*0.25;
+
+
+    sample.style.filter=
+    `
+    blur(${blur}px)
+    contrast(1.05)
+    `;
+
+
+    requestAnimationFrame(
+        autoFocus
+    );
+
+}
+
+
+autoFocus();
+
+
+
+/* ===========================
+   HUD dinámico
+=========================== */
+
+
+const hudScale=
+document.getElementById("hud3");
+
+const hudStatus=
+document.getElementById("hud4");
+
+
+setInterval(()=>{
+
+
+    let magnification=
+    Math.round(400*zoom);
+
+
+    hudScale.innerHTML=
+    `
+    Scale ${Math.round(50/zoom)} μm
+    `;
+
+
+    hudStatus.innerHTML=
+    `
+    MAG ${magnification}x<br>
+    FOCUS AUTO
+    `;
+
+
+},500);
+
+</script>
+
+</body>
+</html>
