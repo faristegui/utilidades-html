@@ -1,0 +1,2076 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>NŌMA — Cocina contemporánea</title>
+
+  <!-- =========================
+       BULMA
+  ========================== -->
+
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css"
+  >
+
+  <!-- =========================
+       GOOGLE FONTS
+  ========================== -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+
+    /* =====================================================
+       VARIABLES
+    ===================================================== */
+
+    :root {
+      --background: #f5f5f2;
+      --surface: #ffffff;
+      --dark: #171816;
+      --muted: #777873;
+      --line: #dedfd9;
+      --lime: #c9f24a;
+      --lime-dark: #9dbb27;
+      --soft: #eceee7;
+    }
+
+
+    /* =====================================================
+       GENERAL
+    ===================================================== */
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--background);
+      color: var(--dark);
+      font-family: "DM Sans", sans-serif;
+      font-size: 16px;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    a:hover {
+      color: inherit;
+    }
+
+    img {
+      display: block;
+    }
+
+    .container {
+      max-width: 1240px !important;
+    }
+
+
+    /* =====================================================
+       NAVBAR
+    ===================================================== */
+
+    .navbar-wrapper {
+      padding-top: 18px;
+    }
+
+    .modern-nav {
+      height: 72px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      padding: 0 8px;
+    }
+
+    .brand {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -1.5px;
+      text-decoration: none;
+    }
+
+    .brand span {
+      color: var(--lime-dark);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 34px;
+    }
+
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      color: #555650;
+
+      transition: color .2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--dark);
+    }
+
+    .reserve-pill {
+      background: var(--dark);
+      color: white;
+
+      padding: 12px 21px;
+
+      border-radius: 999px;
+
+      font-size: 14px;
+      font-weight: 600;
+
+      text-decoration: none;
+
+      transition:
+        background .2s ease,
+        transform .2s ease;
+    }
+
+    .reserve-pill:hover {
+      background: #30312e;
+      color: white;
+
+      transform: translateY(-2px);
+    }
+
+
+    /* =====================================================
+       HERO
+    ===================================================== */
+
+    .hero-modern {
+      padding: 65px 0 110px;
+    }
+
+    .hero-grid {
+      display: grid;
+
+      grid-template-columns:
+        minmax(0, .85fr)
+        minmax(0, 1.15fr);
+
+      gap: 80px;
+
+      align-items: center;
+    }
+
+    .location {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+
+      font-size: 11px;
+      font-weight: 700;
+
+      letter-spacing: .14em;
+
+      color: #73746e;
+    }
+
+    .location::before {
+      content: "";
+
+      width: 7px;
+      height: 7px;
+
+      border-radius: 50%;
+
+      background: var(--lime-dark);
+    }
+
+    .hero-copy h1 {
+      margin: 27px 0 25px;
+
+      font-size: clamp(58px, 7vw, 100px);
+
+      line-height: .91;
+
+      letter-spacing: -5px;
+
+      font-weight: 600;
+    }
+
+    .hero-copy h1 span {
+      display: block;
+      color: #858680;
+    }
+
+    .hero-description {
+      max-width: 450px;
+
+      color: var(--muted);
+
+      font-size: 17px;
+
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+
+      margin-top: 38px;
+    }
+
+    .primary-button {
+      display: inline-flex;
+
+      align-items: center;
+      justify-content: center;
+
+      padding: 14px 23px;
+
+      border-radius: 999px;
+
+      background: var(--dark);
+      color: white;
+
+      font-size: 14px;
+      font-weight: 600;
+
+      text-decoration: none;
+
+      transition:
+        transform .2s ease,
+        background .2s ease;
+    }
+
+    .primary-button:hover {
+      background: #333430;
+      color: white;
+
+      transform: translateY(-2px);
+    }
+
+    .text-button {
+      font-size: 14px;
+      font-weight: 600;
+
+      text-decoration: none;
+
+      border-bottom: 1px solid var(--dark);
+
+      padding-bottom: 3px;
+    }
+
+    .text-button:hover {
+      opacity: .6;
+    }
+
+
+    /* =====================================================
+       HERO IMAGE
+    ===================================================== */
+
+    .hero-visual {
+      position: relative;
+    }
+
+    .hero-image {
+      width: 100%;
+      height: 650px;
+
+      object-fit: cover;
+
+      border-radius: 26px;
+    }
+
+    .floating-info {
+      position: absolute;
+
+      left: 25px;
+      bottom: 25px;
+
+      background: rgba(255,255,255,.94);
+
+      padding: 17px 21px;
+
+      border-radius: 15px;
+
+      min-width: 180px;
+
+      backdrop-filter: blur(10px);
+    }
+
+    .floating-info span {
+      display: block;
+
+      font-size: 11px;
+
+      color: #7b7c76;
+
+      text-transform: uppercase;
+
+      letter-spacing: .12em;
+
+      margin-bottom: 5px;
+    }
+
+    .floating-info strong {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+
+    /* =====================================================
+       INTRO
+    ===================================================== */
+
+    .intro-section {
+      padding: 130px 0;
+    }
+
+    .section-label {
+      font-size: 11px;
+
+      font-weight: 700;
+
+      letter-spacing: .15em;
+
+      text-transform: uppercase;
+
+      color: #7b7c76;
+    }
+
+    .intro-title {
+      margin-top: 24px;
+
+      font-size: clamp(42px, 5vw, 70px);
+
+      line-height: 1;
+
+      letter-spacing: -3px;
+
+      font-weight: 500;
+    }
+
+    .intro-title span {
+      color: #858680;
+    }
+
+    .intro-copy {
+      color: var(--muted);
+
+      font-size: 16px;
+
+      line-height: 1.85;
+
+      max-width: 500px;
+    }
+
+    .intro-stat {
+      margin-top: 45px;
+
+      display: flex;
+      gap: 55px;
+    }
+
+    .stat strong {
+      display: block;
+
+      font-size: 29px;
+
+      letter-spacing: -1px;
+    }
+
+    .stat span {
+      display: block;
+
+      color: #8a8b85;
+
+      font-size: 12px;
+
+      margin-top: 4px;
+    }
+
+
+    /* =====================================================
+       IMAGE FEATURE
+    ===================================================== */
+
+    .feature-section {
+      padding-bottom: 140px;
+    }
+
+    .feature-image {
+      width: 100%;
+      height: 620px;
+
+      object-fit: cover;
+
+      border-radius: 26px;
+    }
+
+
+    /* =====================================================
+       MENU
+    ===================================================== */
+
+    .menu-section {
+      padding: 130px 0;
+
+      background: var(--surface);
+    }
+
+    .menu-header {
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: flex-end;
+
+      padding-bottom: 60px;
+
+      border-bottom: 1px solid var(--line);
+    }
+
+    .menu-title {
+      margin-top: 20px;
+
+      font-size: clamp(48px, 6vw, 82px);
+
+      line-height: .9;
+
+      letter-spacing: -4px;
+
+      font-weight: 500;
+    }
+
+    .menu-description {
+      max-width: 350px;
+
+      color: var(--muted);
+
+      line-height: 1.7;
+
+      font-size: 14px;
+    }
+
+    .menu-category {
+      margin-top: 55px;
+    }
+
+    .category-title {
+      display: flex;
+
+      align-items: center;
+
+      gap: 18px;
+
+      margin-bottom: 10px;
+
+      font-size: 12px;
+
+      text-transform: uppercase;
+
+      letter-spacing: .14em;
+
+      font-weight: 700;
+    }
+
+    .category-title::after {
+      content: "";
+
+      height: 1px;
+
+      flex: 1;
+
+      background: var(--line);
+    }
+
+    .menu-item {
+      display: grid;
+
+      grid-template-columns: 1fr auto;
+
+      gap: 40px;
+
+      padding: 24px 0;
+
+      border-bottom: 1px solid var(--line);
+
+      transition: padding .2s ease;
+    }
+
+    .menu-item:hover {
+      padding-left: 10px;
+    }
+
+    .menu-item h3 {
+      margin: 0;
+
+      font-size: 18px;
+
+      font-weight: 600;
+    }
+
+    .menu-item p {
+      margin: 7px 0 0;
+
+      color: #858680;
+
+      font-size: 13px;
+
+      line-height: 1.6;
+    }
+
+    .menu-price {
+      font-size: 15px;
+
+      font-weight: 600;
+
+      white-space: nowrap;
+    }
+
+
+    /* =====================================================
+       CHEF / STORY
+    ===================================================== */
+
+    .story-section {
+      padding: 140px 0;
+    }
+
+    .story-image {
+      width: 100%;
+      height: 620px;
+
+      object-fit: cover;
+
+      border-radius: 26px;
+    }
+
+    .story-title {
+      margin-top: 23px;
+
+      font-size: clamp(44px, 5vw, 70px);
+
+      line-height: .95;
+
+      letter-spacing: -3px;
+
+      font-weight: 500;
+    }
+
+    .story-title span {
+      color: #858680;
+    }
+
+    .story-text {
+      color: var(--muted);
+
+      font-size: 16px;
+
+      line-height: 1.85;
+
+      max-width: 470px;
+
+      margin-top: 30px;
+    }
+
+    .chef-name {
+      margin-top: 35px;
+
+      font-weight: 600;
+
+      font-size: 14px;
+    }
+
+    .chef-role {
+      display: block;
+
+      color: #8a8b85;
+
+      font-size: 12px;
+
+      margin-top: 3px;
+    }
+
+
+    /* =====================================================
+       GALLERY
+    ===================================================== */
+
+    .gallery-section {
+      padding: 0 0 140px;
+    }
+
+    .gallery-grid {
+      display: grid;
+
+      grid-template-columns:
+        1.1fr
+        .9fr;
+
+      gap: 18px;
+    }
+
+    .gallery-left {
+      height: 680px;
+    }
+
+    .gallery-right {
+      display: grid;
+
+      grid-template-rows: 1fr 1fr;
+
+      gap: 18px;
+    }
+
+    .gallery-image {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+
+      border-radius: 22px;
+    }
+
+
+    /* =====================================================
+       RESERVATION
+    ===================================================== */
+
+    .reservation-section {
+      padding: 130px 0;
+
+      background: var(--dark);
+
+      color: white;
+    }
+
+    .reservation-title {
+      margin-top: 22px;
+
+      font-size: clamp(48px, 6vw, 80px);
+
+      line-height: .9;
+
+      letter-spacing: -4px;
+
+      font-weight: 500;
+    }
+
+    .reservation-title span {
+      color: var(--lime);
+    }
+
+    .reservation-description {
+      max-width: 420px;
+
+      color: #a4a59f;
+
+      line-height: 1.8;
+
+      margin-top: 28px;
+    }
+
+    .reservation-card {
+      background: #ffffff;
+
+      color: var(--dark);
+
+      border-radius: 24px;
+
+      padding: 35px;
+
+      max-width: 480px;
+
+      margin-left: auto;
+    }
+
+    .reservation-card h3 {
+      font-size: 23px;
+
+      font-weight: 600;
+
+      margin-bottom: 28px;
+    }
+
+    .field-label {
+      display: block;
+
+      font-size: 12px;
+
+      font-weight: 600;
+
+      margin-bottom: 8px;
+    }
+
+    .modern-input,
+    .modern-select {
+      width: 100%;
+
+      height: 48px;
+
+      border: 1px solid #d8d9d3;
+
+      border-radius: 10px;
+
+      background: #f8f8f6;
+
+      padding: 0 14px;
+
+      font-family: inherit;
+
+      font-size: 14px;
+
+      outline: none;
+    }
+
+    .modern-input:focus,
+    .modern-select:focus {
+      border-color: #9da09a;
+
+      background: white;
+    }
+
+    .reservation-submit {
+      width: 100%;
+
+      height: 50px;
+
+      border: none;
+
+      border-radius: 999px;
+
+      background: var(--lime);
+
+      color: var(--dark);
+
+      font-family: inherit;
+
+      font-weight: 700;
+
+      cursor: pointer;
+
+      margin-top: 8px;
+
+      transition:
+        transform .2s ease,
+        background .2s ease;
+    }
+
+    .reservation-submit:hover {
+      background: #d8ff68;
+
+      transform: translateY(-2px);
+    }
+
+
+    /* =====================================================
+       FOOTER
+    ===================================================== */
+
+    footer {
+      background: var(--dark);
+
+      color: white;
+
+      border-top: 1px solid #30312e;
+
+      padding: 75px 0 30px;
+    }
+
+    .footer-brand {
+      font-size: 30px;
+
+      font-weight: 700;
+
+      letter-spacing: -2px;
+    }
+
+    .footer-brand span {
+      color: var(--lime);
+    }
+
+    .footer-description {
+      color: #8f908b;
+
+      max-width: 280px;
+
+      font-size: 13px;
+
+      line-height: 1.7;
+
+      margin-top: 15px;
+    }
+
+    .footer-title {
+      font-size: 12px;
+
+      font-weight: 700;
+
+      text-transform: uppercase;
+
+      letter-spacing: .12em;
+
+      margin-bottom: 17px;
+    }
+
+    .footer-link {
+      display: block;
+
+      color: #92938d;
+
+      font-size: 13px;
+
+      margin-bottom: 9px;
+
+      text-decoration: none;
+    }
+
+    .footer-link:hover {
+      color: white;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #30312e;
+
+      margin-top: 65px;
+
+      padding-top: 25px;
+
+      color: #6e706a;
+
+      font-size: 11px;
+
+      display: flex;
+
+      justify-content: space-between;
+    }
+
+
+    /* =====================================================
+       MOBILE
+    ===================================================== */
+
+    .mobile-menu-button {
+      display: none;
+
+      border: none;
+
+      background: transparent;
+
+      font-size: 22px;
+
+      cursor: pointer;
+    }
+
+
+    @media (max-width: 900px) {
+
+      .container {
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+
+      .nav-links,
+      .reserve-pill {
+        display: none;
+      }
+
+      .mobile-menu-button {
+        display: block;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+
+        gap: 50px;
+      }
+
+      .hero-copy h1 {
+        font-size: 70px;
+      }
+
+      .hero-image {
+        height: 520px;
+      }
+
+      .menu-header {
+        display: block;
+      }
+
+      .menu-description {
+        margin-top: 30px;
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-left {
+        height: 500px;
+      }
+
+      .gallery-right {
+        height: 700px;
+      }
+
+      .reservation-card {
+        margin: 60px 0 0;
+      }
+
+    }
+
+
+    @media (max-width: 600px) {
+
+      .hero-modern {
+        padding-top: 40px;
+      }
+
+      .hero-copy h1 {
+        font-size: 56px;
+
+        letter-spacing: -3px;
+      }
+
+      .hero-image {
+        height: 430px;
+
+        border-radius: 20px;
+      }
+
+      .intro-section,
+      .menu-section,
+      .story-section,
+      .reservation-section {
+        padding: 90px 0;
+      }
+
+      .feature-image {
+        height: 430px;
+      }
+
+      .story-image {
+        height: 450px;
+      }
+
+      .gallery-section {
+        padding-bottom: 90px;
+      }
+
+      .gallery-left {
+        height: 430px;
+      }
+
+      .gallery-right {
+        height: 600px;
+      }
+
+      .reservation-card {
+        padding: 25px;
+      }
+
+      .footer-bottom {
+        display: block;
+      }
+
+      .footer-bottom span {
+        display: block;
+
+        margin-bottom: 8px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAV
+====================================================== -->
+
+<div class="navbar-wrapper">
+
+  <div class="container">
+
+    <nav class="modern-nav">
+
+      <a href="#" class="brand">
+        NŌMA<span>.</span>
+      </a>
+
+
+      <div class="nav-links">
+
+        <a href="#nosotros">
+          Nosotros
+        </a>
+
+        <a href="#menu">
+          Menú
+        </a>
+
+        <a href="#historia">
+          Nuestra cocina
+        </a>
+
+        <a href="#contacto">
+          Contacto
+        </a>
+
+      </div>
+
+
+      <a
+        href="#reservas"
+        class="reserve-pill"
+      >
+        Reservar mesa
+      </a>
+
+
+      <button
+        class="mobile-menu-button"
+        aria-label="Abrir menú"
+      >
+        ☰
+      </button>
+
+    </nav>
+
+  </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     HERO
+====================================================== -->
+
+<section class="hero-modern">
+
+  <div class="container">
+
+    <div class="hero-grid">
+
+
+      <div class="hero-copy">
+
+        <div class="location">
+          MAR DEL PLATA · ARGENTINA
+        </div>
+
+
+        <h1>
+
+          Cocina que
+
+          <span>
+            se disfruta.
+          </span>
+
+        </h1>
+
+
+        <p class="hero-description">
+
+          Producto local, cocina contemporánea
+          y una carta que cambia con nosotros.
+
+          Un lugar para comer bien,
+          tomar algo y quedarse un rato más.
+
+        </p>
+
+
+        <div class="hero-actions">
+
+          <a
+            href="#menu"
+            class="primary-button"
+          >
+            Ver la carta
+          </a>
+
+
+          <a
+            href="#reservas"
+            class="text-button"
+          >
+            Reservar →
+          </a>
+
+        </div>
+
+      </div>
+
+
+
+      <div class="hero-visual">
+
+        <img
+          class="hero-image"
+          src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1600&q=90"
+          alt="Plato de cocina contemporánea"
+        >
+
+
+        <div class="floating-info">
+
+          <span>
+            Hoy
+          </span>
+
+          <strong>
+            20:00 — 00:30
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     NOSOTROS
+====================================================== -->
+
+<section
+  id="nosotros"
+  class="intro-section"
+>
+
+  <div class="container">
+
+    <div class="columns is-variable is-8">
+
+      <div class="column is-7">
+
+        <div class="section-label">
+          01 / Nosotros
+        </div>
+
+
+        <h2 class="intro-title">
+
+          Una cocina
+
+          <span>
+            sin demasiadas vueltas.
+          </span>
+
+        </h2>
+
+      </div>
+
+
+      <div class="column is-5">
+
+        <p class="intro-copy">
+
+          NŌMA nació con una idea bastante simple:
+          cocinar con buenos productos, respetarlos
+          y dejar que sean protagonistas.
+
+          <br><br>
+
+          Trabajamos con productores de la región,
+          pescadores locales y pequeños proveedores
+          que comparten nuestra forma de entender
+          la comida.
+
+        </p>
+
+
+        <div class="intro-stat">
+
+          <div class="stat">
+
+            <strong>
+              2021
+            </strong>
+
+            <span>
+              Año de apertura
+            </span>
+
+          </div>
+
+
+          <div class="stat">
+
+            <strong>
+              42
+            </strong>
+
+            <span>
+              Cubiertos
+            </span>
+
+          </div>
+
+
+          <div class="stat">
+
+            <strong>
+              01
+            </strong>
+
+            <span>
+              Carta cambiante
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FEATURE IMAGE
+====================================================== -->
+
+<section class="feature-section">
+
+  <div class="container">
+
+    <img
+      class="feature-image"
+      src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1800&q=90"
+      alt="Interior de NŌMA"
+    >
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     MENU
+====================================================== -->
+
+<section
+  id="menu"
+  class="menu-section"
+>
+
+  <div class="container">
+
+
+    <div class="menu-header">
+
+      <div>
+
+        <div class="section-label">
+          02 / La carta
+        </div>
+
+        <h2 class="menu-title">
+          Para compartir.
+        </h2>
+
+      </div>
+
+
+      <p class="menu-description">
+
+        Nuestra carta cambia según la temporada,
+        el mercado y las ganas de cocinar algo nuevo.
+
+      </p>
+
+    </div>
+
+
+
+    <!-- ENTRADAS -->
+
+    <div class="menu-category">
+
+      <div class="category-title">
+        Para empezar
+      </div>
+
+
+      <div class="menu-item">
+
+        <div>
+
+          <h3>
+            Pan de masa madre
+          </h3>
+
+          <p>
+            Manteca ahumada · aceite de oliva
+          </p>
+
+        </div>
+
+        <div class="menu-price">
+          $4.500
+        </div>
+
+      </div>
+
+
+      <div class="menu-item">
+
+        <div>
+
+          <h3>
+            Burrata
+          </h3>
+
+          <p>
+            Tomates · albahaca · aceite de chile
+          </p>
+
+        </div>
+
+        <div class="menu-price">
+          $12.000
+        </div>
+
+      </div>
+
+
+      <div class="menu-item">
+
+        <div>
+
+          <h3>
+            Pesca curada
+          </h3>
+
+          <p>
+            Limón · hinojo · hierbas frescas
+          </p>
+
+        </div>
+
+        <div class="menu-price">
+          $15.500
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- PRINCIPALES -->
+
+    <div class="menu-category">
+
+      <div class="category-title">
+        Principales
+      </div>
+
+
+      <div class="menu-item">
+
+        <div>
+
+          <h3>
+            Pesca del día
+          </h3>
+
+          <p>
+            Vegetales de temporada · beurre blanc
+          </p>
+
+        </div>
+
+        <div class="menu-price">
+          $19.500
+        </div>
+
+      </div>
+
+
+      <div class="menu-item">
+
+        <div>
+
+          <h3>
+            Ojo de bife
+          </h3>
+
+          <p>
+            Papas · chimichurri · jugo de carne
+          </p>
+
+        </div>
+
+        <div class="menu-price">
+          $23.000
+        </div>
+
+      </div>
+
+
+      <div class="menu-item">
+
+        <div>
+
+          <h3>
+            Pasta fresca
+          </h3>
+
+          <p>
+            Parmesano · manteca · pimienta negra
+          </p>
+
+        </div>
+
+        <div class="menu-price">
+          $14.000
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- POSTRES -->
+
+    <div class="menu-category">
+
+      <div class="category-title">
+        Algo dulce
+      </div>
+
+
+      <div class="menu-item">
+
+        <div>
+
+          <h3>
+            Chocolate & sal
+          </h3>
+
+          <p>
+            Chocolate amargo · caramelo · sal marina
+          </p>
+
+        </div>
+
+        <div class="menu-price">
+          $8.500
+        </div>
+
+      </div>
+
+
+      <div class="menu-item">
+
+        <div>
+
+          <h3>
+            Flan de dulce de leche
+          </h3>
+
+          <p>
+            Crema · naranja · nueces
+          </p>
+
+        </div>
+
+        <div class="menu-price">
+          $7.500
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     HISTORIA / CHEF
+====================================================== -->
+
+<section
+  id="historia"
+  class="story-section"
+>
+
+  <div class="container">
+
+    <div class="columns is-vcentered is-variable is-8">
+
+
+      <div class="column is-6">
+
+        <img
+          class="story-image"
+          src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&w=1300&q=90"
+          alt="Chef de NŌMA"
+        >
+
+      </div>
+
+
+      <div class="column is-6">
+
+        <div class="section-label">
+          03 / Nuestra cocina
+        </div>
+
+
+        <h2 class="story-title">
+
+          Cocinar bien
+          <span>empieza mucho antes del plato.</span>
+
+        </h2>
+
+
+        <p class="story-text">
+
+          Elegir un buen producto.
+          Conocer de dónde viene.
+          Saber cuándo tocarlo y cuándo dejarlo tranquilo.
+
+          <br><br>
+
+          Nuestra cocina busca hacer pocas cosas,
+          pero hacerlas realmente bien.
+
+        </p>
+
+
+        <div class="chef-name">
+
+          Tomás Ferrero
+
+          <span class="chef-role">
+            Chef ejecutivo
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     GALERÍA
+====================================================== -->
+
+<section class="gallery-section">
+
+  <div class="container">
+
+    <div class="gallery-grid">
+
+
+      <div class="gallery-left">
+
+        <img
+          class="gallery-image"
+          src="https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=1400&q=90"
+          alt="Plato de NŌMA"
+        >
+
+      </div>
+
+
+      <div class="gallery-right">
+
+        <img
+          class="gallery-image"
+          src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=1100&q=90"
+          alt="Interior del restaurante"
+        >
+
+
+        <img
+          class="gallery-image"
+          src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=1100&q=90"
+          alt="Mesa del restaurante"
+        >
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     RESERVAS
+====================================================== -->
+
+<section
+  id="reservas"
+  class="reservation-section"
+>
+
+  <div class="container">
+
+    <div class="columns is-vcentered is-variable is-8">
+
+
+      <div class="column is-6">
+
+        <div class="section-label">
+          04 / Reservas
+        </div>
+
+
+        <h2 class="reservation-title">
+
+          Tu mesa.
+
+          <span>
+            Tu momento.
+          </span>
+
+        </h2>
+
+
+        <p class="reservation-description">
+
+          Abrimos de miércoles a domingo.
+
+          <br><br>
+
+          Cena · 20:00 — 00:30
+
+          <br>
+
+          Mar del Plata · Buenos Aires
+
+        </p>
+
+      </div>
+
+
+
+      <div class="column is-6">
+
+        <div class="reservation-card">
+
+          <h3>
+            Reservar una mesa
+          </h3>
+
+
+          <form id="reservationForm">
+
+
+            <div class="field">
+
+              <label class="field-label">
+                Nombre
+              </label>
+
+              <input
+                id="nombre"
+                class="modern-input"
+                type="text"
+                placeholder="Tu nombre"
+                required
+              >
+
+            </div>
+
+
+            <div class="columns">
+
+
+              <div class="column">
+
+                <label class="field-label">
+                  Fecha
+                </label>
+
+                <input
+                  id="fecha"
+                  class="modern-input"
+                  type="date"
+                  required
+                >
+
+              </div>
+
+
+              <div class="column">
+
+                <label class="field-label">
+                  Personas
+                </label>
+
+                <select
+                  id="personas"
+                  class="modern-select"
+                >
+
+                  <option>2 personas</option>
+                  <option>3 personas</option>
+                  <option>4 personas</option>
+                  <option>5 personas</option>
+                  <option>6 personas</option>
+                  <option>7+ personas</option>
+
+                </select>
+
+              </div>
+
+            </div>
+
+
+            <div class="field">
+
+              <label class="field-label">
+                Horario
+              </label>
+
+              <select
+                id="hora"
+                class="modern-select"
+              >
+
+                <option>20:00</option>
+                <option>20:30</option>
+                <option>21:00</option>
+                <option>21:30</option>
+                <option>22:00</option>
+                <option>22:30</option>
+                <option>23:00</option>
+
+              </select>
+
+            </div>
+
+
+            <div class="field">
+
+              <label class="field-label">
+                WhatsApp
+              </label>
+
+              <input
+                id="telefono"
+                class="modern-input"
+                type="tel"
+                placeholder="+54 9..."
+                required
+              >
+
+            </div>
+
+
+            <button
+              type="submit"
+              class="reservation-submit"
+            >
+              Consultar disponibilidad
+            </button>
+
+          </form>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FOOTER
+====================================================== -->
+
+<footer id="contacto">
+
+  <div class="container">
+
+    <div class="columns">
+
+
+      <div class="column is-6">
+
+        <div class="footer-brand">
+          NŌMA<span>.</span>
+        </div>
+
+
+        <p class="footer-description">
+
+          Cocina contemporánea en Mar del Plata.
+          Producto local, buenos vinos y una mesa
+          para quedarse un rato más.
+
+        </p>
+
+      </div>
+
+
+      <div class="column">
+
+        <div class="footer-title">
+          Visitanos
+        </div>
+
+        <a class="footer-link">
+          Mar del Plata
+        </a>
+
+        <a class="footer-link">
+          Buenos Aires, Argentina
+        </a>
+
+      </div>
+
+
+      <div class="column">
+
+        <div class="footer-title">
+          Horarios
+        </div>
+
+        <a class="footer-link">
+          Miércoles — Domingo
+        </a>
+
+        <a class="footer-link">
+          20:00 — 00:30
+        </a>
+
+      </div>
+
+
+      <div class="column">
+
+        <div class="footer-title">
+          Contacto
+        </div>
+
+        <a class="footer-link">
+          +54 9 223 555-5555
+        </a>
+
+        <a class="footer-link">
+          hola@noma-resto.com
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+      <span>
+        © 2026 NŌMA
+      </span>
+
+      <span>
+        Mar del Plata · Argentina
+      </span>
+
+    </div>
+
+  </div>
+
+</footer>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+====================================================== -->
+
+<script>
+
+  /* ==========================================
+     FECHA MÍNIMA
+  ========================================== */
+
+  const fechaInput =
+    document.getElementById("fecha");
+
+  const today =
+    new Date().toISOString().split("T")[0];
+
+  fechaInput.min = today;
+
+
+  /* ==========================================
+     RESERVA → WHATSAPP
+  ========================================== */
+
+  const reservationForm =
+    document.getElementById("reservationForm");
+
+
+  reservationForm.addEventListener(
+    "submit",
+    function(event) {
+
+      event.preventDefault();
+
+
+      const nombre =
+        document.getElementById("nombre").value;
+
+      const fecha =
+        document.getElementById("fecha").value;
+
+      const personas =
+        document.getElementById("personas").value;
+
+      const hora =
+        document.getElementById("hora").value;
+
+      const telefono =
+        document.getElementById("telefono").value;
+
+
+      const mensaje =
+
+        `Hola NŌMA! Quiero consultar por una reserva.%0A%0A` +
+
+        `Nombre: ${nombre}%0A` +
+
+        `Fecha: ${fecha}%0A` +
+
+        `Hora: ${hora}%0A` +
+
+        `Personas: ${personas}%0A` +
+
+        `WhatsApp: ${telefono}`;
+
+
+      /*
+        CAMBIÁ ESTE NÚMERO
+        POR EL WHATSAPP REAL DEL RESTAURANTE
+      */
+
+      const numero =
+        "5492235555555";
+
+
+      window.open(
+        `https://wa.me/${numero}?text=${mensaje}`,
+        "_blank"
+      );
+
+    }
+  );
+
+
+  /* ==========================================
+     MOBILE MENU
+  ========================================== */
+
+  const mobileButton =
+    document.querySelector(".mobile-menu-button");
+
+  const navLinks =
+    document.querySelector(".nav-links");
+
+
+  mobileButton.addEventListener(
+    "click",
+    function() {
+
+      if (navLinks.style.display === "flex") {
+
+        navLinks.style.display = "none";
+
+      } else {
+
+        navLinks.style.display = "flex";
+
+        navLinks.style.position = "absolute";
+
+        navLinks.style.top = "80px";
+
+        navLinks.style.left = "20px";
+
+        navLinks.style.right = "20px";
+
+        navLinks.style.padding = "20px";
+
+        navLinks.style.background = "#ffffff";
+
+        navLinks.style.borderRadius = "18px";
+
+        navLinks.style.flexDirection = "column";
+
+        navLinks.style.alignItems = "flex-start";
+
+        navLinks.style.boxShadow =
+          "0 15px 40px rgba(0,0,0,.08)";
+
+      }
+
+    }
+  );
+
+</script>
+
+
+</body>
+
+</html>

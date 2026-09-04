@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Monitor ECG</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+
+body{
+    background:#020617;
+    overflow:hidden;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+.card{
+    background:#0f172a;
+    border:1px solid #1e293b;
+    box-shadow:0 0 15px rgba(0,255,120,.08);
+}
+
+.value{
+    font-size:2.2rem;
+    font-weight:bold;
+}
+
+canvas{
+    width:100%;
+}
+
+#ecg{
+    width:100%;
+    height:220px;
+}
+
+.glow{
+    color:#00ff99;
+    text-shadow:
+        0 0 5px #00ff99,
+        0 0 15px #00ff99;
+}
+
+.heart{
+
+animation:beat .8s infinite;
+
+}
+
+@keyframes beat{
+
+0%{transform:scale(1);}
+25%{transform:scale(1.15);}
+40%{transform:scale(.95);}
+100%{transform:scale(1);}
+
+}
+
+</style>
+
+</head>
+
+<body class="text-white">
+
+<div class="p-5">
+
+<div class="flex justify-between items-center mb-4">
+
+<div>
+
+<h1 class="text-3xl font-bold glow">
+MONITOR MULTIPARAMÉTRICO
+</h1>
+
+<p class="text-gray-400">
+Paciente Demo
+</p>
+
+</div>
+
+<div id="clock" class="text-3xl font-bold text-cyan-300"></div>
+
+</div>
+
+<div class="grid grid-cols-12 gap-4">
+
+<!-- ECG -->
+
+<div class="col-span-12 lg:col-span-8 card rounded-xl p-4">
+
+<div class="flex justify-between mb-2">
+
+<span class="text-green-400 font-bold">
+ECG
+</span>
+
+<div class="text-right">
+
+<div class="heart text-red-500 text-3xl">
+♥
+</div>
+
+<div id="bpm" class="text-5xl font-bold text-green-400">
+78
+</div>
+
+<div class="text-gray-400">
+BPM
+</div>
+
+</div>
+
+</div>
+
+<canvas id="ecg"></canvas>
+
+</div>
+
+<!-- Tarjetas -->
+
+<div class="col-span-12 lg:col-span-4 grid gap-4">
+
+<div class="card rounded-xl p-4">
+
+<div class="text-gray-400">
+🩸 Presión
+</div>
+
+<div class="value text-cyan-400" id="pressure">
+120/80
+</div>
+
+</div>
+
+<div class="card rounded-xl p-4">
+
+<div class="text-gray-400">
+🫁 SpO₂
+</div>
+
+<div class="value text-green-400" id="spo2">
+98%
+</div>
+
+</div>
+
+<div class="card rounded-xl p-4">
+
+<div class="text-gray-400">
+🌡 Temperatura
+</div>
+
+<div class="value text-yellow-400" id="temp">
+36.7°
+</div>
+
+</div>
+
+<div class="card rounded-xl p-4">
+
+<div class="text-gray-400">
+😮 Respiración
+</div>
+
+<div class="value text-blue-400" id="resp">
+16
+</div>
+
+</div>
+
+</div>
+
+<div class="col-span-12 card rounded-xl p-5">
+
+<h2 class="text-green-400 mb-3">
+Historial de Frecuencia Cardíaca
+</h2>
+
+<canvas id="history" height="80"></canvas>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+function random(min,max){
+
+return Math.random()*(max-min)+min;
+
+}
+
+//////////////////////////////////////
+// reloj
+
+setInterval(()=>{
+
+clock.innerHTML=new Date().toLocaleTimeString();
+
+},1000);
+
+//////////////////////////////////////
+// valores
+
+setInterval(()=>{
+
+let bpm=Math.floor(random(72,84));
+
+document.getElementById("bpm").innerHTML=bpm;
+
+document.getElementById("spo2").innerHTML=
+Math.floor(random(97,100))+"%";
+
+document.getElementById("temp").innerHTML=
+random(36.4,37.2).toFixed(1)+"°";
+
+document.getElementById("resp").innerHTML=
+Math.floor(random(14,18));
+
+document.getElementById("pressure").innerHTML=
+Math.floor(random(115,126))
++"/"+
+Math.floor(random(75,84));
+
+historyChart.data.datasets[0].data.shift();
+
+historyChart.data.datasets[0].data.push(bpm);
+
+historyChart.update();
+
+},2000);
+
+//////////////////////////////////////
+// ECG
+
+const ecg=document.getElementById("ecg");
+
+const ctx=ecg.getContext("2d");
+
+function resize(){
+
+ecg.width=ecg.offsetWidth;
+ecg.height=220;
+
+}
+
+resize();
+
+window.onresize=resize;
+
+let x=0;
+
+function draw(){
+
+ctx.fillStyle="#020617";
+
+ctx.fillRect(0,0,ecg.width,ecg.height);
+
+ctx.strokeStyle="#00ff99";
+
+ctx.lineWidth=2;
+
+ctx.beginPath();
+
+for(let i=0;i<ecg.width;i++){
+
+let y=110;
+
+let p=(i+x)%180;
+
+if(p>50 && p<60) y-=15;
+if(p>60 && p<63) y+=40;
+if(p>63 && p<66) y-=90;
+if(p>66 && p<70) y+=35;
+if(p>70 && p<82) y-=8;
+
+ctx.lineTo(i,y);
+
+}
+
+ctx.stroke();
+
+x+=3;
+
+requestAnimationFrame(draw);
+
+}
+
+draw();
+
+//////////////////////////////////////
+// gráfico
+
+const historyChart=new Chart(
+document.getElementById("history"),{
+
+type:"line",
+
+data:{
+
+labels:new Array(30).fill(""),
+
+datasets:[{
+
+data:[
+75,76,77,78,79,80,79,78,77,76,
+77,78,79,80,81,80,79,78,77,76,
+77,78,79,80,81,80,79,78,77,78
+],
+
+borderColor:"#00ff99",
+
+borderWidth:3,
+
+pointRadius:0,
+
+tension:.4,
+
+fill:true,
+
+backgroundColor:"rgba(0,255,120,.12)"
+
+}]
+
+},
+
+options:{
+
+responsive:true,
+
+plugins:{legend:{display:false}},
+
+scales:{
+
+x:{display:false},
+
+y:{
+
+grid:{color:"#1e293b"},
+
+ticks:{color:"#94a3b8"}
+
+}
+
+}
+
+}
+
+});
+
+</script>
+
+</body>
+</html>

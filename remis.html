@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remis Express - Tu viaje rápido y seguro</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom colors */
+        @layer utilities {
+            .bg-primary { @apply bg-indigo-600; }
+            .text-primary { @apply text-indigo-600; }
+            .bg-primary-hover:hover { @apply bg-indigo-700; }
+            .border-primary { @apply border-indigo-600; }
+        }
+        /* Custom animations */
+        .fade-in {
+            animation: fadeIn 0.8s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .slide-up {
+            animation: slideUp 0.6s ease-out;
+        }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .card-hover:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased bg-gray-50 text-gray-900 overflow-x-hidden">
+    <!-- Header -->
+    <header class="bg-white text-gray-800 py-4 shadow-lg sticky top-0 z-50 border-b border-gray-200">
+        <div class="container mx-auto flex items-center justify-between px-4">
+            <h1 class="text-2xl font-bold text-primary">Remis Express</h1>
+            <nav class="space-x-6 hidden md:block">
+                <a href="#servicios" class="hover:text-primary transition font-medium">Servicios</a>
+                <a href="#precios" class="hover:text-primary transition font-medium">Precios</a>
+                <a href="#contacto" class="hover:text-primary transition font-medium">Contacto</a>
+            </nav>
+            <button id="menuBtn" class="md:hidden focus:outline-none p-2 rounded-lg hover:bg-gray-100 transition">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobileMenu" class="md:hidden hidden px-4 pt-2 pb-4 bg-white border-t border-gray-200">
+            <a href="#servicios" class="block py-2 hover:text-primary transition font-medium">Servicios</a>
+            <a href="#precios" class="block py-2 hover:text-primary transition font-medium">Precios</a>
+            <a href="#contacto" class="block py-2 hover:text-primary transition font-medium">Contacto</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative py-20 md:py-32 bg-gradient-to-br from-indigo-50 via-white to-purple-50 overflow-hidden">
+        <div class="absolute inset-0 bg-grid-pattern opacity-5"></div>
+        <div class="container mx-auto px-4 text-center relative z-10">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-5xl md:text-7xl font-extrabold text-gray-800 mb-6 fade-in">Viaja rápido, llega seguro</h2>
+                <p class="text-xl md:text-2xl text-gray-600 mb-10 fade-in">Remis 24/7, servicio premium a precios competitivos con vehículos de última generación y conductores profesionales.</p>
+                <div class="flex flex-col md:flex-row gap-4 justify-center mb-12 fade-in">
+                    <a href="#contacto" class="bg-primary text-white py-4 px-8 rounded-full hover:bg-primary-hover transition font-semibold text-lg shadow-xl pulse">Reserva ahora</a>
+                    <a href="#servicios" class="bg-white text-primary border-2 border-primary py-4 px-8 rounded-full hover:bg-primary hover:text-white transition font-semibold text-lg shadow-lg">Ver servicios</a>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center fade-in">
+                    <div class="bg-white rounded-lg p-4 shadow-md">
+                        <div class="text-3xl font-bold text-primary">24/7</div>
+                        <div class="text-sm text-gray-600">Disponibilidad</div>
+                    </div>
+                    <div class="bg-white rounded-lg p-4 shadow-md">
+                        <div class="text-3xl font-bold text-primary">50+</div>
+                        <div class="text-sm text-gray-600">Vehículos</div>
+                    </div>
+                    <div class="bg-white rounded-lg p-4 shadow-md">
+                        <div class="text-3xl font-bold text-primary">1000+</div>
+                        <div class="text-sm text-gray-600">Clientes</div>
+                    </div>
+                    <div class="bg-white rounded-lg p-4 shadow-md">
+                        <div class="text-3xl font-bold text-primary">5★</div>
+                        <div class="text-sm text-gray-600">Calificación</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section id="servicios" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h3 class="text-4xl font-bold text-gray-800 mb-4">Nuestros Servicios</h3>
+                <div class="w-24 h-1 bg-primary mx-auto rounded-full"></div>
+                <p class="text-lg text-gray-600 mt-6 max-w-2xl mx-auto">Ofrecemos servicios de remis premium con vehículos de última generación y conductores profesionales para todas sus necesidades de transporte.</p>
+            </div>
+            <div class="grid gap-8 md:grid-cols-3">
+                <div class="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden">
+                    <div class="h-48 bg-gradient-to-br from-indigo-500 to-purple-600 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
+                        <div class="absolute bottom-4 left-4 text-white">
+                            <h4 class="text-2xl font-bold">Remis Ejecutivo</h4>
+                            <p class="text-indigo-100">Servicio premium</p>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex items-center mb-6">
+                            <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mr-4">
+                                <svg class="w-8 h-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V9a2 2 0 00-2-2H7a2 2 0 00-2 2v12m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4 0h1m-5-4h.01M9 11h.01M12 16h.01M15 11h.01M21 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"></path></svg>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500">Flota Premium</p>
+                                <p class="text-lg font-semibold text-gray-800">$30/km</p>
+                            </div>
+                        </div>
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-center text-gray-600">
+                                <div class="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
+                                Mercedes Clase E, BMW Serie 5
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <div class="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
+                                Conductores certificados
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <div class="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
+                                Asistencia 24/7
+                            </li>
+                        </ul>
+                        <a href="#contacto" class="block w-full bg-indigo-600 text-white py-3 px-6 rounded-lg hover:bg-indigo-700 transition font-semibold text-center shadow-md">Reservar Ahora</a>
+                    </div>
+                </div>
+                
+                <div class="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden">
+                    <div class="h-48 bg-gradient-to-br from-blue-500 to-cyan-600 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
+                        <div class="absolute bottom-4 left-4 text-white">
+                            <h4 class="text-2xl font-bold">Remis Compartido</h4>
+                            <p class="text-blue-100">Ahorra hasta 40%</p>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex items-center mb-6">
+                            <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                                <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500">Costo compartido</p>
+                                <p class="text-lg font-semibold text-gray-800">$15/km</p>
+                            </div>
+                        </div>
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-center text-gray-600">
+                                <div class="w-2 h-2 bg-blue-500 rounded-full mr-3"></div>
+                                Compartir viaje con otros pasajeros
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <div class="w-2 h-2 bg-blue-500 rounded-full mr-3"></div>
+                                Rutas optimizadas
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <div class="w-2 h-2 bg-blue-500 rounded-full mr-3"></div>
+                                Pagos seguros y trazables
+                            </li>
+                        </ul>
+                        <a href="#contacto" class="block w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition font-semibold text-center shadow-md">Reservar Ahora</a>
+                    </div>
+                </div>
+                
+                <div class="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden">
+                    <div class="h-48 bg-gradient-to-br from-green-500 to-emerald-600 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
+                        <div class="absolute bottom-4 left-4 text-white">
+                            <h4 class="text-2xl font-bold">Aeropuerto</h4>
+                            <p class="text-green-100">Servicio especializado</p>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex items-center mb-6">
+                            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mr-4">
+                                <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7H3v12a2 2 0 002 2z"></path></svg>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500">Tarifa fija</p>
+                                <p class="text-lg font-semibold text-gray-800">$40 fijo</p>
+                            </div>
+                        </div>
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-center text-gray-600">
+                                <div class="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
+                                Seguimiento de vuelo en tiempo real
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <div class="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
+                                Punto a punto garantizado
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <div class="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
+                                Asistencia de equipaje
+                            </li>
+                        </ul>
+                        <a href="#contacto" class="block w-full bg-green-600 text-white py-3 px-6 rounded-lg hover:bg-green-700 transition font-semibold text-center shadow-md">Reservar Ahora</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="precios" class="py-20 bg-gradient-to-br from-gray-50 to-indigo-50">
+        <div class="container mx-auto px-4">
+            <h3 class="text-4xl font-bold text-center text-gray-800 mb-4">Precios Transparentes</h3>
+            <p class="text-lg text-gray-600 text-center mb-16 max-w-2xl mx-auto">Tarifas competitivas y sin sorpresas. Todos nuestros precios incluyen impuestos y servicio al cliente 24/7.</p>
+            <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                <div class="bg-white rounded-xl shadow-lg p-8 card-hover text-center border-t-4 border-indigo-600">
+                    <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-indigo-100 flex items-center justify-center">
+                        <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&auto=format&fit=crop&w=80&q=80" alt="Remis Ejecutivo" class="w-14 h-14 rounded-full object-cover">
+                    </div>
+                    <h4 class="text-2xl font-semibold mb-2">Remis Ejecutivo</h4>
+                    <p class="text-sm text-gray-500 mb-4">Servicio premium para ejecutivos</p>
+                    <p class="text-5xl font-bold text-primary mb-6">$30 <span class="text-lg font-normal">por km</span></p>
+                    <ul class="text-left mb-8 space-y-3">
+                        <li class="flex items-center"><span class="text-green-500 mr-2 text-lg">✓</span> <span class="text-sm">Mercedes Clase E o similar</span></li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2 text-lg">✓</span> <span class="text-sm">Conductor profesional certificado</span></li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2 text-lg">✓</span> <span class="text-sm">Asistencia 24/7 incluida</span></li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2 text-lg">✓</span> <span class="text-sm">Mantenimiento del vehículo</span></li>
+                    </ul>
+                    <a href="#contacto" class="block w-full bg-primary text-white py-3 px-6 rounded-lg hover:bg-primary-hover transition font-semibold shadow-md">Reservar Ahora</a>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-8 card-hover text-center border-t-4 border-indigo-600 relative">
+                    <div class="absolute top-0 right-0 bg-green-500 text-white px-3 py-1 rounded-bl-lg rounded-tr-lg text-sm font-semibold">MÁS POPULAR</div>
+                    <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-indigo-100 flex items-center justify-center">
+                        <img src="https://images.unsplash.com/photo-1544620545-c458b251b8d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=80&q=80" alt="Remis Compartido" class="w-14 h-14 rounded-full object-cover">
+                    </div>
+                    <h4 class="text-2xl font-semibold mb-2">Remis Compartido</h4>
+                    <p class="text-sm text-gray-500 mb-4">Opción económica y eficiente</p>
+                    <p class="text-5xl font-bold text-primary mb-6">$15 <span class="text-lg font-normal">por km</span></p>
+                    <ul class="text-left mb-8 space-y-3">
+                        <li class="flex items-center"><span class="text-green-500 mr-2 text-lg">✓</span> <span class="text-sm">Compartir viaje con otros pasajeros</span></li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2 text-lg">✓</span> <span class="text-sm">Rutas optimizadas</span></li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2 text-lg">✓</span> <span class="text-sm">Ahorro de hasta 40%</span></li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2 text-lg">✓</span> <span class="text-sm">Pagos seguros y trazables</span></li>
+                    </ul>
+                    <a href="#contacto" class="block w-full bg-primary text-white py-3 px-6 rounded-lg hover:bg-primary-hover transition font-semibold shadow-md">Reservar Ahora</a>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-8 card-hover text-center border-t-4 border-indigo-600">
+                    <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-indigo-100 flex items-center justify-center">
+                        <img src="https://images.unsplash.com/photo-1530521954074-e64f8949fe8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=80&q=80" alt="Traslados al Aeropuerto" class="w-14 h-14 rounded-full object-cover">
+                    </div>
+                    <h4 class="text-2xl font-semibold mb-2">Aeropuerto</h4>
+                    <p class="text-sm text-gray-500 mb-4">Servicio especializado de traslado</p>
+                    <p class="text-5xl font-bold text-primary mb-6">$40 <span class="text-lg font-normal">tarifa fija</span></p>
+                    <ul class="text-left mb-8 space-y-3">
+                        <li class="flex items-center"><span class="text-green-500 mr-2 text-lg">✓</span> <span class="text-sm">Seguimiento de vuelo en tiempo real</span></li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2 text-lg">✓</span> <span class="text-sm">Punto a punto garantizado</span></li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2 text-lg">✓</span> <span class="text-sm">Asistencia de equipaje</span></li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2 text-lg">✓</span> <span class="text-sm">Recepción VIP disponible</span></li>
+                    </ul>
+                    <a href="#contacto" class="block w-full bg-primary text-white py-3 px-6 rounded-lg hover:bg-primary-hover transition font-semibold shadow-md">Reservar Ahora</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contacto" class="py-20 bg-gradient-to-br from-indigo-600 to-purple-600 text-white">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <h3 class="text-4xl font-bold text-center mb-4">Contáctanos</h3>
+            <p class="text-lg text-center mb-12 max-w-2xl mx-auto">¿Listo para viajar? Contáctanos ahora y obtén un 20% de descuento en tu primer viaje con Remis Express.</p>
+            <div class="grid md:grid-cols-2 gap-12">
+                <div>
+                    <h4 class="text-2xl font-semibold mb-6">Información de Contacto</h4>
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-white bg-opacity-20 rounded-lg flex items-center justify-center mr-4">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                            </div>
+                            <div>
+                                <p class="font-semibold">Teléfono</p>
+                                <p class="text-white text-opacity-90">+54 9 11 1234-5678</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-white bg-opacity-20 rounded-lg flex items-center justify-center mr-4">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                            </div>
+                            <div>
+                                <p class="font-semibold">Email</p>
+                                <p class="text-white text-opacity-90">info@remisexpress.com</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-white bg-opacity-20 rounded-lg flex items-center justify-center mr-4">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            </div>
+                            <div>
+                                <p class="font-semibold">Dirección</p>
+                                <p class="text-white text-opacity-90">Av. Corrientes 1234, CABA</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-8">
+                        <h4 class="text-2xl font-semibold mb-4">Redes Sociales</h4>
+                        <div class="flex space-x-4">
+                            <a href="#" class="w-10 h-10 bg-white bg-opacity-20 rounded-lg flex items-center justify-center hover:bg-opacity-30 transition">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.006 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956 0.925-1.956 1.914v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"></path></svg>
+                            </a>
+                            <a href="#" class="w-10 h-10 bg-white bg-opacity-20 rounded-lg flex items-center justify-center hover:bg-opacity-30 transition">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9.21 0 14.28-7.29 14.28-13.61 0-.21 0-.42-.01-.63A10.9 10.9 0 0023 3z"></path></svg>
+                            </a>
+                            <a href="#" class="w-10 h-10 bg-white bg-opacity-20 rounded-lg flex items-center justify-center hover:bg-opacity-30 transition">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.204-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.645-.07-4.849 0-3.204.014-3.581.072-4.848.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.359 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.362-.2 6.78-2.618 6.98-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.2-4.359-2.618-6.79-6.98-6.99zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163S15.403 8.001 12 8.001zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4-1.791 4-4 4zm8.405-12.405c-.966 0-1.75.784-1.75 1.75s.784 1.75 1.75 1.75 1.75-.784 1.75-1.75-.784-1.75-1.75-1.75z"></path></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-2xl font-semibold mb-6">Enviar Mensaje</h4>
+                    <form class="space-y-4" onsubmit="event.preventDefault(); alert('¡Gracias! Nos pondremos en contacto pronto.');">
+                        <div class="grid grid-cols-2 gap-4">
+                            <input type="text" placeholder="Nombre" class="w-full px-4 py-3 rounded-lg border-0 focus:ring-2 focus:ring-white text-gray-800" required>
+                            <input type="email" placeholder="Email" class="w-full px-4 py-3 rounded-lg border-0 focus:ring-2 focus:ring-white text-gray-800" required>
+                        </div>
+                        <input type="tel" placeholder="Teléfono" class="w-full px-4 py-3 rounded-lg border-0 focus:ring-2 focus:ring-white text-gray-800" required>
+                        <textarea placeholder="Mensaje" rows="4" class="w-full px-4 py-3 rounded-lg border-0 focus:ring-2 focus:ring-white text-gray-800" required></textarea>
+                        <button type="submit" class="w-full bg-white text-indigo-600 py-3 px-6 rounded-lg hover:bg-gray-100 transition font-semibold shadow-lg">Enviar Mensaje</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-200 py-4">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2026 Remis Express. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,2462 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>DriveGo | Alquiler de Autos</title>
+  <meta
+    name="description"
+    content="Alquilá tu auto de forma rápida, segura y sencilla. Gran variedad de vehículos y excelentes precios."
+  >
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: "#2563eb",
+            secondary: "#0f172a",
+            accent: "#f59e0b"
+          },
+
+          fontFamily: {
+            sans: ["Inter", "sans-serif"]
+          },
+
+          boxShadow: {
+            premium: "0 25px 70px rgba(15,23,42,.15)"
+          },
+
+          animation: {
+            float: "float 4s ease-in-out infinite",
+            fadeUp: "fadeUp .7s ease forwards"
+          },
+
+          keyframes: {
+            float: {
+              "0%,100%": {
+                transform: "translateY(0)"
+              },
+              "50%": {
+                transform: "translateY(-10px)"
+              }
+            },
+
+            fadeUp: {
+              from: {
+                opacity: "0",
+                transform: "translateY(25px)"
+              },
+              to: {
+                opacity: "1",
+                transform: "translateY(0)"
+              }
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+    }
+
+    .hero {
+      background:
+        linear-gradient(
+          90deg,
+          rgba(2,6,23,.94) 0%,
+          rgba(2,6,23,.80) 45%,
+          rgba(2,6,23,.25) 100%
+        ),
+        url("https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=2000&q=90");
+
+      background-size: cover;
+      background-position: center;
+    }
+
+    .glass {
+      background: rgba(255,255,255,.88);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .car-card {
+      transition: all .3s ease;
+    }
+
+    .car-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 60px rgba(15,23,42,.13);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all .7s ease;
+    }
+
+    .reveal.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .modal-bg {
+      background: rgba(2,6,23,.75);
+      backdrop-filter: blur(6px);
+    }
+
+  </style>
+</head>
+
+
+<body class="bg-white text-slate-800">
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<header
+  id="navbar"
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+>
+
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+
+    <nav class="h-20 flex items-center justify-between">
+
+      <!-- LOGO -->
+
+      <a href="#inicio" class="flex items-center gap-3">
+
+        <div
+          class="w-11 h-11 rounded-xl bg-blue-600 text-white flex items-center justify-center font-black text-lg shadow-lg shadow-blue-600/30"
+        >
+          DG
+        </div>
+
+        <div>
+
+          <div class="text-xl font-black text-white" id="logoText">
+            Drive<span class="text-blue-400">Go</span>
+          </div>
+
+          <div
+            class="text-[9px] uppercase tracking-[.25em] text-slate-400"
+          >
+            Rent a Car
+          </div>
+
+        </div>
+
+      </a>
+
+
+      <!-- DESKTOP NAV -->
+
+      <div class="hidden lg:flex items-center gap-8">
+
+        <a
+          href="#inicio"
+          class="nav-link text-sm text-white/80 hover:text-white transition"
+        >
+          Inicio
+        </a>
+
+        <a
+          href="#vehiculos"
+          class="nav-link text-sm text-white/80 hover:text-white transition"
+        >
+          Vehículos
+        </a>
+
+        <a
+          href="#nosotros"
+          class="nav-link text-sm text-white/80 hover:text-white transition"
+        >
+          Nosotros
+        </a>
+
+        <a
+          href="#faq"
+          class="nav-link text-sm text-white/80 hover:text-white transition"
+        >
+          Preguntas frecuentes
+        </a>
+
+        <a
+          href="#contacto"
+          class="nav-link text-sm text-white/80 hover:text-white transition"
+        >
+          Contacto
+        </a>
+
+      </div>
+
+
+      <!-- CTA -->
+
+      <a
+        href="#vehiculos"
+        class="hidden lg:inline-flex px-5 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-bold transition shadow-lg shadow-blue-600/20"
+      >
+        Reservar ahora
+      </a>
+
+
+      <!-- MOBILE -->
+
+      <button
+        id="menuButton"
+        class="lg:hidden w-11 h-11 rounded-xl border border-white/20 text-white flex items-center justify-center"
+      >
+
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-6 h-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"
+          />
+        </svg>
+
+      </button>
+
+    </nav>
+
+
+    <!-- MOBILE MENU -->
+
+    <div
+      id="mobileMenu"
+      class="hidden lg:hidden bg-slate-900 rounded-2xl p-4 mb-4 shadow-xl"
+    >
+
+      <div class="flex flex-col gap-2">
+
+        <a href="#inicio" class="mobile-link p-3 text-white rounded-xl hover:bg-white/10">
+          Inicio
+        </a>
+
+        <a href="#vehiculos" class="mobile-link p-3 text-white rounded-xl hover:bg-white/10">
+          Vehículos
+        </a>
+
+        <a href="#nosotros" class="mobile-link p-3 text-white rounded-xl hover:bg-white/10">
+          Nosotros
+        </a>
+
+        <a href="#faq" class="mobile-link p-3 text-white rounded-xl hover:bg-white/10">
+          Preguntas frecuentes
+        </a>
+
+        <a href="#contacto" class="mobile-link p-3 text-white rounded-xl hover:bg-white/10">
+          Contacto
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section
+  id="inicio"
+  class="hero min-h-screen pt-28 pb-20 flex items-center relative"
+>
+
+  <div class="max-w-7xl mx-auto px-5 lg:px-8 w-full">
+
+    <div class="max-w-3xl animate-fadeUp">
+
+      <div
+        class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-white text-sm font-semibold mb-7"
+      >
+
+        <span class="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></span>
+
+        Alquiler de autos fácil, rápido y seguro
+
+      </div>
+
+
+      <h1
+        class="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-[1.03] tracking-tight"
+      >
+
+        Tu próximo viaje
+        <span class="text-blue-400">
+          empieza acá.
+        </span>
+
+      </h1>
+
+
+      <p
+        class="mt-7 text-lg lg:text-xl text-slate-300 leading-relaxed max-w-2xl"
+      >
+        Encontrá el auto perfecto para tu viaje. Reservá online,
+        elegí tu vehículo y salí a la ruta sin complicaciones.
+      </p>
+
+
+      <div class="flex flex-wrap gap-4 mt-9">
+
+        <a
+          href="#vehiculos"
+          class="px-7 py-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold transition shadow-xl shadow-blue-600/30"
+        >
+          Ver vehículos →
+        </a>
+
+        <a
+          href="#nosotros"
+          class="px-7 py-4 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold transition"
+        >
+          ¿Por qué elegirnos?
+        </a>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- SEARCH BOX -->
+
+    <div
+      class="glass mt-14 rounded-3xl p-5 lg:p-7 max-w-6xl shadow-premium"
+    >
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+
+        <!-- LOCATION -->
+
+        <div>
+
+          <label class="block text-xs font-bold uppercase tracking-wide text-slate-500 mb-2">
+            Lugar de retiro
+          </label>
+
+          <div class="relative">
+
+            <span class="absolute left-4 top-1/2 -translate-y-1/2">
+              📍
+            </span>
+
+            <select
+              id="pickupLocation"
+              class="w-full pl-11 pr-4 py-3.5 rounded-xl border border-slate-200 bg-white outline-none focus:border-blue-500"
+            >
+
+              <option>Buenos Aires</option>
+              <option>Mar del Plata</option>
+              <option>La Plata</option>
+              <option>Rosario</option>
+              <option>Córdoba</option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+
+        <!-- PICKUP DATE -->
+
+        <div>
+
+          <label class="block text-xs font-bold uppercase tracking-wide text-slate-500 mb-2">
+            Retiro
+          </label>
+
+          <input
+            id="pickupDate"
+            type="date"
+            class="w-full px-4 py-3.5 rounded-xl border border-slate-200 outline-none focus:border-blue-500"
+          >
+
+        </div>
+
+
+        <!-- RETURN DATE -->
+
+        <div>
+
+          <label class="block text-xs font-bold uppercase tracking-wide text-slate-500 mb-2">
+            Devolución
+          </label>
+
+          <input
+            id="returnDate"
+            type="date"
+            class="w-full px-4 py-3.5 rounded-xl border border-slate-200 outline-none focus:border-blue-500"
+          >
+
+        </div>
+
+
+        <!-- SEARCH -->
+
+        <div class="flex items-end">
+
+          <button
+            id="searchButton"
+            class="w-full py-3.5 rounded-xl bg-slate-950 hover:bg-blue-600 text-white font-bold transition"
+          >
+            Buscar autos
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FEATURES
+===================================================== -->
+
+<section class="py-10 border-b border-slate-100">
+
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-7">
+
+      <div class="flex items-center gap-4 reveal">
+
+        <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center text-xl">
+          ✓
+        </div>
+
+        <div>
+          <div class="font-bold">
+            Reserva segura
+          </div>
+
+          <div class="text-sm text-slate-500">
+            Datos protegidos
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="flex items-center gap-4 reveal">
+
+        <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center text-xl">
+          🚗
+        </div>
+
+        <div>
+          <div class="font-bold">
+            Autos nuevos
+          </div>
+
+          <div class="text-sm text-slate-500">
+            Flota moderna
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="flex items-center gap-4 reveal">
+
+        <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center text-xl">
+          💳
+        </div>
+
+        <div>
+          <div class="font-bold">
+            Precios claros
+          </div>
+
+          <div class="text-sm text-slate-500">
+            Sin sorpresas
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="flex items-center gap-4 reveal">
+
+        <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center text-xl">
+          ☎
+        </div>
+
+        <div>
+          <div class="font-bold">
+            Atención
+          </div>
+
+          <div class="text-sm text-slate-500">
+            Estamos para ayudarte
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     VEHICLES
+===================================================== -->
+
+<section
+  id="vehiculos"
+  class="py-24 bg-slate-50"
+>
+
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+
+
+    <div class="text-center max-w-2xl mx-auto reveal">
+
+      <span class="text-blue-600 text-sm font-bold uppercase tracking-widest">
+        Nuestra flota
+      </span>
+
+      <h2 class="text-4xl lg:text-5xl font-black text-slate-950 mt-3">
+        Elegí tu próximo auto
+      </h2>
+
+      <p class="text-slate-500 mt-5">
+        Desde autos compactos para la ciudad hasta SUVs para disfrutar
+        de la ruta con comodidad.
+      </p>
+
+    </div>
+
+
+    <!-- FILTERS -->
+
+    <div class="flex flex-wrap justify-center gap-3 mt-10">
+
+      <button
+        class="filter-btn active px-5 py-2.5 rounded-full bg-slate-950 text-white text-sm font-bold"
+        data-filter="all"
+      >
+        Todos
+      </button>
+
+      <button
+        class="filter-btn px-5 py-2.5 rounded-full bg-white border border-slate-200 text-slate-600 text-sm font-bold"
+        data-filter="economico"
+      >
+        Económicos
+      </button>
+
+      <button
+        class="filter-btn px-5 py-2.5 rounded-full bg-white border border-slate-200 text-slate-600 text-sm font-bold"
+        data-filter="sedan"
+      >
+        Sedanes
+      </button>
+
+      <button
+        class="filter-btn px-5 py-2.5 rounded-full bg-white border border-slate-200 text-slate-600 text-sm font-bold"
+        data-filter="suv"
+      >
+        SUVs
+      </button>
+
+      <button
+        class="filter-btn px-5 py-2.5 rounded-full bg-white border border-slate-200 text-slate-600 text-sm font-bold"
+        data-filter="premium"
+      >
+        Premium
+      </button>
+
+    </div>
+
+
+    <!-- CARS -->
+
+    <div
+      id="carsGrid"
+      class="grid md:grid-cols-2 lg:grid-cols-3 gap-7 mt-12"
+    >
+
+
+      <!-- CAR 1 -->
+
+      <article
+        class="car-card car-item bg-white rounded-3xl overflow-hidden border border-slate-100 reveal"
+        data-category="economico"
+      >
+
+        <div class="relative">
+
+          <img
+            src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=1000&q=85"
+            alt="Toyota Corolla"
+            class="w-full h-56 object-cover"
+          >
+
+          <span
+            class="absolute top-4 left-4 px-3 py-1.5 bg-white/90 backdrop-blur rounded-full text-xs font-bold"
+          >
+            Económico
+          </span>
+
+        </div>
+
+
+        <div class="p-6">
+
+          <div class="flex justify-between items-start gap-3">
+
+            <div>
+
+              <h3 class="text-xl font-black">
+                Toyota Corolla
+              </h3>
+
+              <p class="text-sm text-slate-500 mt-1">
+                Sedan • Automático
+              </p>
+
+            </div>
+
+            <div class="text-right">
+
+              <div class="text-2xl font-black text-blue-600">
+                $45.000
+              </div>
+
+              <div class="text-xs text-slate-400">
+                por día
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="grid grid-cols-3 gap-3 mt-6 text-sm text-slate-500">
+
+            <div class="text-center">
+              👤
+              <div class="mt-1">5</div>
+            </div>
+
+            <div class="text-center">
+              🧳
+              <div class="mt-1">2</div>
+            </div>
+
+            <div class="text-center">
+              ⚙
+              <div class="mt-1">Auto</div>
+            </div>
+
+          </div>
+
+
+          <button
+            onclick="openBooking('Toyota Corolla', 45000)"
+            class="w-full mt-6 py-3.5 rounded-xl bg-slate-950 hover:bg-blue-600 text-white font-bold transition"
+          >
+            Reservar este auto
+          </button>
+
+        </div>
+
+      </article>
+
+
+
+      <!-- CAR 2 -->
+
+      <article
+        class="car-card car-item bg-white rounded-3xl overflow-hidden border border-slate-100 reveal"
+        data-category="sedan"
+      >
+
+        <div class="relative">
+
+          <img
+            src="https://images.unsplash.com/photo-1550355291-bbee04a92027?auto=format&fit=crop&w=1000&q=85"
+            alt="BMW Serie 3"
+            class="w-full h-56 object-cover"
+          >
+
+          <span
+            class="absolute top-4 left-4 px-3 py-1.5 bg-white/90 backdrop-blur rounded-full text-xs font-bold"
+          >
+            Sedan
+          </span>
+
+        </div>
+
+
+        <div class="p-6">
+
+          <div class="flex justify-between items-start gap-3">
+
+            <div>
+
+              <h3 class="text-xl font-black">
+                BMW Serie 3
+              </h3>
+
+              <p class="text-sm text-slate-500 mt-1">
+                Sedan • Automático
+              </p>
+
+            </div>
+
+            <div class="text-right">
+
+              <div class="text-2xl font-black text-blue-600">
+                $85.000
+              </div>
+
+              <div class="text-xs text-slate-400">
+                por día
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="grid grid-cols-3 gap-3 mt-6 text-sm text-slate-500">
+
+            <div class="text-center">
+              👤
+              <div class="mt-1">5</div>
+            </div>
+
+            <div class="text-center">
+              🧳
+              <div class="mt-1">3</div>
+            </div>
+
+            <div class="text-center">
+              ⚙
+              <div class="mt-1">Auto</div>
+            </div>
+
+          </div>
+
+
+          <button
+            onclick="openBooking('BMW Serie 3', 85000)"
+            class="w-full mt-6 py-3.5 rounded-xl bg-slate-950 hover:bg-blue-600 text-white font-bold transition"
+          >
+            Reservar este auto
+          </button>
+
+        </div>
+
+      </article>
+
+
+
+      <!-- CAR 3 -->
+
+      <article
+        class="car-card car-item bg-white rounded-3xl overflow-hidden border border-slate-100 reveal"
+        data-category="suv"
+      >
+
+        <div class="relative">
+
+          <img
+            src="https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?auto=format&fit=crop&w=1000&q=85"
+            alt="SUV"
+            class="w-full h-56 object-cover"
+          >
+
+          <span
+            class="absolute top-4 left-4 px-3 py-1.5 bg-white/90 backdrop-blur rounded-full text-xs font-bold"
+          >
+            SUV
+          </span>
+
+        </div>
+
+
+        <div class="p-6">
+
+          <div class="flex justify-between items-start gap-3">
+
+            <div>
+
+              <h3 class="text-xl font-black">
+                SUV Familiar
+              </h3>
+
+              <p class="text-sm text-slate-500 mt-1">
+                SUV • Automático
+              </p>
+
+            </div>
+
+            <div class="text-right">
+
+              <div class="text-2xl font-black text-blue-600">
+                $72.000
+              </div>
+
+              <div class="text-xs text-slate-400">
+                por día
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="grid grid-cols-3 gap-3 mt-6 text-sm text-slate-500">
+
+            <div class="text-center">
+              👤
+              <div class="mt-1">5</div>
+            </div>
+
+            <div class="text-center">
+              🧳
+              <div class="mt-1">4</div>
+            </div>
+
+            <div class="text-center">
+              ⚙
+              <div class="mt-1">Auto</div>
+            </div>
+
+          </div>
+
+
+          <button
+            onclick="openBooking('SUV Familiar', 72000)"
+            class="w-full mt-6 py-3.5 rounded-xl bg-slate-950 hover:bg-blue-600 text-white font-bold transition"
+          >
+            Reservar este auto
+          </button>
+
+        </div>
+
+      </article>
+
+
+
+      <!-- CAR 4 -->
+
+      <article
+        class="car-card car-item bg-white rounded-3xl overflow-hidden border border-slate-100 reveal"
+        data-category="economico"
+      >
+
+        <div class="relative">
+
+          <img
+            src="https://images.unsplash.com/photo-1517846693594-1567da72af75?auto=format&fit=crop&w=1000&q=85"
+            alt="Auto compacto"
+            class="w-full h-56 object-cover"
+          >
+
+          <span
+            class="absolute top-4 left-4 px-3 py-1.5 bg-white/90 backdrop-blur rounded-full text-xs font-bold"
+          >
+            Económico
+          </span>
+
+        </div>
+
+
+        <div class="p-6">
+
+          <div class="flex justify-between items-start gap-3">
+
+            <div>
+
+              <h3 class="text-xl font-black">
+                Compacto City
+              </h3>
+
+              <p class="text-sm text-slate-500 mt-1">
+                Hatchback • Manual
+              </p>
+
+            </div>
+
+            <div class="text-right">
+
+              <div class="text-2xl font-black text-blue-600">
+                $38.000
+              </div>
+
+              <div class="text-xs text-slate-400">
+                por día
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="grid grid-cols-3 gap-3 mt-6 text-sm text-slate-500">
+
+            <div class="text-center">
+              👤
+              <div class="mt-1">5</div>
+            </div>
+
+            <div class="text-center">
+              🧳
+              <div class="mt-1">2</div>
+            </div>
+
+            <div class="text-center">
+              ⚙
+              <div class="mt-1">Manual</div>
+            </div>
+
+          </div>
+
+
+          <button
+            onclick="openBooking('Compacto City', 38000)"
+            class="w-full mt-6 py-3.5 rounded-xl bg-slate-950 hover:bg-blue-600 text-white font-bold transition"
+          >
+            Reservar este auto
+          </button>
+
+        </div>
+
+      </article>
+
+
+
+      <!-- CAR 5 -->
+
+      <article
+        class="car-card car-item bg-white rounded-3xl overflow-hidden border border-slate-100 reveal"
+        data-category="suv"
+      >
+
+        <div class="relative">
+
+          <img
+            src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=1000&q=85"
+            alt="SUV Premium"
+            class="w-full h-56 object-cover"
+          >
+
+          <span
+            class="absolute top-4 left-4 px-3 py-1.5 bg-white/90 backdrop-blur rounded-full text-xs font-bold"
+          >
+            SUV
+          </span>
+
+        </div>
+
+
+        <div class="p-6">
+
+          <div class="flex justify-between items-start gap-3">
+
+            <div>
+
+              <h3 class="text-xl font-black">
+                SUV Adventure
+              </h3>
+
+              <p class="text-sm text-slate-500 mt-1">
+                SUV • Automático
+              </p>
+
+            </div>
+
+            <div class="text-right">
+
+              <div class="text-2xl font-black text-blue-600">
+                $95.000
+              </div>
+
+              <div class="text-xs text-slate-400">
+                por día
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="grid grid-cols-3 gap-3 mt-6 text-sm text-slate-500">
+
+            <div class="text-center">
+              👤
+              <div class="mt-1">5</div>
+            </div>
+
+            <div class="text-center">
+              🧳
+              <div class="mt-1">5</div>
+            </div>
+
+            <div class="text-center">
+              ⚙
+              <div class="mt-1">Auto</div>
+            </div>
+
+          </div>
+
+
+          <button
+            onclick="openBooking('SUV Adventure', 95000)"
+            class="w-full mt-6 py-3.5 rounded-xl bg-slate-950 hover:bg-blue-600 text-white font-bold transition"
+          >
+            Reservar este auto
+          </button>
+
+        </div>
+
+      </article>
+
+
+
+      <!-- CAR 6 -->
+
+      <article
+        class="car-card car-item bg-white rounded-3xl overflow-hidden border border-slate-100 reveal"
+        data-category="premium"
+      >
+
+        <div class="relative">
+
+          <img
+            src="https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=1000&q=85"
+            alt="Mercedes Benz"
+            class="w-full h-56 object-cover"
+          >
+
+          <span
+            class="absolute top-4 left-4 px-3 py-1.5 bg-white/90 backdrop-blur rounded-full text-xs font-bold"
+          >
+            Premium
+          </span>
+
+        </div>
+
+
+        <div class="p-6">
+
+          <div class="flex justify-between items-start gap-3">
+
+            <div>
+
+              <h3 class="text-xl font-black">
+                Mercedes Clase C
+              </h3>
+
+              <p class="text-sm text-slate-500 mt-1">
+                Premium • Automático
+              </p>
+
+            </div>
+
+            <div class="text-right">
+
+              <div class="text-2xl font-black text-blue-600">
+                $120.000
+              </div>
+
+              <div class="text-xs text-slate-400">
+                por día
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="grid grid-cols-3 gap-3 mt-6 text-sm text-slate-500">
+
+            <div class="text-center">
+              👤
+              <div class="mt-1">5</div>
+            </div>
+
+            <div class="text-center">
+              🧳
+              <div class="mt-1">3</div>
+            </div>
+
+            <div class="text-center">
+              ⚙
+              <div class="mt-1">Auto</div>
+            </div>
+
+          </div>
+
+
+          <button
+            onclick="openBooking('Mercedes Clase C', 120000)"
+            class="w-full mt-6 py-3.5 rounded-xl bg-slate-950 hover:bg-blue-600 text-white font-bold transition"
+          >
+            Reservar este auto
+          </button>
+
+        </div>
+
+      </article>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     ABOUT
+===================================================== -->
+
+<section
+  id="nosotros"
+  class="py-24"
+>
+
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+
+      <div class="relative reveal">
+
+        <img
+          src="https://images.unsplash.com/photo-1542282088-fe8426682b8f?auto=format&fit=crop&w=1200&q=85"
+          alt="Auto de alquiler"
+          class="rounded-[2rem] w-full h-[520px] object-cover shadow-premium"
+        >
+
+        <div
+          class="absolute -bottom-7 -right-7 bg-white rounded-2xl shadow-xl p-6 hidden sm:block"
+        >
+
+          <div class="text-4xl font-black text-blue-600">
+            10+
+          </div>
+
+          <div class="text-sm text-slate-500 mt-1">
+            años ofreciendo<br>
+            movilidad
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+      <div class="reveal">
+
+        <span class="text-blue-600 text-sm font-bold uppercase tracking-widest">
+          Sobre DriveGo
+        </span>
+
+        <h2
+          class="text-4xl lg:text-5xl font-black text-slate-950 mt-3 leading-tight"
+        >
+          Alquilá un auto.
+          <span class="text-blue-600">
+            Disfrutá el viaje.
+          </span>
+        </h2>
+
+        <p class="text-slate-600 mt-6 leading-relaxed">
+          Somos una empresa dedicada a brindar soluciones de movilidad
+          para turistas, empresas y particulares.
+        </p>
+
+        <p class="text-slate-600 mt-4 leading-relaxed">
+          Nuestra prioridad es que puedas encontrar el vehículo adecuado
+          de manera rápida, transparente y segura.
+        </p>
+
+
+        <div class="grid sm:grid-cols-2 gap-5 mt-8">
+
+          <div class="flex gap-3">
+            <span class="text-blue-600 font-bold">✓</span>
+            <span>Flota moderna</span>
+          </div>
+
+          <div class="flex gap-3">
+            <span class="text-blue-600 font-bold">✓</span>
+            <span>Precios competitivos</span>
+          </div>
+
+          <div class="flex gap-3">
+            <span class="text-blue-600 font-bold">✓</span>
+            <span>Atención personalizada</span>
+          </div>
+
+          <div class="flex gap-3">
+            <span class="text-blue-600 font-bold">✓</span>
+            <span>Reservas simples</span>
+          </div>
+
+        </div>
+
+
+        <a
+          href="#contacto"
+          class="inline-flex mt-9 px-6 py-3.5 rounded-xl bg-slate-950 text-white font-bold hover:bg-blue-600 transition"
+        >
+          Conocé más sobre nosotros
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     HOW IT WORKS
+===================================================== -->
+
+<section class="py-24 bg-slate-950 text-white">
+
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+
+    <div class="text-center max-w-2xl mx-auto reveal">
+
+      <span class="text-blue-400 text-sm font-bold uppercase tracking-widest">
+        Cómo funciona
+      </span>
+
+      <h2 class="text-4xl font-black mt-3">
+        Alquilar nunca fue tan fácil
+      </h2>
+
+    </div>
+
+
+    <div class="grid md:grid-cols-3 gap-8 mt-14">
+
+
+      <div class="text-center reveal">
+
+        <div
+          class="w-16 h-16 mx-auto rounded-2xl bg-blue-600 flex items-center justify-center text-2xl font-black"
+        >
+          1
+        </div>
+
+        <h3 class="text-xl font-bold mt-6">
+          Elegí tu auto
+        </h3>
+
+        <p class="text-slate-400 mt-3 leading-relaxed">
+          Explorá nuestra flota y elegí el vehículo que mejor se adapte
+          a tu viaje.
+        </p>
+
+      </div>
+
+
+      <div class="text-center reveal">
+
+        <div
+          class="w-16 h-16 mx-auto rounded-2xl bg-blue-600 flex items-center justify-center text-2xl font-black"
+        >
+          2
+        </div>
+
+        <h3 class="text-xl font-bold mt-6">
+          Reservá
+        </h3>
+
+        <p class="text-slate-400 mt-3 leading-relaxed">
+          Completá tus datos y elegí las fechas en las que necesitás
+          el vehículo.
+        </p>
+
+      </div>
+
+
+      <div class="text-center reveal">
+
+        <div
+          class="w-16 h-16 mx-auto rounded-2xl bg-blue-600 flex items-center justify-center text-2xl font-black"
+        >
+          3
+        </div>
+
+        <h3 class="text-xl font-bold mt-6">
+          Disfrutá
+        </h3>
+
+        <p class="text-slate-400 mt-3 leading-relaxed">
+          Retirá el auto y empezá tu viaje. Así de simple.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     TESTIMONIALS
+===================================================== -->
+
+<section class="py-24">
+
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+
+    <div class="text-center reveal">
+
+      <span class="text-blue-600 text-sm font-bold uppercase tracking-widest">
+        Opiniones
+      </span>
+
+      <h2 class="text-4xl font-black mt-3">
+        Clientes que volvieron a elegirnos
+      </h2>
+
+    </div>
+
+
+    <div class="grid md:grid-cols-3 gap-6 mt-12">
+
+
+      <div class="p-7 rounded-3xl border border-slate-100 shadow-sm reveal">
+
+        <div class="text-yellow-400">
+          ★★★★★
+        </div>
+
+        <p class="text-slate-600 mt-5 leading-relaxed">
+          “El proceso fue súper rápido. El auto estaba impecable
+          y la atención fue excelente.”
+        </p>
+
+        <div class="mt-6 font-bold">
+          Martín López
+        </div>
+
+        <div class="text-sm text-slate-400">
+          Buenos Aires
+        </div>
+
+      </div>
+
+
+      <div class="p-7 rounded-3xl border border-slate-100 shadow-sm reveal">
+
+        <div class="text-yellow-400">
+          ★★★★★
+        </div>
+
+        <p class="text-slate-600 mt-5 leading-relaxed">
+          “Viajamos en familia y el SUV fue perfecto. Todo muy
+          claro desde el momento de la reserva.”
+        </p>
+
+        <div class="mt-6 font-bold">
+          Sofía Martínez
+        </div>
+
+        <div class="text-sm text-slate-400">
+          Mar del Plata
+        </div>
+
+      </div>
+
+
+      <div class="p-7 rounded-3xl border border-slate-100 shadow-sm reveal">
+
+        <div class="text-yellow-400">
+          ★★★★★
+        </div>
+
+        <p class="text-slate-600 mt-5 leading-relaxed">
+          “Muy buenos precios y excelente atención. Definitivamente
+          voy a volver a alquilar con ellos.”
+        </p>
+
+        <div class="mt-6 font-bold">
+          Diego Fernández
+        </div>
+
+        <div class="text-sm text-slate-400">
+          La Plata
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FAQ
+===================================================== -->
+
+<section
+  id="faq"
+  class="py-24 bg-slate-50"
+>
+
+  <div class="max-w-4xl mx-auto px-5 lg:px-8">
+
+    <div class="text-center reveal">
+
+      <span class="text-blue-600 text-sm font-bold uppercase tracking-widest">
+        FAQ
+      </span>
+
+      <h2 class="text-4xl font-black mt-3">
+        Preguntas frecuentes
+      </h2>
+
+    </div>
+
+
+    <div class="mt-12 space-y-4">
+
+
+      <div class="faq-item bg-white rounded-2xl border border-slate-100 overflow-hidden reveal">
+
+        <button
+          class="faq-question w-full p-6 flex items-center justify-between text-left font-bold"
+        >
+          ¿Qué necesito para alquilar un auto?
+
+          <span class="text-xl">
+            +
+          </span>
+
+        </button>
+
+        <div class="faq-answer hidden px-6 pb-6 text-slate-500 leading-relaxed">
+          Necesitás presentar documentación vigente y cumplir con los
+          requisitos establecidos por la empresa para realizar el alquiler.
+        </div>
+
+      </div>
+
+
+      <div class="faq-item bg-white rounded-2xl border border-slate-100 overflow-hidden reveal">
+
+        <button
+          class="faq-question w-full p-6 flex items-center justify-between text-left font-bold"
+        >
+          ¿Puedo cancelar mi reserva?
+
+          <span class="text-xl">
+            +
+          </span>
+
+        </button>
+
+        <div class="faq-answer hidden px-6 pb-6 text-slate-500 leading-relaxed">
+          Sí. Las condiciones de cancelación dependen de la tarifa y
+          de las condiciones específicas de la reserva.
+        </div>
+
+      </div>
+
+
+      <div class="faq-item bg-white rounded-2xl border border-slate-100 overflow-hidden reveal">
+
+        <button
+          class="faq-question w-full p-6 flex items-center justify-between text-left font-bold"
+        >
+          ¿Los autos tienen seguro?
+
+          <span class="text-xl">
+            +
+          </span>
+
+        </button>
+
+        <div class="faq-answer hidden px-6 pb-6 text-slate-500 leading-relaxed">
+          Las condiciones de cobertura dependen del vehículo y del plan
+          contratado. Consultanos para conocer las opciones disponibles.
+        </div>
+
+      </div>
+
+
+      <div class="faq-item bg-white rounded-2xl border border-slate-100 overflow-hidden reveal">
+
+        <button
+          class="faq-question w-full p-6 flex items-center justify-between text-left font-bold"
+        >
+          ¿Puedo retirar el auto en una ciudad y devolverlo en otra?
+
+          <span class="text-xl">
+            +
+          </span>
+
+        </button>
+
+        <div class="faq-answer hidden px-6 pb-6 text-slate-500 leading-relaxed">
+          Dependiendo de la disponibilidad, podemos ofrecer devoluciones
+          en distintas ubicaciones. Consultá antes de realizar la reserva.
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     CONTACT
+===================================================== -->
+
+<section
+  id="contacto"
+  class="py-24 bg-blue-600"
+>
+
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+
+    <div class="grid lg:grid-cols-2 gap-14 items-center">
+
+
+      <div class="text-white reveal">
+
+        <span class="text-blue-200 text-sm font-bold uppercase tracking-widest">
+          Contacto
+        </span>
+
+        <h2 class="text-4xl lg:text-5xl font-black mt-3">
+          ¿Tenés alguna consulta?
+        </h2>
+
+        <p class="text-blue-100 mt-5 text-lg leading-relaxed">
+          Escribinos y te ayudamos a encontrar el vehículo ideal
+          para tu próximo viaje.
+        </p>
+
+
+        <div class="space-y-5 mt-9">
+
+          <div class="flex gap-4">
+
+            <div class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center">
+              📞
+            </div>
+
+            <div>
+
+              <div class="font-bold">
+                Teléfono
+              </div>
+
+              <div class="text-blue-100">
+                +54 9 11 1234-5678
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="flex gap-4">
+
+            <div class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center">
+              ✉
+            </div>
+
+            <div>
+
+              <div class="font-bold">
+                Email
+              </div>
+
+              <div class="text-blue-100">
+                hola@drivego.com
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="flex gap-4">
+
+            <div class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center">
+              📍
+            </div>
+
+            <div>
+
+              <div class="font-bold">
+                Oficinas
+              </div>
+
+              <div class="text-blue-100">
+                Buenos Aires, Argentina
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- FORM -->
+
+      <form
+        id="contactForm"
+        class="bg-white rounded-3xl p-7 sm:p-9 shadow-2xl reveal"
+      >
+
+        <h3 class="text-2xl font-black">
+          Consultanos
+        </h3>
+
+        <p class="text-slate-500 mt-2">
+          Te responderemos lo antes posible.
+        </p>
+
+
+        <div class="grid sm:grid-cols-2 gap-4 mt-7">
+
+          <input
+            type="text"
+            required
+            placeholder="Nombre"
+            class="px-4 py-3.5 rounded-xl border border-slate-200 outline-none focus:border-blue-500"
+          >
+
+          <input
+            type="tel"
+            placeholder="Teléfono"
+            class="px-4 py-3.5 rounded-xl border border-slate-200 outline-none focus:border-blue-500"
+          >
+
+        </div>
+
+
+        <input
+          type="email"
+          required
+          placeholder="Email"
+          class="w-full mt-4 px-4 py-3.5 rounded-xl border border-slate-200 outline-none focus:border-blue-500"
+        >
+
+
+        <textarea
+          rows="5"
+          required
+          placeholder="¿En qué podemos ayudarte?"
+          class="w-full mt-4 px-4 py-3.5 rounded-xl border border-slate-200 outline-none focus:border-blue-500 resize-none"
+        ></textarea>
+
+
+        <button
+          type="submit"
+          class="w-full mt-5 py-4 rounded-xl bg-slate-950 hover:bg-blue-700 text-white font-bold transition"
+        >
+          Enviar consulta →
+        </button>
+
+
+        <p
+          id="contactSuccess"
+          class="hidden text-center text-green-600 font-semibold mt-4"
+        >
+          ¡Mensaje enviado correctamente!
+        </p>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer class="bg-slate-950 text-white">
+
+  <div class="max-w-7xl mx-auto px-5 lg:px-8 py-14">
+
+    <div class="grid md:grid-cols-4 gap-10">
+
+
+      <div class="md:col-span-2">
+
+        <div class="flex items-center gap-3">
+
+          <div
+            class="w-11 h-11 rounded-xl bg-blue-600 flex items-center justify-center font-black"
+          >
+            DG
+          </div>
+
+          <div>
+
+            <div class="text-xl font-black">
+              Drive<span class="text-blue-400">Go</span>
+            </div>
+
+            <div class="text-xs text-slate-500">
+              Rent a Car
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <p class="text-slate-400 mt-5 max-w-md leading-relaxed">
+          Tu compañero de confianza para moverte por la ciudad,
+          viajar por Argentina y disfrutar cada kilómetro.
+        </p>
+
+      </div>
+
+
+      <div>
+
+        <h3 class="font-bold mb-5">
+          Navegación
+        </h3>
+
+        <div class="space-y-3 text-slate-400 text-sm">
+
+          <a href="#inicio" class="block hover:text-blue-400">
+            Inicio
+          </a>
+
+          <a href="#vehiculos" class="block hover:text-blue-400">
+            Vehículos
+          </a>
+
+          <a href="#nosotros" class="block hover:text-blue-400">
+            Nosotros
+          </a>
+
+          <a href="#faq" class="block hover:text-blue-400">
+            FAQ
+          </a>
+
+          <a href="#contacto" class="block hover:text-blue-400">
+            Contacto
+          </a>
+
+        </div>
+
+      </div>
+
+
+      <div>
+
+        <h3 class="font-bold mb-5">
+          Contacto
+        </h3>
+
+        <div class="space-y-3 text-slate-400 text-sm">
+
+          <p>
+            Buenos Aires, Argentina
+          </p>
+
+          <p>
+            +54 9 11 1234-5678
+          </p>
+
+          <p>
+            hola@drivego.com
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div
+      class="border-t border-white/10 mt-12 pt-7 flex flex-col sm:flex-row justify-between gap-4 text-sm text-slate-500"
+    >
+
+      <p>
+        © 2026 DriveGo. Todos los derechos reservados.
+      </p>
+
+      <p>
+        Alquiler de autos · Argentina
+      </p>
+
+    </div>
+
+  </div>
+
+</footer>
+
+
+
+<!-- =====================================================
+     WHATSAPP
+===================================================== -->
+
+<a
+  href="https://wa.me/5491112345678?text=Hola%20DriveGo,%20quiero%20consultar%20por%20un%20alquiler."
+  target="_blank"
+  rel="noopener noreferrer"
+  class="fixed bottom-6 right-6 z-40 w-14 h-14 rounded-full bg-green-500 hover:bg-green-600 text-white flex items-center justify-center shadow-2xl transition hover:scale-110"
+  aria-label="WhatsApp"
+>
+
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="w-7 h-7"
+    fill="currentColor"
+    viewBox="0 0 24 24"
+  >
+
+    <path
+      d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0C5.5 0 .2 5.3.2 11.9c0 2.1.5 4.1 1.6 5.9L.1 24l6.4-1.7a11.8 11.8 0 0 0 5.6 1.4h.1c6.5 0 11.8-5.3 11.8-11.9 0-3.1-1.2-6.1-3.5-8.3Zm-8.4 18.2c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-3.8 1 1-3.7-.2-.4a9.8 9.8 0 0 1-1.5-5.2c0-5.5 4.5-9.9 10-9.9 2.6 0 5.1 1 7 2.9 1.9 1.9 2.9 4.4 2.9 7 0 5.5-4.5 9.9-9.9 9.9Zm5.4-7.4c-.3-.2-1.7-.9-2-.9-.3-.1-.5-.2-.7.2-.2.3-.8.9-1 1.1-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.2-.2.2-.3.3-.5.1-.2.1-.4 0-.5-.1-.2-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 .9-1 2.4s1 2.8 1.2 3c.2.2 2 3.1 4.9 4.4.7.3 1.3.5 1.7.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.3.1-1.4-.1-.1-.3-.2-.6-.4Z"
+    />
+
+  </svg>
+
+</a>
+
+
+
+<!-- =====================================================
+     BOOKING MODAL
+===================================================== -->
+
+<div
+  id="bookingModal"
+  class="hidden fixed inset-0 z-[100] modal-bg items-center justify-center p-5"
+>
+
+  <div
+    class="bg-white rounded-3xl w-full max-w-lg max-h-[90vh] overflow-y-auto shadow-2xl"
+  >
+
+    <div class="p-7">
+
+      <div class="flex items-start justify-between">
+
+        <div>
+
+          <span class="text-blue-600 text-xs font-bold uppercase tracking-widest">
+            Reserva
+          </span>
+
+          <h2
+            id="modalCarName"
+            class="text-3xl font-black mt-2"
+          >
+            Tu vehículo
+          </h2>
+
+        </div>
+
+
+        <button
+          id="closeModal"
+          class="w-10 h-10 rounded-xl bg-slate-100 hover:bg-slate-200 flex items-center justify-center"
+        >
+          ✕
+        </button>
+
+      </div>
+
+
+      <div
+        class="mt-7 p-5 bg-slate-50 rounded-2xl"
+      >
+
+        <div class="flex justify-between">
+
+          <span class="text-slate-500">
+            Precio por día
+          </span>
+
+          <strong
+            id="modalPrice"
+            class="text-blue-600"
+          >
+            $0
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <form id="bookingForm" class="mt-6 space-y-4">
+
+        <input
+          id="bookingName"
+          type="text"
+          required
+          placeholder="Nombre completo"
+          class="w-full px-4 py-3.5 rounded-xl border border-slate-200 outline-none focus:border-blue-500"
+        >
+
+        <input
+          id="bookingPhone"
+          type="tel"
+          required
+          placeholder="Teléfono / WhatsApp"
+          class="w-full px-4 py-3.5 rounded-xl border border-slate-200 outline-none focus:border-blue-500"
+        >
+
+        <input
+          id="bookingEmail"
+          type="email"
+          required
+          placeholder="Email"
+          class="w-full px-4 py-3.5 rounded-xl border border-slate-200 outline-none focus:border-blue-500"
+        >
+
+        <div class="grid grid-cols-2 gap-4">
+
+          <div>
+
+            <label class="block text-xs font-bold text-slate-500 mb-2">
+              Retiro
+            </label>
+
+            <input
+              id="bookingPickup"
+              type="date"
+              required
+              class="w-full px-4 py-3 rounded-xl border border-slate-200"
+            >
+
+          </div>
+
+
+          <div>
+
+            <label class="block text-xs font-bold text-slate-500 mb-2">
+              Devolución
+            </label>
+
+            <input
+              id="bookingReturn"
+              type="date"
+              required
+              class="w-full px-4 py-3 rounded-xl border border-slate-200"
+            >
+
+          </div>
+
+        </div>
+
+
+        <button
+          type="submit"
+          class="w-full py-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold transition"
+        >
+          Solicitar reserva
+        </button>
+
+
+        <p
+          id="bookingSuccess"
+          class="hidden text-center text-green-600 font-semibold"
+        >
+          ¡Reserva solicitada correctamente!
+        </p>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+
+/* =====================================================
+   NAVBAR SCROLL
+===================================================== */
+
+const navbar = document.getElementById("navbar");
+const logoText = document.getElementById("logoText");
+
+window.addEventListener("scroll", () => {
+
+  if (window.scrollY > 50) {
+
+    navbar.classList.add(
+      "bg-slate-950/95",
+      "backdrop-blur-xl",
+      "shadow-xl"
+    );
+
+  } else {
+
+    navbar.classList.remove(
+      "bg-slate-950/95",
+      "backdrop-blur-xl",
+      "shadow-xl"
+    );
+
+  }
+
+});
+
+
+
+/* =====================================================
+   MOBILE MENU
+===================================================== */
+
+const menuButton = document.getElementById("menuButton");
+const mobileMenu = document.getElementById("mobileMenu");
+
+menuButton.addEventListener("click", () => {
+
+  mobileMenu.classList.toggle("hidden");
+
+});
+
+document.querySelectorAll(".mobile-link").forEach(link => {
+
+  link.addEventListener("click", () => {
+
+    mobileMenu.classList.add("hidden");
+
+  });
+
+});
+
+
+
+/* =====================================================
+   DATE DEFAULTS
+===================================================== */
+
+const today = new Date();
+
+const tomorrow = new Date(today);
+tomorrow.setDate(today.getDate() + 1);
+
+const formatDate = date => {
+
+  const year = date.getFullYear();
+
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+
+  const day = String(date.getDate()).padStart(2, "0");
+
+  return `${year}-${month}-${day}`;
+
+};
+
+document.getElementById("pickupDate").value = formatDate(today);
+document.getElementById("returnDate").value = formatDate(tomorrow);
+
+document.getElementById("pickupDate").min = formatDate(today);
+document.getElementById("returnDate").min = formatDate(tomorrow);
+
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
+
+document
+  .getElementById("searchButton")
+  .addEventListener("click", () => {
+
+    const pickup = document.getElementById("pickupDate").value;
+    const returnDate = document.getElementById("returnDate").value;
+
+    if (!pickup || !returnDate) {
+
+      alert("Seleccioná las fechas de retiro y devolución.");
+
+      return;
+
+    }
+
+    if (new Date(returnDate) <= new Date(pickup)) {
+
+      alert("La fecha de devolución debe ser posterior al retiro.");
+
+      return;
+
+    }
+
+    document
+      .getElementById("vehiculos")
+      .scrollIntoView({
+        behavior: "smooth"
+      });
+
+  });
+
+
+
+/* =====================================================
+   FILTERS
+===================================================== */
+
+const filterButtons = document.querySelectorAll(".filter-btn");
+const cars = document.querySelectorAll(".car-item");
+
+filterButtons.forEach(button => {
+
+  button.addEventListener("click", () => {
+
+    const filter = button.dataset.filter;
+
+
+    filterButtons.forEach(btn => {
+
+      btn.classList.remove(
+        "bg-slate-950",
+        "text-white"
+      );
+
+      btn.classList.add(
+        "bg-white",
+        "text-slate-600"
+      );
+
+    });
+
+
+    button.classList.remove(
+      "bg-white",
+      "text-slate-600"
+    );
+
+    button.classList.add(
+      "bg-slate-950",
+      "text-white"
+    );
+
+
+    cars.forEach(car => {
+
+      if (
+        filter === "all" ||
+        car.dataset.category === filter
+      ) {
+
+        car.classList.remove("hidden");
+
+      } else {
+
+        car.classList.add("hidden");
+
+      }
+
+    });
+
+  });
+
+});
+
+
+
+/* =====================================================
+   BOOKING MODAL
+===================================================== */
+
+const bookingModal =
+  document.getElementById("bookingModal");
+
+const modalCarName =
+  document.getElementById("modalCarName");
+
+const modalPrice =
+  document.getElementById("modalPrice");
+
+
+let selectedCar = "";
+let selectedPrice = 0;
+
+
+function openBooking(car, price) {
+
+  selectedCar = car;
+  selectedPrice = price;
+
+  modalCarName.textContent = car;
+
+  modalPrice.textContent =
+    "$" + price.toLocaleString("es-AR");
+
+  bookingModal.classList.remove("hidden");
+  bookingModal.classList.add("flex");
+
+}
+
+
+function closeBooking() {
+
+  bookingModal.classList.add("hidden");
+  bookingModal.classList.remove("flex");
+
+}
+
+
+document
+  .getElementById("closeModal")
+  .addEventListener("click", closeBooking);
+
+
+bookingModal.addEventListener("click", event => {
+
+  if (event.target === bookingModal) {
+
+    closeBooking();
+
+  }
+
+});
+
+
+
+/* =====================================================
+   BOOKING FORM
+===================================================== */
+
+document
+  .getElementById("bookingForm")
+  .addEventListener("submit", event => {
+
+    event.preventDefault();
+
+    const name =
+      document.getElementById("bookingName").value;
+
+    const phone =
+      document.getElementById("bookingPhone").value;
+
+    const pickup =
+      document.getElementById("bookingPickup").value;
+
+    const returnDate =
+      document.getElementById("bookingReturn").value;
+
+
+    if (
+      new Date(returnDate) <=
+      new Date(pickup)
+    ) {
+
+      alert(
+        "La devolución debe ser posterior al retiro."
+      );
+
+      return;
+
+    }
+
+
+    const message =
+      `Hola DriveGo! Quiero reservar un ${selectedCar}.%0A%0A` +
+      `Nombre: ${name}%0A` +
+      `Teléfono: ${phone}%0A` +
+      `Retiro: ${pickup}%0A` +
+      `Devolución: ${returnDate}`;
+
+
+    window.open(
+      `https://wa.me/5491112345678?text=${message}`,
+      "_blank"
+    );
+
+
+    document
+      .getElementById("bookingSuccess")
+      .classList.remove("hidden");
+
+  });
+
+
+
+/* =====================================================
+   CONTACT FORM
+===================================================== */
+
+document
+  .getElementById("contactForm")
+  .addEventListener("submit", event => {
+
+    event.preventDefault();
+
+    const success =
+      document.getElementById("contactSuccess");
+
+    success.classList.remove("hidden");
+
+    event.target.reset();
+
+    setTimeout(() => {
+
+      success.classList.add("hidden");
+
+    }, 5000);
+
+  });
+
+
+
+/* =====================================================
+   FAQ
+===================================================== */
+
+document
+  .querySelectorAll(".faq-question")
+  .forEach(question => {
+
+    question.addEventListener("click", () => {
+
+      const answer =
+        question.nextElementSibling;
+
+      const icon =
+        question.querySelector("span");
+
+
+      answer.classList.toggle("hidden");
+
+      icon.textContent =
+        answer.classList.contains("hidden")
+          ? "+"
+          : "−";
+
+    });
+
+  });
+
+
+
+/* =====================================================
+   SCROLL REVEAL
+===================================================== */
+
+const observer =
+  new IntersectionObserver(
+    entries => {
+
+      entries.forEach(entry => {
+
+        if (entry.isIntersecting) {
+
+          entry.target.classList.add("show");
+
+        }
+
+      });
+
+    },
+    {
+      threshold: 0.1
+    }
+  );
+
+
+document
+  .querySelectorAll(".reveal")
+  .forEach(element => {
+
+    observer.observe(element);
+
+  });
+
+
+</script>
+
+</body>
+</html>

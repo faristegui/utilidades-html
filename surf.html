@@ -1,0 +1,1696 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Ola Sur | Escuela de Surf Mar del Plata</title>
+
+  <meta
+    name="description"
+    content="Escuela de surf en Mar del Plata. Clases para principiantes, intermedios y avanzados. Alquiler de tablas y trajes."
+  >
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+
+          colors: {
+            ocean: "#063B4C",
+            oceanDark: "#032731",
+            aqua: "#28C5C8",
+            arena: "#F4E6C8",
+            sunset: "#F47B44",
+            crema: "#FFF9ED"
+          },
+
+          fontFamily: {
+            sans: ["DM Sans", "sans-serif"],
+            display: ["Bebas Neue", "sans-serif"]
+          },
+
+          boxShadow: {
+            ocean: "0 25px 70px rgba(3,39,49,.20)"
+          }
+
+        }
+      }
+    }
+  </script>
+
+  <style>
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "DM Sans", sans-serif;
+      background: #FFF9ED;
+      color: #032731;
+    }
+
+    .display {
+      font-family: "Bebas Neue", sans-serif;
+      letter-spacing: .02em;
+    }
+
+    .hero {
+      background:
+        linear-gradient(
+          90deg,
+          rgba(3,39,49,.78) 0%,
+          rgba(3,39,49,.42) 48%,
+          rgba(3,39,49,.12) 100%
+        ),
+        url("https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=2200&q=90")
+        center/cover;
+    }
+
+    .wave {
+      position: relative;
+    }
+
+    .wave::after {
+      content: "";
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 100%;
+      height: 90px;
+      background: #FFF9ED;
+      clip-path: ellipse(70% 45% at 50% 100%);
+    }
+
+    .tilt-left {
+      transform: rotate(-2deg);
+    }
+
+    .tilt-right {
+      transform: rotate(2deg);
+    }
+
+    .tilt-left:hover,
+    .tilt-right:hover {
+      transform: rotate(0deg) translateY(-8px);
+    }
+
+    .card {
+      transition:
+        transform .35s ease,
+        box-shadow .35s ease;
+    }
+
+    .card:hover {
+      box-shadow: 0 25px 60px rgba(3,39,49,.15);
+    }
+
+    .fade {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: .7s ease;
+    }
+
+    .fade.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .marquee {
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .marquee-content {
+      display: inline-block;
+      animation: marquee 20s linear infinite;
+    }
+
+    @keyframes marquee {
+
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-50%);
+      }
+
+    }
+
+    .sun {
+      animation: sun 5s ease-in-out infinite;
+    }
+
+    @keyframes sun {
+
+      0%,100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-12px);
+      }
+
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<header
+  id="header"
+  class="fixed top-0 left-0 right-0 z-50 text-white transition-all duration-300"
+>
+
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+
+    <nav class="h-24 flex items-center justify-between">
+
+      <!-- LOGO -->
+
+      <a href="#inicio" class="flex items-center gap-3">
+
+        <div
+          class="w-12 h-12 rounded-full bg-aqua text-ocean flex items-center justify-center text-2xl font-bold"
+        >
+          ≋
+        </div>
+
+        <div>
+
+          <div class="display text-3xl leading-none">
+            OLA SUR
+          </div>
+
+          <div class="text-[9px] uppercase tracking-[.35em] opacity-70">
+            Escuela de Surf
+          </div>
+
+        </div>
+
+      </a>
+
+
+      <!-- DESKTOP -->
+
+      <div class="hidden lg:flex items-center gap-8 text-sm font-semibold">
+
+        <a href="#inicio" class="hover:text-aqua transition">
+          Inicio
+        </a>
+
+        <a href="#clases" class="hover:text-aqua transition">
+          Clases
+        </a>
+
+        <a href="#escuela" class="hover:text-aqua transition">
+          La escuela
+        </a>
+
+        <a href="#galeria" class="hover:text-aqua transition">
+          Galería
+        </a>
+
+        <a href="#contacto" class="hover:text-aqua transition">
+          Contacto
+        </a>
+
+      </div>
+
+
+      <a
+        href="#reserva"
+        class="hidden md:flex bg-sunset px-6 py-3.5 rounded-full font-bold hover:bg-white hover:text-ocean transition"
+      >
+        Reservar clase
+      </a>
+
+
+      <!-- MOBILE -->
+
+      <button
+        id="menuBtn"
+        class="lg:hidden w-11 h-11 rounded-full border border-white/30"
+      >
+        ☰
+      </button>
+
+    </nav>
+
+
+    <!-- MOBILE MENU -->
+
+    <div
+      id="mobileMenu"
+      class="hidden lg:hidden bg-oceanDark rounded-3xl p-5 mb-4 shadow-xl"
+    >
+
+      <div class="flex flex-col">
+
+        <a href="#inicio" class="p-3">
+          Inicio
+        </a>
+
+        <a href="#clases" class="p-3">
+          Clases
+        </a>
+
+        <a href="#escuela" class="p-3">
+          La escuela
+        </a>
+
+        <a href="#galeria" class="p-3">
+          Galería
+        </a>
+
+        <a href="#contacto" class="p-3">
+          Contacto
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section
+  id="inicio"
+  class="hero wave min-h-screen text-white flex items-center"
+>
+
+  <div class="max-w-7xl mx-auto px-5 lg:px-8 w-full pt-20">
+
+    <div class="max-w-3xl fade">
+
+      <div
+        class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 px-5 py-2.5 rounded-full text-sm font-semibold"
+      >
+
+        <span class="w-2 h-2 bg-aqua rounded-full"></span>
+
+        Mar del Plata · Buenos Aires
+
+      </div>
+
+
+      <h1
+        class="display text-[6rem] sm:text-[8rem] lg:text-[11rem] leading-[.78] mt-8"
+      >
+
+        VIVÍ
+        <span class="text-aqua">
+          EL
+        </span>
+
+        MAR.
+
+      </h1>
+
+
+      <p
+        class="text-lg sm:text-xl text-white/80 max-w-xl mt-8 leading-relaxed"
+      >
+
+        Aprendé a surfear, mejorá tu técnica y disfrutá
+        del océano con nuestra escuela de surf en
+        Mar del Plata.
+
+      </p>
+
+
+      <div class="flex flex-wrap gap-4 mt-9">
+
+        <a
+          href="#reserva"
+          class="bg-sunset px-7 py-4 rounded-full font-bold hover:bg-white hover:text-ocean transition"
+        >
+          Quiero surfear →
+        </a>
+
+        <a
+          href="#clases"
+          class="border border-white/30 backdrop-blur-sm px-7 py-4 rounded-full font-bold hover:bg-white hover:text-ocean transition"
+        >
+          Ver clases
+        </a>
+
+      </div>
+
+
+      <div class="flex flex-wrap gap-8 mt-12 text-sm">
+
+        <div>
+          <strong class="text-2xl block">
+            +10
+          </strong>
+
+          años enseñando
+        </div>
+
+        <div>
+          <strong class="text-2xl block">
+            5★
+          </strong>
+
+          experiencia
+        </div>
+
+        <div>
+          <strong class="text-2xl block">
+            100%
+          </strong>
+
+          buena onda
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- SCROLL -->
+
+  <div
+    class="absolute bottom-20 left-1/2 -translate-x-1/2 hidden md:block"
+  >
+
+    <div class="flex flex-col items-center gap-2 text-xs uppercase tracking-[.3em]">
+
+      Scroll
+
+      <div class="w-px h-12 bg-white/50"></div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     MARQUEE
+===================================================== -->
+
+<section class="bg-aqua text-ocean py-5 marquee">
+
+  <div
+    class="marquee-content display text-3xl tracking-wide"
+  >
+
+    SURF · MAR · SOL · LIBERTAD · OLAS · AVENTURA ·
+
+    SURF · MAR · SOL · LIBERTAD · OLAS · AVENTURA ·
+
+    SURF · MAR · SOL · LIBERTAD · OLAS · AVENTURA ·
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     CLASES
+===================================================== -->
+
+<section
+  id="clases"
+  class="py-28"
+>
+
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+
+
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-8 fade">
+
+      <div>
+
+        <span
+          class="text-sunset uppercase tracking-[.3em] text-xs font-bold"
+        >
+          Elegí tu nivel
+        </span>
+
+        <h2
+          class="display text-6xl sm:text-7xl mt-3 leading-none"
+        >
+          ENCONTRÁ
+          <span class="text-ocean">
+            TU OLA.
+          </span>
+        </h2>
+
+      </div>
+
+
+      <p class="max-w-md text-ocean/60">
+
+        No importa si nunca tocaste una tabla.
+        Tenemos clases pensadas para cada nivel.
+
+      </p>
+
+    </div>
+
+
+
+    <!-- CARDS -->
+
+    <div class="grid md:grid-cols-3 gap-8 mt-16">
+
+
+      <!-- PRINCIPIANTE -->
+
+      <article
+        class="card tilt-left bg-white rounded-[2.5rem] overflow-hidden shadow-ocean fade"
+      >
+
+        <div class="relative">
+
+          <img
+            src="https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=900&q=85"
+            class="w-full h-72 object-cover"
+            alt="Clase de surf para principiantes"
+          >
+
+          <div
+            class="absolute top-5 left-5 bg-aqua text-ocean px-4 py-2 rounded-full text-xs font-bold"
+          >
+            NIVEL 01
+          </div>
+
+        </div>
+
+
+        <div class="p-7">
+
+          <div class="flex justify-between items-start gap-4">
+
+            <div>
+
+              <h3 class="display text-4xl">
+                Principiantes
+              </h3>
+
+              <p class="text-ocean/50 text-sm mt-2">
+                Tu primera experiencia en el mar.
+              </p>
+
+            </div>
+
+            <div class="font-bold text-sunset">
+              $25K
+            </div>
+
+          </div>
+
+
+          <ul class="mt-6 space-y-3 text-sm text-ocean/70">
+
+            <li>✓ Clase de 90 minutos</li>
+
+            <li>✓ Tabla incluida</li>
+
+            <li>✓ Traje incluido</li>
+
+            <li>✓ Instructor personalizado</li>
+
+          </ul>
+
+
+          <button
+            onclick="reservar('Clase Principiantes')"
+            class="w-full mt-7 bg-ocean text-white py-4 rounded-full font-bold hover:bg-aqua hover:text-ocean transition"
+          >
+            Reservar
+          </button>
+
+        </div>
+
+      </article>
+
+
+
+      <!-- INTERMEDIO -->
+
+      <article
+        class="card bg-ocean text-white rounded-[2.5rem] overflow-hidden shadow-ocean fade"
+      >
+
+        <div class="relative">
+
+          <img
+            src="https://images.unsplash.com/photo-1455729552865-3658a5d39692?auto=format&fit=crop&w=900&q=85"
+            class="w-full h-72 object-cover"
+            alt="Surfista en el océano"
+          >
+
+          <div
+            class="absolute top-5 left-5 bg-sunset text-white px-4 py-2 rounded-full text-xs font-bold"
+          >
+            MÁS ELEGIDA
+          </div>
+
+        </div>
+
+
+        <div class="p-7">
+
+          <div class="flex justify-between items-start gap-4">
+
+            <div>
+
+              <h3 class="display text-4xl">
+                Intermedios
+              </h3>
+
+              <p class="text-white/50 text-sm mt-2">
+                Mejorá tu técnica y empezá a buscar olas.
+              </p>
+
+            </div>
+
+            <div class="font-bold text-aqua">
+              $28K
+            </div>
+
+          </div>
+
+
+          <ul class="mt-6 space-y-3 text-sm text-white/70">
+
+            <li>✓ Clase de 90 minutos</li>
+
+            <li>✓ Tabla incluida</li>
+
+            <li>✓ Traje incluido</li>
+
+            <li>✓ Corrección técnica</li>
+
+          </ul>
+
+
+          <button
+            onclick="reservar('Clase Intermedios')"
+            class="w-full mt-7 bg-aqua text-ocean py-4 rounded-full font-bold hover:bg-white transition"
+          >
+            Reservar
+          </button>
+
+        </div>
+
+      </article>
+
+
+
+      <!-- AVANZADO -->
+
+      <article
+        class="card tilt-right bg-white rounded-[2.5rem] overflow-hidden shadow-ocean fade"
+      >
+
+        <div class="relative">
+
+          <img
+            src="https://images.unsplash.com/photo-1531722569936-825d3cc60b7e?auto=format&fit=crop&w=900&q=85"
+            class="w-full h-72 object-cover"
+            alt="Surf avanzado"
+          >
+
+          <div
+            class="absolute top-5 left-5 bg-ocean text-white px-4 py-2 rounded-full text-xs font-bold"
+          >
+            NIVEL 03
+          </div>
+
+        </div>
+
+
+        <div class="p-7">
+
+          <div class="flex justify-between items-start gap-4">
+
+            <div>
+
+              <h3 class="display text-4xl">
+                Avanzados
+              </h3>
+
+              <p class="text-ocean/50 text-sm mt-2">
+                Potenciá tu surfing y dominá las olas.
+              </p>
+
+            </div>
+
+            <div class="font-bold text-sunset">
+              $32K
+            </div>
+
+          </div>
+
+
+          <ul class="mt-6 space-y-3 text-sm text-ocean/70">
+
+            <li>✓ Clase personalizada</li>
+
+            <li>✓ Análisis de técnica</li>
+
+            <li>✓ Selección de olas</li>
+
+            <li>✓ Entrenamiento específico</li>
+
+          </ul>
+
+
+          <button
+            onclick="reservar('Clase Avanzados')"
+            class="w-full mt-7 bg-ocean text-white py-4 rounded-full font-bold hover:bg-aqua hover:text-ocean transition"
+          >
+            Reservar
+          </button>
+
+        </div>
+
+      </article>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     ESCUELA
+===================================================== -->
+
+<section
+  id="escuela"
+  class="bg-arena py-28 overflow-hidden"
+>
+
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+
+      <!-- IMAGEN -->
+
+      <div class="relative fade">
+
+        <div
+          class="absolute -top-6 -left-6 w-28 h-28 bg-sunset rounded-full sun"
+        ></div>
+
+        <img
+          src="https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=1300&q=90"
+          class="relative z-10 w-full h-[560px] object-cover rounded-[4rem]"
+          alt="Escuela de surf"
+        >
+
+        <div
+          class="absolute z-20 bottom-8 -right-4 bg-ocean text-white rounded-3xl px-7 py-5 shadow-xl"
+        >
+
+          <div class="display text-4xl">
+            +10
+          </div>
+
+          <div class="text-sm text-white/60">
+            años surfeando juntos
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- TEXTO -->
+
+      <div class="fade">
+
+        <span
+          class="text-sunset uppercase tracking-[.3em] text-xs font-bold"
+        >
+          Sobre nosotros
+        </span>
+
+
+        <h2
+          class="display text-6xl sm:text-7xl mt-4 leading-none"
+        >
+
+          MÁS QUE
+          <span class="text-sunset">
+            UNA CLASE.
+          </span>
+
+        </h2>
+
+
+        <p class="text-ocean/60 text-lg mt-7 leading-relaxed">
+
+          Creemos que aprender surf no se trata solamente
+          de pararse arriba de una tabla.
+
+          Se trata de conectar con el mar, aprender a leerlo
+          y disfrutar cada momento.
+
+        </p>
+
+
+        <p class="text-ocean/60 mt-5 leading-relaxed">
+
+          Nuestro equipo está formado por instructores
+          apasionados que conocen las playas de Mar del Plata
+          y disfrutan enseñando tanto como surfeando.
+
+        </p>
+
+
+        <div class="grid grid-cols-2 gap-6 mt-9">
+
+
+          <div class="border-l-4 border-aqua pl-5">
+
+            <div class="font-bold text-xl">
+              Grupos chicos
+            </div>
+
+            <div class="text-sm text-ocean/50 mt-1">
+              Más atención para cada alumno.
+            </div>
+
+          </div>
+
+
+          <div class="border-l-4 border-sunset pl-5">
+
+            <div class="font-bold text-xl">
+              Equipamiento
+            </div>
+
+            <div class="text-sm text-ocean/50 mt-1">
+              Tablas y trajes incluidos.
+            </div>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     EQUIPAMIENTO
+===================================================== -->
+
+<section class="py-28 bg-ocean text-white">
+
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+
+
+    <div class="text-center max-w-2xl mx-auto fade">
+
+      <span
+        class="text-aqua uppercase tracking-[.3em] text-xs font-bold"
+      >
+        También podés alquilar
+      </span>
+
+      <h2 class="display text-6xl mt-4">
+        TODO PARA ENTRAR AL MAR.
+      </h2>
+
+      <p class="text-white/50 mt-5">
+        Si ya sabés surfear y solamente necesitás equipo,
+        también tenemos opciones de alquiler.
+      </p>
+
+    </div>
+
+
+    <div class="grid md:grid-cols-2 gap-8 mt-14">
+
+
+      <div
+        class="bg-white/5 border border-white/10 rounded-[2rem] p-8 flex gap-6 items-center fade"
+      >
+
+        <div
+          class="w-20 h-20 rounded-2xl bg-aqua text-ocean flex items-center justify-center text-4xl"
+        >
+          🏄
+        </div>
+
+        <div>
+
+          <h3 class="display text-3xl">
+            Tablas
+          </h3>
+
+          <p class="text-white/50 text-sm mt-1">
+            Diferentes tamaños y niveles.
+          </p>
+
+          <strong class="block mt-3 text-aqua">
+            Desde $12.000 / día
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <div
+        class="bg-white/5 border border-white/10 rounded-[2rem] p-8 flex gap-6 items-center fade"
+      >
+
+        <div
+          class="w-20 h-20 rounded-2xl bg-sunset text-white flex items-center justify-center text-4xl"
+        >
+          🌊
+        </div>
+
+        <div>
+
+          <h3 class="display text-3xl">
+            Trajes
+          </h3>
+
+          <p class="text-white/50 text-sm mt-1">
+            Neoprene para disfrutar incluso en días fríos.
+          </p>
+
+          <strong class="block mt-3 text-aqua">
+            Desde $7.000 / día
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     GALERIA
+===================================================== -->
+
+<section
+  id="galeria"
+  class="py-28"
+>
+
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+
+
+    <div class="flex flex-col md:flex-row justify-between md:items-end gap-5 fade">
+
+      <div>
+
+        <span
+          class="text-sunset uppercase tracking-[.3em] text-xs font-bold"
+        >
+          Así se vive
+        </span>
+
+        <h2 class="display text-6xl mt-3">
+          MAR. SOL. OLAS.
+        </h2>
+
+      </div>
+
+
+      <a
+        href="#"
+        class="font-bold text-ocean hover:text-sunset"
+      >
+        @olasurmdp →
+      </a>
+
+    </div>
+
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12">
+
+
+      <img
+        src="https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=800&q=85"
+        class="w-full h-72 object-cover rounded-[2rem] md:rounded-[3rem]"
+        alt="Surf"
+      >
+
+
+      <img
+        src="https://images.unsplash.com/photo-1455729552865-3658a5d39692?auto=format&fit=crop&w=800&q=85"
+        class="w-full h-72 object-cover rounded-[2rem] md:rounded-[3rem] md:mt-10"
+        alt="Surfista"
+      >
+
+
+      <img
+        src="https://images.pexels.com/photos/33937019/pexels-photo-33937019.jpeg?auto=compress&cs=tinysrgb&w=1200"
+        class="w-full h-72 object-cover rounded-[2rem] md:rounded-[3rem]"
+        alt="Surfista surfeando una ola en Mar del Plata"
+      >
+
+
+      <img
+        src="https://images.unsplash.com/photo-1524650359799-842906ca1c06?auto=format&fit=crop&w=800&q=85"
+        class="w-full h-72 object-cover rounded-[2rem] md:rounded-[3rem] md:mt-10"
+        alt="Playa"
+      >
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     TESTIMONIOS
+===================================================== -->
+
+<section class="py-28 bg-crema">
+
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+
+
+    <div class="text-center fade">
+
+      <span
+        class="text-sunset uppercase tracking-[.3em] text-xs font-bold"
+      >
+        Comunidad Ola Sur
+      </span>
+
+      <h2 class="display text-6xl mt-3">
+        ELLOS YA SE ANIMARON.
+      </h2>
+
+    </div>
+
+
+    <div class="grid md:grid-cols-3 gap-7 mt-14">
+
+
+      <article
+        class="bg-white rounded-[2rem] p-8 shadow-ocean fade"
+      >
+
+        <div class="text-sunset text-xl">
+          ★★★★★
+        </div>
+
+        <p class="text-ocean/60 mt-6 leading-relaxed">
+
+          “Nunca había hecho surf y pensé que me iba a
+          costar muchísimo. En la primera clase ya pude
+          pararme en la tabla.”
+
+        </p>
+
+        <div class="font-bold mt-7">
+          Martina R.
+        </div>
+
+        <div class="text-xs text-ocean/40 mt-1">
+          Alumna principiante
+        </div>
+
+      </article>
+
+
+      <article
+        class="bg-ocean text-white rounded-[2rem] p-8 shadow-ocean fade"
+      >
+
+        <div class="text-aqua text-xl">
+          ★★★★★
+        </div>
+
+        <p class="text-white/60 mt-6 leading-relaxed">
+
+          “Muy buena onda los profes. Fui con dos amigos
+          y terminamos haciendo varias clases. El equipo
+          está impecable.”
+
+        </p>
+
+        <div class="font-bold mt-7">
+          Tomás G.
+        </div>
+
+        <div class="text-xs text-white/40 mt-1">
+          Alumno intermedio
+        </div>
+
+      </article>
+
+
+      <article
+        class="bg-white rounded-[2rem] p-8 shadow-ocean fade"
+      >
+
+        <div class="text-sunset text-xl">
+          ★★★★★
+        </div>
+
+        <p class="text-ocean/60 mt-6 leading-relaxed">
+
+          “Excelente experiencia. Los instructores están
+          atentos todo el tiempo y te explican realmente
+          cómo leer las olas.”
+
+        </p>
+
+        <div class="font-bold mt-7">
+          Nicolás P.
+        </div>
+
+        <div class="text-xs text-ocean/40 mt-1">
+          Alumno avanzado
+        </div>
+
+      </article>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     RESERVA
+===================================================== -->
+
+<section
+  id="reserva"
+  class="py-28 bg-arena"
+>
+
+  <div class="max-w-5xl mx-auto px-5 lg:px-8">
+
+    <div
+      class="bg-ocean text-white rounded-[3rem] overflow-hidden shadow-ocean"
+    >
+
+      <div class="grid lg:grid-cols-2">
+
+
+        <!-- TEXTO -->
+
+        <div class="p-9 lg:p-14">
+
+          <span
+            class="text-aqua uppercase tracking-[.3em] text-xs font-bold"
+          >
+            Reservá tu lugar
+          </span>
+
+
+          <h2
+            class="display text-6xl mt-4 leading-none"
+          >
+            TU PRÓXIMA
+            <span class="text-sunset">
+              AVENTURA
+            </span>
+            EMPIEZA ACÁ.
+          </h2>
+
+
+          <p class="text-white/50 mt-6 leading-relaxed">
+
+            Completá tus datos y te contactamos por WhatsApp
+            para confirmar disponibilidad, horario y condiciones
+            del mar.
+
+          </p>
+
+
+          <div class="mt-9 space-y-5">
+
+
+            <div class="flex items-center gap-4">
+
+              <div
+                class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center"
+              >
+                📍
+              </div>
+
+              <div>
+
+                <div class="font-bold">
+                  Mar del Plata
+                </div>
+
+                <div class="text-sm text-white/40">
+                  Consultá nuestra playa del día
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <div class="flex items-center gap-4">
+
+              <div
+                class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center"
+              >
+                🌊
+              </div>
+
+              <div>
+
+                <div class="font-bold">
+                  Clases todo el año
+                </div>
+
+                <div class="text-sm text-white/40">
+                  Dependiendo de las condiciones
+                </div>
+
+              </div>
+
+            </div>
+
+
+          </div>
+
+        </div>
+
+
+        <!-- FORM -->
+
+        <form
+          id="bookingForm"
+          class="bg-white text-ocean p-9 lg:p-14"
+        >
+
+          <h3 class="display text-4xl">
+            Reservar clase
+          </h3>
+
+
+          <input
+            id="nombre"
+            required
+            type="text"
+            placeholder="Tu nombre"
+            class="w-full mt-7 px-5 py-4 rounded-2xl bg-crema border border-ocean/10 outline-none focus:border-aqua"
+          >
+
+
+          <input
+            id="telefono"
+            required
+            type="tel"
+            placeholder="Tu WhatsApp"
+            class="w-full mt-4 px-5 py-4 rounded-2xl bg-crema border border-ocean/10 outline-none focus:border-aqua"
+          >
+
+
+          <select
+            id="nivel"
+            class="w-full mt-4 px-5 py-4 rounded-2xl bg-crema border border-ocean/10 outline-none"
+          >
+
+            <option>Principiante</option>
+
+            <option>Intermedio</option>
+
+            <option>Avanzado</option>
+
+          </select>
+
+
+          <input
+            id="fecha"
+            type="date"
+            class="w-full mt-4 px-5 py-4 rounded-2xl bg-crema border border-ocean/10 outline-none"
+          >
+
+
+          <select
+            id="personas"
+            class="w-full mt-4 px-5 py-4 rounded-2xl bg-crema border border-ocean/10 outline-none"
+          >
+
+            <option>1 persona</option>
+
+            <option>2 personas</option>
+
+            <option>3 personas</option>
+
+            <option>4 personas</option>
+
+            <option>5+ personas</option>
+
+          </select>
+
+
+          <textarea
+            id="comentario"
+            rows="3"
+            placeholder="¿Querés contarnos algo?"
+            class="w-full mt-4 px-5 py-4 rounded-2xl bg-crema border border-ocean/10 outline-none resize-none"
+          ></textarea>
+
+
+          <button
+            type="submit"
+            class="w-full mt-5 py-4 bg-sunset text-white rounded-full font-bold hover:bg-ocean transition"
+          >
+            Consultar por WhatsApp →
+          </button>
+
+
+          <p class="text-xs text-ocean/40 text-center mt-4">
+            Te responderemos para confirmar disponibilidad.
+          </p>
+
+        </form>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer
+  id="contacto"
+  class="bg-oceanDark text-white"
+>
+
+  <div class="max-w-7xl mx-auto px-5 lg:px-8 py-16">
+
+
+    <div class="grid md:grid-cols-3 gap-12">
+
+
+      <!-- BRAND -->
+
+      <div>
+
+        <div class="display text-4xl">
+          OLA SUR
+        </div>
+
+        <div class="text-aqua text-[9px] uppercase tracking-[.4em]">
+          Escuela de Surf
+        </div>
+
+
+        <p class="text-white/40 mt-5 max-w-sm leading-relaxed">
+
+          Aprendé, disfrutá y conectá con el mar.
+          Escuela de surf en Mar del Plata.
+
+        </p>
+
+      </div>
+
+
+      <!-- LINKS -->
+
+      <div>
+
+        <h3 class="font-bold">
+          Navegación
+        </h3>
+
+        <div class="space-y-3 mt-5 text-white/40">
+
+          <a href="#inicio" class="block hover:text-aqua">
+            Inicio
+          </a>
+
+          <a href="#clases" class="block hover:text-aqua">
+            Clases
+          </a>
+
+          <a href="#escuela" class="block hover:text-aqua">
+            Escuela
+          </a>
+
+          <a href="#reserva" class="block hover:text-aqua">
+            Reservar
+          </a>
+
+        </div>
+
+      </div>
+
+
+      <!-- CONTACTO -->
+
+      <div>
+
+        <h3 class="font-bold">
+          Contacto
+        </h3>
+
+        <div class="space-y-4 mt-5 text-white/40">
+
+          <p>
+            📱 +54 9 223 555-5555
+          </p>
+
+          <p>
+            📍 Mar del Plata, Buenos Aires
+          </p>
+
+          <p>
+            📸 @olasurmdp
+          </p>
+
+          <p>
+            ✉️ hola@olasur.com
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div
+      class="border-t border-white/10 mt-14 pt-7 flex flex-col sm:flex-row justify-between gap-4 text-sm text-white/25"
+    >
+
+      <span>
+        © 2026 Ola Sur
+      </span>
+
+      <span>
+        Hecho para amantes del océano 🌊
+      </span>
+
+    </div>
+
+  </div>
+
+</footer>
+
+
+
+<!-- =====================================================
+     WHATSAPP FLOAT
+===================================================== -->
+
+<a
+  href="https://wa.me/5492235555555"
+  target="_blank"
+  class="fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-2xl hover:scale-110 transition"
+  aria-label="WhatsApp"
+>
+
+  <span class="text-2xl">
+    ☎
+  </span>
+
+</a>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+
+/* =====================================================
+   HEADER AL HACER SCROLL
+===================================================== */
+
+const header =
+  document.getElementById("header");
+
+
+window.addEventListener("scroll", () => {
+
+  if (window.scrollY > 60) {
+
+    header.classList.add(
+      "bg-oceanDark/95",
+      "backdrop-blur-xl",
+      "shadow-xl"
+    );
+
+  } else {
+
+    header.classList.remove(
+      "bg-oceanDark/95",
+      "backdrop-blur-xl",
+      "shadow-xl"
+    );
+
+  }
+
+});
+
+
+
+/* =====================================================
+   MENU MOBILE
+===================================================== */
+
+const menuBtn =
+  document.getElementById("menuBtn");
+
+const mobileMenu =
+  document.getElementById("mobileMenu");
+
+
+menuBtn.addEventListener("click", () => {
+
+  mobileMenu.classList.toggle("hidden");
+
+});
+
+
+document
+  .querySelectorAll("#mobileMenu a")
+  .forEach(link => {
+
+    link.addEventListener("click", () => {
+
+      mobileMenu.classList.add("hidden");
+
+    });
+
+  });
+
+
+
+/* =====================================================
+   RESERVAR DESDE LAS CARDS
+===================================================== */
+
+function reservar(nivel) {
+
+  const select =
+    document.getElementById("nivel");
+
+  if (nivel.includes("Principiantes")) {
+    select.value = "Principiante";
+  }
+
+  if (nivel.includes("Intermedios")) {
+    select.value = "Intermedio";
+  }
+
+  if (nivel.includes("Avanzados")) {
+    select.value = "Avanzado";
+  }
+
+
+  document
+    .getElementById("reserva")
+    .scrollIntoView({
+      behavior: "smooth"
+    });
+
+}
+
+
+
+/* =====================================================
+   FORMULARIO WHATSAPP
+===================================================== */
+
+document
+  .getElementById("bookingForm")
+  .addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+
+    const nombre =
+      document.getElementById("nombre").value;
+
+    const telefono =
+      document.getElementById("telefono").value;
+
+    const nivel =
+      document.getElementById("nivel").value;
+
+    const fecha =
+      document.getElementById("fecha").value ||
+      "A confirmar";
+
+    const personas =
+      document.getElementById("personas").value;
+
+    const comentario =
+      document.getElementById("comentario").value ||
+      "Sin comentarios";
+
+
+    const mensaje =
+
+      `Hola! Quiero consultar por una clase de surf.%0A%0A` +
+
+      `Nombre: ${nombre}%0A` +
+
+      `WhatsApp: ${telefono}%0A` +
+
+      `Nivel: ${nivel}%0A` +
+
+      `Fecha: ${fecha}%0A` +
+
+      `Personas: ${personas}%0A` +
+
+      `Comentario: ${comentario}`;
+
+
+    window.open(
+      `https://wa.me/5492235555555?text=${mensaje}`,
+      "_blank"
+    );
+
+  });
+
+
+
+/* =====================================================
+   ANIMACIONES AL SCROLLEAR
+===================================================== */
+
+const observer =
+  new IntersectionObserver(
+
+    entries => {
+
+      entries.forEach(entry => {
+
+        if (entry.isIntersecting) {
+
+          entry.target.classList.add("visible");
+
+          observer.unobserve(entry.target);
+
+        }
+
+      });
+
+    },
+
+    {
+      threshold: 0.12
+    }
+
+  );
+
+
+document
+  .querySelectorAll(".fade")
+  .forEach(element => {
+
+    observer.observe(element);
+
+  });
+
+
+
+/* =====================================================
+   FECHA MÍNIMA = HOY
+===================================================== */
+
+const fechaInput =
+  document.getElementById("fecha");
+
+
+const hoy =
+  new Date().toISOString().split("T")[0];
+
+
+fechaInput.min = hoy;
+
+
+</script>
+
+</body>
+</html>

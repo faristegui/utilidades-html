@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Documento para Firma</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Fuente -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Signature Pad -->
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js"></script>
+
+    <!-- html2canvas -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <!-- jsPDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <style>
+
+        body{
+            background:#eef2f7;
+            font-family:'Inter',sans-serif;
+        }
+
+        .card{
+            border:none;
+            border-radius:18px;
+        }
+
+        h2{
+            font-weight:700;
+        }
+
+        .section-title{
+            font-weight:600;
+            color:#0d6efd;
+            margin-bottom:20px;
+        }
+
+        canvas{
+            width:100%;
+            height:220px;
+            border:2px dashed #ced4da;
+            border-radius:12px;
+            background:white;
+            touch-action:none;
+        }
+
+        .legal{
+            background:#f8f9fa;
+            border-left:5px solid #0d6efd;
+            padding:20px;
+            border-radius:10px;
+            text-align:justify;
+        }
+
+        .footer{
+            border-top:1px solid #dee2e6;
+            margin-top:40px;
+            padding-top:20px;
+            text-align:center;
+            color:#6c757d;
+            font-size:.9rem;
+        }
+
+        @media print{
+
+            .no-print{
+                display:none;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-10">
+
+            <div class="card shadow-lg">
+
+                <div class="card-body p-5" id="documento">
+
+                    <div class="text-center mb-5">
+
+                        <i class="bi bi-file-earmark-text-fill text-primary" style="font-size:55px;"></i>
+
+                        <h2 class="mt-3">
+                            Contrato de Adhesión
+                        </h2>
+
+                        <p class="text-muted">
+                            Complete la información y firme al pie del documento.
+                        </p>
+
+                    </div>
+
+                    <h5 class="section-title">
+                        Datos del Firmante
+                    </h5>
+
+                    <div class="row g-3">
+
+                        <div class="col-md-6">
+                            <label class="form-label">Nombre Completo</label>
+                            <input class="form-control" id="nombre">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">DNI</label>
+                            <input class="form-control">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Email</label>
+                            <input class="form-control">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Teléfono</label>
+                            <input class="form-control">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Empresa</label>
+                            <input class="form-control">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Cargo</label>
+                            <input class="form-control">
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label">Dirección</label>
+                            <input class="form-control">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Ciudad</label>
+                            <input class="form-control">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Fecha</label>
+                            <input class="form-control" type="date">
+                        </div>
+
+                    </div>
+
+                    <hr class="my-5">
+
+                    <h5 class="section-title">
+                        Declaración
+                    </h5>
+
+                    <div class="legal">
+
+                        Declaro que toda la información proporcionada en este
+                        documento es correcta y completa.
+
+                        Asimismo manifiesto que he leído y comprendido los
+                        términos y condiciones establecidos, aceptándolos en
+                        su totalidad.
+
+                        La firma realizada a continuación representa mi
+                        conformidad expresa con el contenido del presente
+                        documento.
+
+                    </div>
+
+                    <hr class="my-5">
+
+                    <h5 class="section-title">
+                        Firma Digital
+                    </h5>
+
+                    <canvas id="signature-pad"></canvas>
+
+                    <small class="text-muted">
+                        Puede firmar utilizando el mouse, el dedo o un lápiz digital.
+                    </small>
+
+                    <div class="footer">
+
+                        Documento generado electrónicamente.
+
+                    </div>
+
+                </div>
+
+                <div class="card-footer bg-white text-end no-print">
+
+                    <button class="btn btn-outline-secondary me-2" id="clear">
+                        <i class="bi bi-eraser"></i>
+                        Limpiar Firma
+                    </button>
+
+                    <button class="btn btn-primary" id="download">
+                        <i class="bi bi-download"></i>
+                        Descargar PDF
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div id="pdf-documento" style="
+    display:none;
+    width:794px;
+    min-height:1123px;
+    padding:80px;
+    background:white;
+    color:#000;
+    font-family:Arial, sans-serif;
+">
+
+    <h2 style="text-align:center;">
+        Contrato de Adhesión
+    </h2>
+
+    <p>
+        Fecha: <span id="pdf-fecha"></span>
+    </p>
+
+    <p>
+        Yo, <b id="pdf-nombre"></b>,
+        declaro que la información proporcionada en este documento
+        es correcta y acepto los términos establecidos.
+    </p>
+
+    <p>
+        Asimismo manifiesto haber leído y comprendido las condiciones
+        descriptas, prestando conformidad mediante mi firma.
+    </p>
+
+
+    <br><br><br>
+
+
+    <div style="
+        width:250px;
+        margin-left:auto;
+        text-align:center;
+    ">
+
+        <img id="pdf-firma"
+             style="width:180px;height:auto;">
+
+        <hr>
+
+        <p>
+            Firma del paciente
+        </p>
+
+    </div>
+
+
+</div>
+
+<script>
+
+const canvas = document.getElementById("signature-pad");
+
+canvas.width = canvas.offsetWidth;
+canvas.height = canvas.offsetHeight;
+
+const signaturePad = new SignaturePad(canvas);
+
+window.addEventListener("resize",()=>{
+
+    const data = signaturePad.toData();
+
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+
+    signaturePad.fromData(data);
+
+});
+
+document.getElementById("clear").onclick=()=>{
+
+    signaturePad.clear();
+
+}
+document.getElementById("download").onclick=async()=>{
+
+    if(signaturePad.isEmpty()){
+
+        alert("Debe realizar una firma.");
+
+        return;
+
+    }
+
+
+    // Pasar datos del formulario al documento PDF
+
+    document.getElementById("pdf-nombre").innerText =
+        document.getElementById("nombre").value || "________________";
+
+
+    document.getElementById("pdf-fecha").innerText =
+        new Date().toLocaleDateString("es-AR");
+
+
+    document.getElementById("pdf-firma").src =
+        signaturePad.toDataURL();
+
+
+
+    // Mostrar temporalmente la plantilla del PDF
+
+    const plantilla = document.getElementById("pdf-documento");
+
+    plantilla.style.display = "block";
+
+
+
+    const captura = await html2canvas(plantilla,{
+        scale:3,
+        backgroundColor:"#ffffff"
+    });
+
+
+
+    // Ocultarla nuevamente
+
+    plantilla.style.display = "none";
+
+
+
+    // Crear PDF
+
+    const {jsPDF}=window.jspdf;
+
+    const pdf=new jsPDF(
+        "p",
+        "mm",
+        "a4"
+    );
+
+
+    const anchoPDF = 190;
+
+    const altoPDF =
+        captura.height * anchoPDF / captura.width;
+
+
+
+    pdf.addImage(
+        captura.toDataURL("image/png"),
+        "PNG",
+        0,
+        0,
+        210,
+        297
+    );
+
+
+    pdf.save(
+        "documento_firmado.pdf"
+    );
+
+
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>CleanPro | Limpieza Profesional para Empresas</title>
+  <meta
+    name="description"
+    content="Servicios profesionales de limpieza y productos de higiene para oficinas y empresas."
+  />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: "#0ea5a4",
+            dark: "#0f172a",
+            soft: "#f0fdfa"
+          },
+          fontFamily: {
+            sans: ["Inter", "sans-serif"]
+          },
+          animation: {
+            float: "float 4s ease-in-out infinite",
+            "fade-up": "fadeUp .8s ease-out forwards"
+          },
+          keyframes: {
+            float: {
+              "0%, 100%": { transform: "translateY(0)" },
+              "50%": { transform: "translateY(-10px)" }
+            },
+            fadeUp: {
+              "0%": {
+                opacity: "0",
+                transform: "translateY(25px)"
+              },
+              "100%": {
+                opacity: "1",
+                transform: "translateY(0)"
+              }
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+    }
+
+    .glass {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #0f766e, #06b6d4);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-bg {
+      background:
+        radial-gradient(circle at 15% 20%, rgba(20, 184, 166, .16), transparent 30%),
+        radial-gradient(circle at 85% 30%, rgba(6, 182, 212, .14), transparent 30%),
+        linear-gradient(180deg, #f8fffe 0%, #ffffff 100%);
+    }
+
+    .service-card {
+      transition: all .3s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 50px -15px rgba(15, 118, 110, .18);
+    }
+
+    .product-card {
+      transition: all .3s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-6px);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all .7s ease;
+    }
+
+    .reveal.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+
+<body class="bg-white text-slate-800">
+
+  <!-- ================= HEADER ================= -->
+
+  <header
+    id="header"
+    class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+  >
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <nav class="flex items-center justify-between h-20">
+
+        <!-- LOGO -->
+        <a href="#inicio" class="flex items-center gap-3">
+          <div
+            class="w-11 h-11 rounded-2xl bg-gradient-to-br from-teal-500 to-cyan-500 flex items-center justify-center text-white shadow-lg shadow-teal-500/20"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-6 h-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0V14a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+              />
+            </svg>
+          </div>
+
+          <div>
+            <span class="block text-xl font-extrabold text-slate-900">
+              Clean<span class="text-teal-500">Pro</span>
+            </span>
+            <span class="text-[10px] uppercase tracking-[.2em] text-slate-400">
+              Soluciones profesionales
+            </span>
+          </div>
+        </a>
+
+        <!-- DESKTOP NAV -->
+        <div class="hidden lg:flex items-center gap-8">
+          <a href="#inicio" class="text-sm font-medium text-slate-600 hover:text-teal-600 transition">
+            Inicio
+          </a>
+          <a href="#servicios" class="text-sm font-medium text-slate-600 hover:text-teal-600 transition">
+            Servicios
+          </a>
+          <a href="#productos" class="text-sm font-medium text-slate-600 hover:text-teal-600 transition">
+            Productos
+          </a>
+          <a href="#nosotros" class="text-sm font-medium text-slate-600 hover:text-teal-600 transition">
+            Nosotros
+          </a>
+          <a href="#contacto" class="text-sm font-medium text-slate-600 hover:text-teal-600 transition">
+            Contacto
+          </a>
+        </div>
+
+        <!-- CTA -->
+        <a
+          href="#contacto"
+          class="hidden lg:inline-flex items-center gap-2 bg-slate-900 text-white px-5 py-3 rounded-xl text-sm font-semibold hover:bg-teal-600 transition shadow-lg"
+        >
+          Solicitar presupuesto
+          <span>→</span>
+        </a>
+
+        <!-- MOBILE BUTTON -->
+        <button
+          id="menuBtn"
+          class="lg:hidden w-11 h-11 rounded-xl border border-slate-200 flex items-center justify-center"
+          aria-label="Abrir menú"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-6 h-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
+        </button>
+
+      </nav>
+
+      <!-- MOBILE MENU -->
+      <div
+        id="mobileMenu"
+        class="hidden lg:hidden glass rounded-2xl border border-white shadow-xl p-4 mb-4"
+      >
+        <div class="flex flex-col gap-2">
+          <a href="#inicio" class="mobile-link p-3 rounded-xl hover:bg-teal-50">Inicio</a>
+          <a href="#servicios" class="mobile-link p-3 rounded-xl hover:bg-teal-50">Servicios</a>
+          <a href="#productos" class="mobile-link p-3 rounded-xl hover:bg-teal-50">Productos</a>
+          <a href="#nosotros" class="mobile-link p-3 rounded-xl hover:bg-teal-50">Nosotros</a>
+          <a href="#contacto" class="mobile-link p-3 rounded-xl hover:bg-teal-50">Contacto</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- ================= HERO ================= -->
+
+  <section id="inicio" class="hero-bg min-h-screen pt-32 pb-20 flex items-center overflow-hidden">
+
+    <div class="max-w-7xl mx-auto px-5 lg:px-8 w-full">
+
+      <div class="grid lg:grid-cols-2 gap-14 items-center">
+
+        <!-- TEXT -->
+        <div class="animate-fade-up">
+
+          <div
+            class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-teal-50 border border-teal-100 text-teal-700 text-sm font-semibold mb-6"
+          >
+            <span class="w-2 h-2 bg-teal-500 rounded-full animate-pulse"></span>
+            Limpieza profesional para empresas
+          </div>
+
+          <h1
+            class="text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-[1.05] tracking-tight text-slate-950"
+          >
+            Un espacio limpio.
+            <span class="gradient-text">Un negocio mejor.</span>
+          </h1>
+
+          <p class="mt-7 text-lg text-slate-600 leading-relaxed max-w-xl">
+            Nos encargamos de la limpieza y mantenimiento de tus oficinas
+            para que vos puedas concentrarte en hacer crecer tu empresa.
+          </p>
+
+          <div class="flex flex-col sm:flex-row gap-4 mt-9">
+
+            <a
+              href="#contacto"
+              class="inline-flex justify-center items-center gap-2 px-7 py-4 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-bold shadow-xl shadow-teal-600/20 transition"
+            >
+              Solicitar presupuesto
+              <span>→</span>
+            </a>
+
+            <a
+              href="#servicios"
+              class="inline-flex justify-center items-center gap-2 px-7 py-4 rounded-xl bg-white border border-slate-200 hover:border-teal-300 hover:bg-teal-50 text-slate-700 font-bold transition"
+            >
+              Ver nuestros servicios
+            </a>
+
+          </div>
+
+          <!-- STATS -->
+
+          <div class="flex flex-wrap gap-8 mt-12 pt-8 border-t border-slate-200">
+
+            <div>
+              <div class="text-3xl font-extrabold text-slate-900">10+</div>
+              <div class="text-sm text-slate-500 mt-1">Años de experiencia</div>
+            </div>
+
+            <div>
+              <div class="text-3xl font-extrabold text-slate-900">500+</div>
+              <div class="text-sm text-slate-500 mt-1">Clientes satisfechos</div>
+            </div>
+
+            <div>
+              <div class="text-3xl font-extrabold text-slate-900">24/7</div>
+              <div class="text-sm text-slate-500 mt-1">Atención</div>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- IMAGE / VISUAL -->
+
+        <div class="relative">
+
+          <div class="absolute -top-10 -right-10 w-64 h-64 bg-teal-300/20 rounded-full blur-3xl"></div>
+          <div class="absolute -bottom-10 -left-10 w-64 h-64 bg-cyan-300/20 rounded-full blur-3xl"></div>
+
+          <div class="relative rounded-[2rem] overflow-hidden shadow-2xl shadow-slate-900/10 bg-slate-200">
+
+            <img
+              src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=85"
+              alt="Oficina moderna y limpia"
+              class="w-full h-[550px] object-cover"
+            />
+
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/50 via-transparent to-transparent"></div>
+
+            <div
+              class="absolute bottom-6 left-6 right-6 glass rounded-2xl p-5 border border-white/50"
+            >
+              <div class="flex items-center gap-4">
+
+                <div class="w-12 h-12 rounded-xl bg-teal-500 flex items-center justify-center text-white">
+                  ✓
+                </div>
+
+                <div>
+                  <div class="font-bold text-slate-900">
+                    Calidad garantizada
+                  </div>
+                  <div class="text-sm text-slate-600">
+                    Profesionales capacitados
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
+          <div
+            class="absolute -right-6 top-20 bg-white rounded-2xl shadow-xl p-4 animate-float hidden sm:block"
+          >
+            <div class="flex items-center gap-3">
+
+              <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center text-green-600 font-bold">
+                ★
+              </div>
+
+              <div>
+                <div class="font-bold">4.9 / 5</div>
+                <div class="text-xs text-slate-500">Opiniones</div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================= SERVICES ================= -->
+
+  <section id="servicios" class="py-24 bg-white">
+
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+
+      <div class="text-center max-w-2xl mx-auto reveal">
+
+        <span class="text-teal-600 font-bold text-sm uppercase tracking-widest">
+          Nuestros servicios
+        </span>
+
+        <h2 class="text-4xl lg:text-5xl font-extrabold text-slate-950 mt-3">
+          Todo limpio. Todo bajo control.
+        </h2>
+
+        <p class="text-slate-500 mt-5 leading-relaxed">
+          Soluciones de limpieza adaptadas a las necesidades de cada empresa,
+          oficina y espacio profesional.
+        </p>
+
+      </div>
+
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-14">
+
+        <!-- CARD -->
+
+        <div class="service-card reveal p-7 rounded-3xl border border-slate-100 bg-white shadow-sm">
+
+          <div class="w-14 h-14 rounded-2xl bg-teal-50 text-teal-600 flex items-center justify-center mb-6">
+
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none"
+              viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6" />
+            </svg>
+
+          </div>
+
+          <h3 class="text-xl font-bold text-slate-900">
+            Limpieza de oficinas
+          </h3>
+
+          <p class="text-slate-500 mt-3 leading-relaxed">
+            Mantenimiento diario de escritorios, pisos, baños y espacios comunes.
+          </p>
+
+        </div>
+
+
+        <div class="service-card reveal p-7 rounded-3xl border border-slate-100 bg-white shadow-sm">
+
+          <div class="w-14 h-14 rounded-2xl bg-cyan-50 text-cyan-600 flex items-center justify-center mb-6">
+            ✨
+          </div>
+
+          <h3 class="text-xl font-bold text-slate-900">
+            Limpieza profunda
+          </h3>
+
+          <p class="text-slate-500 mt-3 leading-relaxed">
+            Limpieza intensiva para recuperar y renovar cada espacio.
+          </p>
+
+        </div>
+
+
+        <div class="service-card reveal p-7 rounded-3xl border border-slate-100 bg-white shadow-sm">
+
+          <div class="w-14 h-14 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center mb-6">
+            🪟
+          </div>
+
+          <h3 class="text-xl font-bold text-slate-900">
+            Limpieza de vidrios
+          </h3>
+
+          <p class="text-slate-500 mt-3 leading-relaxed">
+            Cristales impecables para mejorar la imagen de tu empresa.
+          </p>
+
+        </div>
+
+
+        <div class="service-card reveal p-7 rounded-3xl border border-slate-100 bg-white shadow-sm">
+
+          <div class="w-14 h-14 rounded-2xl bg-green-50 text-green-600 flex items-center justify-center mb-6">
+            🧴
+          </div>
+
+          <h3 class="text-xl font-bold text-slate-900">
+            Desinfección
+          </h3>
+
+          <p class="text-slate-500 mt-3 leading-relaxed">
+            Tratamientos para mantener ambientes higiénicos y saludables.
+          </p>
+
+        </div>
+
+
+        <div class="service-card reveal p-7 rounded-3xl border border-slate-100 bg-white shadow-sm">
+
+          <div class="w-14 h-14 rounded-2xl bg-violet-50 text-violet-600 flex items-center justify-center mb-6">
+            🧹
+          </div>
+
+          <h3 class="text-xl font-bold text-slate-900">
+            Mantenimiento
+          </h3>
+
+          <p class="text-slate-500 mt-3 leading-relaxed">
+            Planes periódicos para mantener tu oficina siempre impecable.
+          </p>
+
+        </div>
+
+
+        <div class="service-card reveal p-7 rounded-3xl border border-slate-100 bg-white shadow-sm">
+
+          <div class="w-14 h-14 rounded-2xl bg-orange-50 text-orange-600 flex items-center justify-center mb-6">
+            📦
+          </div>
+
+          <h3 class="text-xl font-bold text-slate-900">
+            Insumos de limpieza
+          </h3>
+
+          <p class="text-slate-500 mt-3 leading-relaxed">
+            Productos profesionales para empresas y grandes superficies.
+          </p>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================= ABOUT ================= -->
+
+  <section id="nosotros" class="py-24 bg-slate-50">
+
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+        <div class="relative reveal">
+
+          <img
+            src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1000&q=85"
+            alt="Profesional de limpieza"
+            class="rounded-[2rem] w-full h-[500px] object-cover shadow-2xl"
+          />
+
+          <div class="absolute -bottom-7 -right-7 bg-white rounded-2xl shadow-xl p-6 hidden sm:block">
+
+            <div class="text-4xl font-extrabold text-teal-600">
+              +10
+            </div>
+
+            <div class="text-sm text-slate-500 mt-1">
+              años cuidando<br />
+              espacios profesionales
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="reveal">
+
+          <span class="text-teal-600 font-bold text-sm uppercase tracking-widest">
+            Sobre nosotros
+          </span>
+
+          <h2 class="text-4xl lg:text-5xl font-extrabold text-slate-950 mt-3 leading-tight">
+            Más que limpiar,
+            <span class="gradient-text">cuidamos tu espacio.</span>
+          </h2>
+
+          <p class="text-slate-600 mt-6 leading-relaxed">
+            En CleanPro creemos que un ambiente limpio es fundamental para
+            trabajar mejor. Por eso ofrecemos soluciones profesionales de
+            limpieza diseñadas específicamente para empresas.
+          </p>
+
+          <div class="grid sm:grid-cols-2 gap-5 mt-8">
+
+            <div class="flex gap-3">
+              <div class="text-teal-600 font-bold">✓</div>
+              <span class="text-slate-700">Personal capacitado</span>
+            </div>
+
+            <div class="flex gap-3">
+              <div class="text-teal-600 font-bold">✓</div>
+              <span class="text-slate-700">Productos profesionales</span>
+            </div>
+
+            <div class="flex gap-3">
+              <div class="text-teal-600 font-bold">✓</div>
+              <span class="text-slate-700">Horarios flexibles</span>
+            </div>
+
+            <div class="flex gap-3">
+              <div class="text-teal-600 font-bold">✓</div>
+              <span class="text-slate-700">Atención personalizada</span>
+            </div>
+
+          </div>
+
+          <a
+            href="#contacto"
+            class="inline-flex mt-9 px-6 py-3 rounded-xl bg-slate-900 text-white font-semibold hover:bg-teal-600 transition"
+          >
+            Conocé nuestra propuesta
+          </a>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================= PRODUCTS ================= -->
+
+  <section id="productos" class="py-24">
+
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-5 reveal">
+
+        <div>
+
+          <span class="text-teal-600 font-bold text-sm uppercase tracking-widest">
+            Productos
+          </span>
+
+          <h2 class="text-4xl font-extrabold text-slate-950 mt-3">
+            Productos profesionales
+          </h2>
+
+          <p class="text-slate-500 mt-3 max-w-xl">
+            Todo lo que necesitás para mantener tus espacios impecables.
+          </p>
+
+        </div>
+
+        <a href="#contacto" class="text-teal-600 font-bold hover:text-teal-700">
+          Consultar catálogo →
+        </a>
+
+      </div>
+
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
+
+        <div class="product-card rounded-3xl bg-white border border-slate-100 shadow-sm overflow-hidden reveal">
+
+          <img
+            src="https://images.unsplash.com/photo-1563453392212-326f5e854473?auto=format&fit=crop&w=700&q=80"
+            class="w-full h-52 object-cover"
+            alt="Productos de limpieza"
+          />
+
+          <div class="p-5">
+            <span class="text-xs text-teal-600 font-bold uppercase">
+              Higiene
+            </span>
+
+            <h3 class="font-bold text-lg mt-2">
+              Limpiador multiuso
+            </h3>
+
+            <p class="text-sm text-slate-500 mt-2">
+              Ideal para superficies de uso diario.
+            </p>
+
+            <button
+              onclick="consultarProducto('Limpiador multiuso')"
+              class="mt-5 w-full py-3 rounded-xl bg-slate-100 hover:bg-teal-600 hover:text-white font-semibold transition"
+            >
+              Consultar
+            </button>
+          </div>
+
+        </div>
+
+
+        <div class="product-card rounded-3xl bg-white border border-slate-100 shadow-sm overflow-hidden reveal">
+
+          <img
+            src="https://images.unsplash.com/photo-1583947215259-38e31be8751f?auto=format&fit=crop&w=700&q=80"
+            class="w-full h-52 object-cover"
+            alt="Guantes de limpieza"
+          />
+
+          <div class="p-5">
+
+            <span class="text-xs text-teal-600 font-bold uppercase">
+              Protección
+            </span>
+
+            <h3 class="font-bold text-lg mt-2">
+              Guantes profesionales
+            </h3>
+
+            <p class="text-sm text-slate-500 mt-2">
+              Protección y comodidad para trabajos intensivos.
+            </p>
+
+            <button
+              onclick="consultarProducto('Guantes profesionales')"
+              class="mt-5 w-full py-3 rounded-xl bg-slate-100 hover:bg-teal-600 hover:text-white font-semibold transition"
+            >
+              Consultar
+            </button>
+
+          </div>
+        </div>
+
+
+        <div class="product-card rounded-3xl bg-white border border-slate-100 shadow-sm overflow-hidden reveal">
+
+          <img
+            src="https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?auto=format&fit=crop&w=700&q=80"
+            class="w-full h-52 object-cover"
+            alt="Productos para pisos"
+          />
+
+          <div class="p-5">
+
+            <span class="text-xs text-teal-600 font-bold uppercase">
+              Pisos
+            </span>
+
+            <h3 class="font-bold text-lg mt-2">
+              Limpiador de pisos
+            </h3>
+
+            <p class="text-sm text-slate-500 mt-2">
+              Limpieza profunda y excelente terminación.
+            </p>
+
+            <button
+              onclick="consultarProducto('Limpiador de pisos')"
+              class="mt-5 w-full py-3 rounded-xl bg-slate-100 hover:bg-teal-600 hover:text-white font-semibold transition"
+            >
+              Consultar
+            </button>
+
+          </div>
+        </div>
+
+
+        <div class="product-card rounded-3xl bg-white border border-slate-100 shadow-sm overflow-hidden reveal">
+
+          <img
+            src="https://images.unsplash.com/photo-1610557892470-a90b7a9b9d8e?auto=format&fit=crop&w=700&q=80"
+            class="w-full h-52 object-cover"
+            alt="Productos de higiene"
+          />
+
+          <div class="p-5">
+
+            <span class="text-xs text-teal-600 font-bold uppercase">
+              Higiene
+            </span>
+
+            <h3 class="font-bold text-lg mt-2">
+              Kit de higiene
+            </h3>
+
+            <p class="text-sm text-slate-500 mt-2">
+              Solución completa para oficinas.
+            </p>
+
+            <button
+              onclick="consultarProducto('Kit de higiene')"
+              class="mt-5 w-full py-3 rounded-xl bg-slate-100 hover:bg-teal-600 hover:text-white font-semibold transition"
+            >
+              Consultar
+            </button>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================= TESTIMONIALS ================= -->
+
+  <section class="py-24 bg-slate-950 text-white">
+
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+
+      <div class="text-center max-w-2xl mx-auto reveal">
+
+        <span class="text-teal-400 font-bold text-sm uppercase tracking-widest">
+          Clientes
+        </span>
+
+        <h2 class="text-4xl font-extrabold mt-3">
+          Lo dicen nuestros clientes
+        </h2>
+
+      </div>
+
+
+      <div class="grid md:grid-cols-3 gap-6 mt-14">
+
+        <div class="bg-white/5 border border-white/10 rounded-3xl p-7 reveal">
+
+          <div class="text-yellow-400 text-xl">
+            ★★★★★
+          </div>
+
+          <p class="text-slate-300 mt-5 leading-relaxed">
+            “Desde que contratamos CleanPro nuestra oficina se mantiene
+            impecable. El equipo es puntual y muy profesional.”
+          </p>
+
+          <div class="mt-6">
+            <div class="font-bold">María González</div>
+            <div class="text-sm text-slate-500">Gerente administrativa</div>
+          </div>
+
+        </div>
+
+
+        <div class="bg-white/5 border border-white/10 rounded-3xl p-7 reveal">
+
+          <div class="text-yellow-400 text-xl">
+            ★★★★★
+          </div>
+
+          <p class="text-slate-300 mt-5 leading-relaxed">
+            “Excelente atención y muy buena calidad. Se adaptaron
+            perfectamente a nuestros horarios.”
+          </p>
+
+          <div class="mt-6">
+            <div class="font-bold">Carlos Rodríguez</div>
+            <div class="text-sm text-slate-500">Director comercial</div>
+          </div>
+
+        </div>
+
+
+        <div class="bg-white/5 border border-white/10 rounded-3xl p-7 reveal">
+
+          <div class="text-yellow-400 text-xl">
+            ★★★★★
+          </div>
+
+          <p class="text-slate-300 mt-5 leading-relaxed">
+            “Muy recomendables. La diferencia en nuestras instalaciones
+            se notó desde el primer día.”
+          </p>
+
+          <div class="mt-6">
+            <div class="font-bold">Lucía Fernández</div>
+            <div class="text-sm text-slate-500">RRHH</div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================= CONTACT ================= -->
+
+  <section id="contacto" class="py-24 bg-teal-50">
+
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+
+      <div class="grid lg:grid-cols-2 gap-14 items-start">
+
+        <div class="reveal">
+
+          <span class="text-teal-600 font-bold text-sm uppercase tracking-widest">
+            Contacto
+          </span>
+
+          <h2 class="text-4xl lg:text-5xl font-extrabold text-slate-950 mt-3">
+            ¿Hablamos de tu empresa?
+          </h2>
+
+          <p class="text-slate-600 mt-5 leading-relaxed max-w-lg">
+            Contanos qué necesitás y prepararemos una propuesta adaptada
+            a tu empresa.
+          </p>
+
+
+          <div class="space-y-5 mt-9">
+
+            <div class="flex gap-4">
+
+              <div class="w-12 h-12 rounded-xl bg-white flex items-center justify-center shadow-sm">
+                📞
+              </div>
+
+              <div>
+                <div class="font-bold text-slate-900">Teléfono</div>
+                <div class="text-slate-500">+54 9 11 1234-5678</div>
+              </div>
+
+            </div>
+
+
+            <div class="flex gap-4">
+
+              <div class="w-12 h-12 rounded-xl bg-white flex items-center justify-center shadow-sm">
+                ✉️
+              </div>
+
+              <div>
+                <div class="font-bold text-slate-900">Email</div>
+                <div class="text-slate-500">hola@cleanpro.com</div>
+              </div>
+
+            </div>
+
+
+            <div class="flex gap-4">
+
+              <div class="w-12 h-12 rounded-xl bg-white flex items-center justify-center shadow-sm">
+                📍
+              </div>
+
+              <div>
+                <div class="font-bold text-slate-900">Ubicación</div>
+                <div class="text-slate-500">Buenos Aires, Argentina</div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- FORM -->
+
+        <form
+          id="contactForm"
+          class="bg-white rounded-3xl shadow-xl p-7 sm:p-9 reveal"
+        >
+
+          <div class="grid sm:grid-cols-2 gap-5">
+
+            <div>
+              <label class="block text-sm font-semibold text-slate-700 mb-2">
+                Nombre
+              </label>
+
+              <input
+                id="name"
+                type="text"
+                required
+                placeholder="Tu nombre"
+                class="w-full px-4 py-3.5 rounded-xl border border-slate-200 outline-none focus:border-teal-500 focus:ring-4 focus:ring-teal-500/10 transition"
+              />
+            </div>
+
+
+            <div>
+              <label class="block text-sm font-semibold text-slate-700 mb-2">
+                Empresa
+              </label>
+
+              <input
+                type="text"
+                placeholder="Nombre de empresa"
+                class="w-full px-4 py-3.5 rounded-xl border border-slate-200 outline-none focus:border-teal-500 focus:ring-4 focus:ring-teal-500/10 transition"
+              />
+            </div>
+
+          </div>
+
+
+          <div class="grid sm:grid-cols-2 gap-5 mt-5">
+
+            <div>
+              <label class="block text-sm font-semibold text-slate-700 mb-2">
+                Email
+              </label>
+
+              <input
+                type="email"
+                required
+                placeholder="tu@email.com"
+                class="w-full px-4 py-3.5 rounded-xl border border-slate-200 outline-none focus:border-teal-500 focus:ring-4 focus:ring-teal-500/10 transition"
+              />
+            </div>
+
+
+            <div>
+              <label class="block text-sm font-semibold text-slate-700 mb-2">
+                Teléfono
+              </label>
+
+              <input
+                type="tel"
+                placeholder="+54 9..."
+                class="w-full px-4 py-3.5 rounded-xl border border-slate-200 outline-none focus:border-teal-500 focus:ring-4 focus:ring-teal-500/10 transition"
+              />
+            </div>
+
+          </div>
+
+
+          <div class="mt-5">
+
+            <label class="block text-sm font-semibold text-slate-700 mb-2">
+              ¿Qué necesitás?
+            </label>
+
+            <select
+              class="w-full px-4 py-3.5 rounded-xl border border-slate-200 outline-none focus:border-teal-500 focus:ring-4 focus:ring-teal-500/10 transition"
+            >
+              <option>Limpieza de oficinas</option>
+              <option>Limpieza profunda</option>
+              <option>Desinfección</option>
+              <option>Productos de limpieza</option>
+              <option>Otro</option>
+            </select>
+
+          </div>
+
+
+          <div class="mt-5">
+
+            <label class="block text-sm font-semibold text-slate-700 mb-2">
+              Mensaje
+            </label>
+
+            <textarea
+              rows="4"
+              required
+              placeholder="Contanos qué necesitás..."
+              class="w-full px-4 py-3.5 rounded-xl border border-slate-200 outline-none focus:border-teal-500 focus:ring-4 focus:ring-teal-500/10 transition resize-none"
+            ></textarea>
+
+          </div>
+
+
+          <button
+            type="submit"
+            class="w-full mt-6 py-4 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-bold transition shadow-lg shadow-teal-600/20"
+          >
+            Enviar consulta →
+          </button>
+
+          <p
+            id="formMessage"
+            class="hidden text-center text-sm text-green-600 font-semibold mt-4"
+          >
+            ¡Consulta enviada correctamente!
+          </p>
+
+        </form>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================= CTA ================= -->
+
+  <section class="py-20 bg-gradient-to-r from-teal-600 to-cyan-600">
+
+    <div class="max-w-5xl mx-auto px-5 text-center text-white reveal">
+
+      <h2 class="text-4xl lg:text-5xl font-extrabold">
+        Tu oficina merece estar impecable.
+      </h2>
+
+      <p class="mt-5 text-teal-50 text-lg">
+        Dejá la limpieza en manos de profesionales.
+      </p>
+
+      <a
+        href="#contacto"
+        class="inline-flex mt-8 px-8 py-4 bg-white text-teal-700 rounded-xl font-bold hover:bg-slate-100 transition shadow-xl"
+      >
+        Solicitar presupuesto
+      </a>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= FOOTER ================= -->
+
+  <footer class="bg-slate-950 text-white">
+
+    <div class="max-w-7xl mx-auto px-5 lg:px-8 py-14">
+
+      <div class="grid md:grid-cols-4 gap-10">
+
+        <div class="md:col-span-2">
+
+          <div class="flex items-center gap-3">
+
+            <div class="w-11 h-11 rounded-2xl bg-teal-500 flex items-center justify-center font-bold">
+              CP
+            </div>
+
+            <div>
+              <div class="text-xl font-extrabold">
+                Clean<span class="text-teal-400">Pro</span>
+              </div>
+              <div class="text-xs text-slate-500">
+                Soluciones profesionales
+              </div>
+            </div>
+
+          </div>
+
+          <p class="text-slate-400 mt-5 max-w-md leading-relaxed">
+            Servicios profesionales de limpieza y mantenimiento para empresas
+            que buscan calidad, confianza y resultados.
+          </p>
+
+        </div>
+
+
+        <div>
+
+          <h3 class="font-bold mb-4">
+            Navegación
+          </h3>
+
+          <div class="space-y-3 text-slate-400 text-sm">
+            <a href="#inicio" class="block hover:text-teal-400 transition">Inicio</a>
+            <a href="#servicios" class="block hover:text-teal-400 transition">Servicios</a>
+            <a href="#productos" class="block hover:text-teal-400 transition">Productos</a>
+            <a href="#nosotros" class="block hover:text-teal-400 transition">Nosotros</a>
+            <a href="#contacto" class="block hover:text-teal-400 transition">Contacto</a>
+          </div>
+
+        </div>
+
+
+        <div>
+
+          <h3 class="font-bold mb-4">
+            Contacto
+          </h3>
+
+          <div class="space-y-3 text-slate-400 text-sm">
+            <p>Buenos Aires, Argentina</p>
+            <p>+54 9 11 1234-5678</p>
+            <p>hola@cleanpro.com</p>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div
+        class="border-t border-white/10 mt-12 pt-7 flex flex-col sm:flex-row justify-between gap-4 text-sm text-slate-500"
+      >
+        <p>
+          © 2026 CleanPro. Todos los derechos reservados.
+        </p>
+
+        <p>
+          Diseñado con ♥ para empresas.
+        </p>
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <!-- ================= WHATSAPP ================= -->
+
+  <a
+    href="https://wa.me/5491112345678?text=Hola%20CleanPro,%20quiero%20consultar%20por%20sus%20servicios."
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Contactar por WhatsApp"
+    class="fixed bottom-6 right-6 z-40 w-14 h-14 rounded-full bg-green-500 hover:bg-green-600 text-white flex items-center justify-center shadow-2xl shadow-green-500/30 transition hover:scale-110"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="w-7 h-7"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+    >
+      <path
+        d="M20.52 3.48A11.85 11.85 0 0012.05 0C5.5 0 .17 5.33.17 11.89c0 2.09.55 4.13 1.59 5.92L.06 24l6.33-1.66a11.9 11.9 0 005.66 1.44h.01c6.55 0 11.88-5.33 11.88-11.89 0-3.18-1.24-6.16-3.42-8.41zM12.06 21.8a9.87 9.87 0 01-5.03-1.38l-.36-.21-3.76.99 1-3.66-.23-.38a9.87 9.87 0 01-1.51-5.27c0-5.46 4.44-9.9 9.9-9.9 2.65 0 5.14 1.03 7.01 2.9a9.85 9.85 0 012.9 7c0 5.47-4.45 9.91-9.92 9.91zm5.43-7.42c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.95 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.47-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.05 1.03-1.05 2.5s1.08 2.9 1.23 3.1c.15.2 2.12 3.24 5.14 4.54.72.31 1.28.49 1.72.63.72.23 1.38.2 1.9.12.58-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35z"
+      />
+    </svg>
+  </a>
+
+
+  <!-- ================= JAVASCRIPT ================= -->
+
+  <script>
+
+    // Header con efecto al hacer scroll
+    const header = document.getElementById("header");
+
+    window.addEventListener("scroll", () => {
+
+      if (window.scrollY > 30) {
+        header.classList.add(
+          "bg-white/90",
+          "backdrop-blur-xl",
+          "shadow-sm"
+        );
+      } else {
+        header.classList.remove(
+          "bg-white/90",
+          "backdrop-blur-xl",
+          "shadow-sm"
+        );
+      }
+
+    });
+
+
+    // Menú móvil
+    const menuBtn = document.getElementById("menuBtn");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    menuBtn.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+    });
+
+
+    // Cerrar menú al seleccionar una sección
+    document.querySelectorAll(".mobile-link").forEach(link => {
+
+      link.addEventListener("click", () => {
+        mobileMenu.classList.add("hidden");
+      });
+
+    });
+
+
+    // Animaciones al entrar en pantalla
+    const observer = new IntersectionObserver(
+      entries => {
+
+        entries.forEach(entry => {
+
+          if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+          }
+
+        });
+
+      },
+      {
+        threshold: 0.12
+      }
+    );
+
+
+    document.querySelectorAll(".reveal").forEach(element => {
+      observer.observe(element);
+    });
+
+
+    // Formulario
+    const contactForm = document.getElementById("contactForm");
+    const formMessage = document.getElementById("formMessage");
+
+    contactForm.addEventListener("submit", event => {
+
+      event.preventDefault();
+
+      formMessage.classList.remove("hidden");
+
+      contactForm.reset();
+
+      setTimeout(() => {
+        formMessage.classList.add("hidden");
+      }, 5000);
+
+    });
+
+
+    // Consulta de productos
+    function consultarProducto(producto) {
+
+      const numero = "5491112345678";
+
+      const mensaje =
+        `Hola CleanPro, quiero consultar por el producto: ${producto}`;
+
+      const url =
+        `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
+
+      window.open(url, "_blank");
+
+    }
+
+  </script>
+
+</body>
+</html>

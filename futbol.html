@@ -1,0 +1,2020 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>MDQ Fútbol | Alquiler de Canchas en Mar del Plata</title>
+
+  <meta
+    name="description"
+    content="Reservá tu cancha de fútbol 5 o fútbol 11 en Mar del Plata. Turnos, torneos, cumpleaños y mucho más."
+  >
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  >
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            futbol: "#16a34a",
+            oscuro: "#07130b"
+          },
+
+          fontFamily: {
+            sans: ["Inter", "sans-serif"]
+          },
+
+          boxShadow: {
+            premium: "0 25px 70px rgba(0,0,0,.18)"
+          },
+
+          keyframes: {
+            fadeUp: {
+              from: {
+                opacity: "0",
+                transform: "translateY(25px)"
+              },
+              to: {
+                opacity: "1",
+                transform: "translateY(0)"
+              }
+            }
+          },
+
+          animation: {
+            fadeUp: "fadeUp .7s ease forwards"
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+    }
+
+    .hero {
+      background:
+        linear-gradient(
+          90deg,
+          rgba(2,10,5,.96) 0%,
+          rgba(2,10,5,.82) 45%,
+          rgba(2,10,5,.30) 100%
+        ),
+        url("https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=2200&q=90");
+
+      background-size: cover;
+      background-position: center;
+    }
+
+    .glass {
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(18px);
+    }
+
+    .pitch-card {
+      transition: .3s ease;
+    }
+
+    .pitch-card:hover {
+      transform: translateY(-8px);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: .7s ease;
+    }
+
+    .reveal.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .modal-bg {
+      background: rgba(0,0,0,.72);
+      backdrop-filter: blur(7px);
+    }
+
+  </style>
+</head>
+
+
+<body class="bg-white text-slate-800">
+
+
+<!-- =========================================================
+     NAVBAR
+========================================================= -->
+
+<header
+  id="navbar"
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+>
+
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+
+    <nav class="h-20 flex items-center justify-between">
+
+
+      <!-- LOGO -->
+
+      <a href="#inicio" class="flex items-center gap-3">
+
+        <div
+          class="w-11 h-11 rounded-xl bg-green-500 text-white flex items-center justify-center font-black shadow-lg"
+        >
+          ⚽
+        </div>
+
+        <div>
+
+          <div class="text-xl font-black text-white">
+            MDQ <span class="text-green-400">Fútbol</span>
+          </div>
+
+          <div
+            class="text-[9px] text-slate-400 uppercase tracking-[.25em]"
+          >
+            Canchas & fútbol
+
+          </div>
+
+        </div>
+
+      </a>
+
+
+      <!-- DESKTOP -->
+
+      <div class="hidden lg:flex items-center gap-8">
+
+        <a
+          href="#inicio"
+          class="text-sm text-white/80 hover:text-white"
+        >
+          Inicio
+        </a>
+
+        <a
+          href="#canchas"
+          class="text-sm text-white/80 hover:text-white"
+        >
+          Canchas
+        </a>
+
+        <a
+          href="#servicios"
+          class="text-sm text-white/80 hover:text-white"
+        >
+          Servicios
+        </a>
+
+        <a
+          href="#nosotros"
+          class="text-sm text-white/80 hover:text-white"
+        >
+          Nosotros
+        </a>
+
+        <a
+          href="#contacto"
+          class="text-sm text-white/80 hover:text-white"
+        >
+          Contacto
+        </a>
+
+      </div>
+
+
+      <a
+        href="#reservar"
+        class="hidden lg:inline-flex bg-green-500 hover:bg-green-600 text-white px-5 py-3 rounded-xl font-bold text-sm transition"
+      >
+        Reservar cancha
+      </a>
+
+
+      <!-- MOBILE -->
+
+      <button
+        id="menuButton"
+        class="lg:hidden w-11 h-11 border border-white/20 rounded-xl text-white"
+      >
+        ☰
+      </button>
+
+    </nav>
+
+
+    <div
+      id="mobileMenu"
+      class="hidden lg:hidden bg-slate-950 rounded-2xl p-4 mb-4"
+    >
+
+      <div class="flex flex-col">
+
+        <a href="#inicio" class="mobile-link p-3 text-white">
+          Inicio
+        </a>
+
+        <a href="#canchas" class="mobile-link p-3 text-white">
+          Canchas
+        </a>
+
+        <a href="#servicios" class="mobile-link p-3 text-white">
+          Servicios
+        </a>
+
+        <a href="#nosotros" class="mobile-link p-3 text-white">
+          Nosotros
+        </a>
+
+        <a href="#contacto" class="mobile-link p-3 text-white">
+          Contacto
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</header>
+
+
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<section
+  id="inicio"
+  class="hero min-h-screen pt-28 pb-20 flex items-center"
+>
+
+  <div class="max-w-7xl mx-auto px-5 lg:px-8 w-full">
+
+    <div class="max-w-3xl animate-fadeUp">
+
+      <div
+        class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-white text-sm font-bold mb-7"
+      >
+
+        <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+
+        Fútbol en Mar del Plata
+
+      </div>
+
+
+      <h1
+        class="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-[1.02]"
+      >
+
+        El partido empieza
+        <span class="text-green-400">
+          acá.
+        </span>
+
+      </h1>
+
+
+      <p
+        class="text-lg lg:text-xl text-slate-300 mt-7 max-w-2xl leading-relaxed"
+      >
+        Alquilá tu cancha de fútbol 5 o fútbol 11 en Mar del Plata.
+        Reservá tu turno, armá el equipo y salí a jugar.
+      </p>
+
+
+      <div class="flex flex-wrap gap-4 mt-9">
+
+        <a
+          href="#reservar"
+          class="px-7 py-4 rounded-xl bg-green-500 hover:bg-green-600 text-white font-bold transition shadow-xl shadow-green-500/20"
+        >
+          ⚽ Reservar turno
+        </a>
+
+        <a
+          href="#canchas"
+          class="px-7 py-4 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold"
+        >
+          Ver canchas
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <!-- RESERVA RAPIDA -->
+
+    <div
+      id="reservar"
+      class="glass rounded-3xl p-5 lg:p-7 mt-14 max-w-6xl shadow-premium"
+    >
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-4">
+
+
+        <div>
+
+          <label class="block text-xs font-bold uppercase text-slate-500 mb-2">
+            Tipo de cancha
+          </label>
+
+          <select
+            id="tipoCancha"
+            class="w-full px-4 py-3.5 rounded-xl border border-slate-200"
+          >
+
+            <option value="Fútbol 5">
+              ⚽ Fútbol 5
+            </option>
+
+            <option value="Fútbol 11">
+              🏟️ Fútbol 11
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div>
+
+          <label class="block text-xs font-bold uppercase text-slate-500 mb-2">
+            Fecha
+          </label>
+
+          <input
+            id="fecha"
+            type="date"
+            class="w-full px-4 py-3.5 rounded-xl border border-slate-200"
+          >
+
+        </div>
+
+
+        <div>
+
+          <label class="block text-xs font-bold uppercase text-slate-500 mb-2">
+            Horario
+          </label>
+
+          <select
+            id="horario"
+            class="w-full px-4 py-3.5 rounded-xl border border-slate-200"
+          >
+
+            <option>10:00</option>
+            <option>11:00</option>
+            <option>12:00</option>
+            <option>13:00</option>
+            <option>14:00</option>
+            <option>15:00</option>
+            <option>16:00</option>
+            <option>17:00</option>
+            <option>18:00</option>
+            <option>19:00</option>
+            <option>20:00</option>
+            <option>21:00</option>
+            <option>22:00</option>
+            <option>23:00</option>
+
+          </select>
+
+        </div>
+
+
+        <div>
+
+          <label class="block text-xs font-bold uppercase text-slate-500 mb-2">
+            Nombre
+          </label>
+
+          <input
+            id="nombreReserva"
+            type="text"
+            placeholder="Tu nombre"
+            class="w-full px-4 py-3.5 rounded-xl border border-slate-200"
+          >
+
+        </div>
+
+
+        <div class="flex items-end">
+
+          <button
+            id="reservarButton"
+            class="w-full py-3.5 rounded-xl bg-slate-950 hover:bg-green-600 text-white font-bold transition"
+          >
+            Reservar
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     BENEFICIOS
+========================================================= -->
+
+<section class="py-10 border-b border-slate-100">
+
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-7">
+
+
+      <div class="flex items-center gap-4 reveal">
+
+        <div class="w-12 h-12 rounded-xl bg-green-50 flex items-center justify-center text-xl">
+          🌱
+        </div>
+
+        <div>
+          <div class="font-bold">
+            Césped sintético
+          </div>
+
+          <div class="text-sm text-slate-500">
+            Canchas cuidadas
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="flex items-center gap-4 reveal">
+
+        <div class="w-12 h-12 rounded-xl bg-green-50 flex items-center justify-center text-xl">
+          💡
+        </div>
+
+        <div>
+          <div class="font-bold">
+            Iluminación
+          </div>
+
+          <div class="text-sm text-slate-500">
+            Jugá de noche
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="flex items-center gap-4 reveal">
+
+        <div class="w-12 h-12 rounded-xl bg-green-50 flex items-center justify-center text-xl">
+          🚿
+        </div>
+
+        <div>
+          <div class="font-bold">
+            Vestuarios
+          </div>
+
+          <div class="text-sm text-slate-500">
+            Comodidad después del partido
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="flex items-center gap-4 reveal">
+
+        <div class="w-12 h-12 rounded-xl bg-green-50 flex items-center justify-center text-xl">
+          📲
+        </div>
+
+        <div>
+          <div class="font-bold">
+            Reserva fácil
+          </div>
+
+          <div class="text-sm text-slate-500">
+            Por WhatsApp
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     CANCHAS
+========================================================= -->
+
+<section
+  id="canchas"
+  class="py-24 bg-slate-50"
+>
+
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+
+
+    <div class="max-w-2xl reveal">
+
+      <span class="text-green-600 text-sm font-bold uppercase tracking-widest">
+        Nuestras canchas
+      </span>
+
+      <h2 class="text-4xl lg:text-5xl font-black text-slate-950 mt-3">
+        Elegí dónde jugar
+      </h2>
+
+      <p class="text-slate-500 mt-5 leading-relaxed">
+        Tenemos opciones para partidos entre amigos, entrenamientos,
+        torneos y partidos de fútbol 11.
+      </p>
+
+    </div>
+
+
+    <div class="grid lg:grid-cols-2 gap-8 mt-12">
+
+
+      <!-- F5 -->
+
+      <article
+        class="pitch-card bg-white rounded-3xl overflow-hidden shadow-sm border border-slate-100 reveal"
+      >
+
+        <div class="relative">
+
+          <img
+            src="https://images.unsplash.com/photo-1526232761682-d26e03ac148e?auto=format&fit=crop&w=1400&q=85"
+            alt="Cancha de fútbol 5"
+            class="w-full h-72 object-cover"
+          >
+
+          <div
+            class="absolute top-5 left-5 bg-green-500 text-white px-4 py-2 rounded-full text-sm font-black"
+          >
+            FÚTBOL 5
+          </div>
+
+        </div>
+
+
+        <div class="p-7">
+
+          <div class="flex justify-between gap-5">
+
+            <div>
+
+              <h3 class="text-2xl font-black">
+                Cancha Fútbol 5
+              </h3>
+
+              <p class="text-slate-500 mt-2">
+                Ideal para picados, equipos y partidos semanales.
+              </p>
+
+            </div>
+
+            <div class="text-right">
+
+              <div class="text-2xl font-black text-green-600">
+                $40.000
+              </div>
+
+              <div class="text-xs text-slate-400">
+                por turno
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-7">
+
+            <div class="bg-slate-50 rounded-xl p-3 text-center text-sm">
+              🌱
+              <div class="mt-1 font-semibold">
+                Sintético
+              </div>
+            </div>
+
+            <div class="bg-slate-50 rounded-xl p-3 text-center text-sm">
+              💡
+              <div class="mt-1 font-semibold">
+                Iluminada
+              </div>
+            </div>
+
+            <div class="bg-slate-50 rounded-xl p-3 text-center text-sm">
+              👥
+              <div class="mt-1 font-semibold">
+                10 jugadores
+              </div>
+            </div>
+
+            <div class="bg-slate-50 rounded-xl p-3 text-center text-sm">
+              🚿
+              <div class="mt-1 font-semibold">
+                Vestuario
+              </div>
+            </div>
+
+          </div>
+
+
+          <button
+            onclick="abrirReserva('Fútbol 5', 40000)"
+            class="w-full mt-7 py-4 bg-slate-950 hover:bg-green-600 text-white rounded-xl font-bold transition"
+          >
+            Reservar Fútbol 5 →
+          </button>
+
+        </div>
+
+      </article>
+
+
+
+      <!-- F11 -->
+
+      <article
+        class="pitch-card bg-white rounded-3xl overflow-hidden shadow-sm border border-slate-100 reveal"
+      >
+
+        <div class="relative">
+
+          <img
+            src="https://images.unsplash.com/photo-1553778263-73a83bab9b0c?auto=format&fit=crop&w=1400&q=85"
+            alt="Cancha de fútbol 11"
+            class="w-full h-72 object-cover"
+          >
+
+          <div
+            class="absolute top-5 left-5 bg-slate-950 text-white px-4 py-2 rounded-full text-sm font-black"
+          >
+            FÚTBOL 11
+          </div>
+
+        </div>
+
+
+        <div class="p-7">
+
+          <div class="flex justify-between gap-5">
+
+            <div>
+
+              <h3 class="text-2xl font-black">
+                Cancha Fútbol 11
+              </h3>
+
+              <p class="text-slate-500 mt-2">
+                Espacio ideal para equipos, torneos y entrenamientos.
+              </p>
+
+            </div>
+
+            <div class="text-right">
+
+              <div class="text-2xl font-black text-green-600">
+                $75.000
+              </div>
+
+              <div class="text-xs text-slate-400">
+                por turno
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-7">
+
+            <div class="bg-slate-50 rounded-xl p-3 text-center text-sm">
+              🌱
+              <div class="mt-1 font-semibold">
+                Césped
+              </div>
+            </div>
+
+            <div class="bg-slate-50 rounded-xl p-3 text-center text-sm">
+              💡
+              <div class="mt-1 font-semibold">
+                Iluminada
+              </div>
+            </div>
+
+            <div class="bg-slate-50 rounded-xl p-3 text-center text-sm">
+              👥
+              <div class="mt-1 font-semibold">
+                22 jugadores
+              </div>
+            </div>
+
+            <div class="bg-slate-50 rounded-xl p-3 text-center text-sm">
+              🏆
+              <div class="mt-1 font-semibold">
+                Torneos
+              </div>
+            </div>
+
+          </div>
+
+
+          <button
+            onclick="abrirReserva('Fútbol 11', 75000)"
+            class="w-full mt-7 py-4 bg-slate-950 hover:bg-green-600 text-white rounded-xl font-bold transition"
+          >
+            Reservar Fútbol 11 →
+          </button>
+
+        </div>
+
+      </article>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     SERVICIOS
+========================================================= -->
+
+<section
+  id="servicios"
+  class="py-24"
+>
+
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+
+    <div class="text-center max-w-2xl mx-auto reveal">
+
+      <span class="text-green-600 text-sm font-bold uppercase tracking-widest">
+        Mucho más que una cancha
+      </span>
+
+      <h2 class="text-4xl lg:text-5xl font-black mt-3">
+        Todo para disfrutar el fútbol
+      </h2>
+
+    </div>
+
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
+
+
+      <div class="p-7 rounded-3xl bg-green-50 reveal">
+
+        <div class="text-4xl">
+          🏆
+        </div>
+
+        <h3 class="text-xl font-black mt-5">
+          Torneos
+        </h3>
+
+        <p class="text-slate-600 mt-3 leading-relaxed">
+          Organizá torneos y competencias con tu equipo.
+        </p>
+
+      </div>
+
+
+      <div class="p-7 rounded-3xl bg-slate-950 text-white reveal">
+
+        <div class="text-4xl">
+          🎂
+        </div>
+
+        <h3 class="text-xl font-black mt-5">
+          Cumpleaños
+        </h3>
+
+        <p class="text-slate-400 mt-3 leading-relaxed">
+          Festejá un cumpleaños diferente con fútbol y amigos.
+        </p>
+
+      </div>
+
+
+      <div class="p-7 rounded-3xl bg-green-50 reveal">
+
+        <div class="text-4xl">
+          👟
+        </div>
+
+        <h3 class="text-xl font-black mt-5">
+          Entrenamientos
+        </h3>
+
+        <p class="text-slate-600 mt-3 leading-relaxed">
+          Espacios para equipos, escuelas y entrenamientos.
+        </p>
+
+      </div>
+
+
+      <div class="p-7 rounded-3xl bg-slate-950 text-white reveal">
+
+        <div class="text-4xl">
+          🍔
+        </div>
+
+        <h3 class="text-xl font-black mt-5">
+          Tercer tiempo
+        </h3>
+
+        <p class="text-slate-400 mt-3 leading-relaxed">
+          Quedate después del partido y disfrutá con el equipo.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     SOBRE NOSOTROS
+========================================================= -->
+
+<section
+  id="nosotros"
+  class="py-24 bg-slate-950 text-white"
+>
+
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+
+      <div class="relative reveal">
+
+        <img
+          src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=1400&q=85"
+          alt="Fútbol"
+          class="rounded-[2rem] w-full h-[520px] object-cover"
+        >
+
+        <div
+          class="absolute bottom-7 left-7 bg-white text-slate-950 rounded-2xl p-6 shadow-xl"
+        >
+
+          <div class="text-4xl font-black text-green-600">
+            +10
+          </div>
+
+          <div class="text-sm text-slate-500">
+            años viviendo<br>
+            el fútbol
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="reveal">
+
+        <span class="text-green-400 text-sm font-bold uppercase tracking-widest">
+          Sobre nosotros
+        </span>
+
+        <h2 class="text-4xl lg:text-5xl font-black mt-3 leading-tight">
+
+          Una cancha.
+          <span class="text-green-400">
+            Un equipo.
+          </span>
+          Mil historias.
+
+        </h2>
+
+
+        <p class="text-slate-400 mt-6 leading-relaxed">
+
+          Somos un espacio pensado para todos los que disfrutan
+          del fútbol en Mar del Plata.
+
+        </p>
+
+
+        <p class="text-slate-400 mt-4 leading-relaxed">
+
+          Ya sea un picado entre amigos, un entrenamiento,
+          un torneo o un cumpleaños, queremos que cada partido
+          sea una experiencia que tengas ganas de repetir.
+
+        </p>
+
+
+        <div class="grid sm:grid-cols-2 gap-5 mt-8">
+
+          <div class="flex gap-3">
+            <span class="text-green-400 font-bold">✓</span>
+            Canchas cuidadas
+          </div>
+
+          <div class="flex gap-3">
+            <span class="text-green-400 font-bold">✓</span>
+            Buena iluminación
+          </div>
+
+          <div class="flex gap-3">
+            <span class="text-green-400 font-bold">✓</span>
+            Atención personalizada
+          </div>
+
+          <div class="flex gap-3">
+            <span class="text-green-400 font-bold">✓</span>
+            Reservas por WhatsApp
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     COMO RESERVAR
+========================================================= -->
+
+<section class="py-24">
+
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+
+    <div class="text-center reveal">
+
+      <span class="text-green-600 text-sm font-bold uppercase tracking-widest">
+        Reservá en minutos
+      </span>
+
+      <h2 class="text-4xl font-black mt-3">
+        Así de fácil
+      </h2>
+
+    </div>
+
+
+    <div class="grid md:grid-cols-3 gap-8 mt-14">
+
+
+      <div class="text-center reveal">
+
+        <div
+          class="w-16 h-16 mx-auto bg-green-500 text-white rounded-2xl flex items-center justify-center text-2xl font-black"
+        >
+          1
+        </div>
+
+        <h3 class="text-xl font-black mt-6">
+          Elegí la cancha
+        </h3>
+
+        <p class="text-slate-500 mt-3">
+          Fútbol 5 o fútbol 11, según el partido que tengas pensado.
+        </p>
+
+      </div>
+
+
+      <div class="text-center reveal">
+
+        <div
+          class="w-16 h-16 mx-auto bg-green-500 text-white rounded-2xl flex items-center justify-center text-2xl font-black"
+        >
+          2
+        </div>
+
+        <h3 class="text-xl font-black mt-6">
+          Elegí día y hora
+        </h3>
+
+        <p class="text-slate-500 mt-3">
+          Consultá disponibilidad y encontrá el turno que mejor te quede.
+        </p>
+
+      </div>
+
+
+      <div class="text-center reveal">
+
+        <div
+          class="w-16 h-16 mx-auto bg-green-500 text-white rounded-2xl flex items-center justify-center text-2xl font-black"
+        >
+          3
+        </div>
+
+        <h3 class="text-xl font-black mt-6">
+          Vení a jugar
+        </h3>
+
+        <p class="text-slate-500 mt-3">
+          Armá el equipo, prepará los botines y nos vemos en la cancha.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     TESTIMONIOS
+========================================================= -->
+
+<section class="py-24 bg-slate-50">
+
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+
+    <div class="text-center reveal">
+
+      <span class="text-green-600 text-sm font-bold uppercase tracking-widest">
+        La gente opina
+      </span>
+
+      <h2 class="text-4xl font-black mt-3">
+        El tercer tiempo empieza con buenos partidos
+      </h2>
+
+    </div>
+
+
+    <div class="grid md:grid-cols-3 gap-6 mt-12">
+
+
+      <div class="bg-white p-7 rounded-3xl reveal">
+
+        <div class="text-yellow-400">
+          ★★★★★
+        </div>
+
+        <p class="text-slate-600 mt-5 leading-relaxed">
+          “La cancha está muy buena y la reserva fue rapidísima.
+          Volvemos todas las semanas.”
+        </p>
+
+        <div class="font-bold mt-6">
+          Nico
+        </div>
+
+        <div class="text-sm text-slate-400">
+          Mar del Plata
+        </div>
+
+      </div>
+
+
+      <div class="bg-white p-7 rounded-3xl reveal">
+
+        <div class="text-yellow-400">
+          ★★★★★
+        </div>
+
+        <p class="text-slate-600 mt-5 leading-relaxed">
+          “Organizamos un torneo con varios equipos y salió todo
+          excelente. Muy buena atención.”
+        </p>
+
+        <div class="font-bold mt-6">
+          Martín
+        </div>
+
+        <div class="text-sm text-slate-400">
+          Mar del Plata
+        </div>
+
+      </div>
+
+
+      <div class="bg-white p-7 rounded-3xl reveal">
+
+        <div class="text-yellow-400">
+          ★★★★★
+        </div>
+
+        <p class="text-slate-600 mt-5 leading-relaxed">
+          “Fuimos a jugar un fútbol 5 con amigos y quedamos
+          muy conformes. La cancha estaba impecable.”
+        </p>
+
+        <div class="font-bold mt-6">
+          Facundo
+        </div>
+
+        <div class="text-sm text-slate-400">
+          Mar del Plata
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     FAQ
+========================================================= -->
+
+<section class="py-24">
+
+  <div class="max-w-4xl mx-auto px-5 lg:px-8">
+
+    <div class="text-center reveal">
+
+      <span class="text-green-600 text-sm font-bold uppercase tracking-widest">
+        FAQ
+      </span>
+
+      <h2 class="text-4xl font-black mt-3">
+        Preguntas frecuentes
+      </h2>
+
+    </div>
+
+
+    <div class="space-y-4 mt-12">
+
+
+      <div class="border border-slate-200 rounded-2xl overflow-hidden reveal">
+
+        <button
+          class="faq-question w-full p-6 flex justify-between text-left font-bold"
+        >
+
+          ¿Cómo puedo reservar una cancha?
+
+          <span>+</span>
+
+        </button>
+
+        <div class="faq-answer hidden px-6 pb-6 text-slate-500">
+
+          Podés consultar disponibilidad mediante el formulario
+          de reserva o directamente por WhatsApp.
+
+        </div>
+
+      </div>
+
+
+      <div class="border border-slate-200 rounded-2xl overflow-hidden reveal">
+
+        <button
+          class="faq-question w-full p-6 flex justify-between text-left font-bold"
+        >
+
+          ¿Puedo reservar una cancha de fútbol 5 todas las semanas?
+
+          <span>+</span>
+
+        </button>
+
+        <div class="faq-answer hidden px-6 pb-6 text-slate-500">
+
+          Sí. Consultanos por turnos fijos para organizar tu horario
+          semanal con tu equipo.
+
+        </div>
+
+      </div>
+
+
+      <div class="border border-slate-200 rounded-2xl overflow-hidden reveal">
+
+        <button
+          class="faq-question w-full p-6 flex justify-between text-left font-bold"
+        >
+
+          ¿Qué pasa si llueve?
+
+          <span>+</span>
+
+        </button>
+
+        <div class="faq-answer hidden px-6 pb-6 text-slate-500">
+
+          Las condiciones dependen del tipo de cancha y del clima.
+          En caso de suspensión, nos comunicamos para reprogramar
+          el turno.
+
+        </div>
+
+      </div>
+
+
+      <div class="border border-slate-200 rounded-2xl overflow-hidden reveal">
+
+        <button
+          class="faq-question w-full p-6 flex justify-between text-left font-bold"
+        >
+
+          ¿Organizan torneos?
+
+          <span>+</span>
+
+        </button>
+
+        <div class="faq-answer hidden px-6 pb-6 text-slate-500">
+
+          Sí. Consultanos para organizar torneos, ligas y eventos
+          deportivos.
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     CONTACTO
+========================================================= -->
+
+<section
+  id="contacto"
+  class="py-24 bg-green-600"
+>
+
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+
+    <div class="grid lg:grid-cols-2 gap-14 items-center">
+
+
+      <div class="text-white reveal">
+
+        <span class="text-green-100 text-sm font-bold uppercase tracking-widest">
+          Contacto
+        </span>
+
+        <h2 class="text-4xl lg:text-5xl font-black mt-3">
+          ¿Armamos un partido?
+        </h2>
+
+        <p class="text-green-100 text-lg mt-5 leading-relaxed">
+          Escribinos y consultá disponibilidad para tu próximo turno.
+        </p>
+
+
+        <div class="space-y-5 mt-9">
+
+
+          <div class="flex gap-4">
+
+            <div class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center">
+              📱
+            </div>
+
+            <div>
+
+              <div class="font-bold">
+                WhatsApp
+              </div>
+
+              <div class="text-green-100">
+                +54 9 223 555-5555
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="flex gap-4">
+
+            <div class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center">
+              📍
+            </div>
+
+            <div>
+
+              <div class="font-bold">
+                Ubicación
+              </div>
+
+              <div class="text-green-100">
+                Mar del Plata, Buenos Aires
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="flex gap-4">
+
+            <div class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center">
+              🕐
+            </div>
+
+            <div>
+
+              <div class="font-bold">
+                Horarios
+              </div>
+
+              <div class="text-green-100">
+                Todos los días
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- FORM -->
+
+      <form
+        id="contactForm"
+        class="bg-white rounded-3xl p-7 sm:p-9 shadow-2xl reveal"
+      >
+
+        <h3 class="text-2xl font-black">
+          Consultá tu turno
+        </h3>
+
+        <p class="text-slate-500 mt-2">
+          Completá tus datos y te contactamos.
+        </p>
+
+
+        <input
+          id="contactName"
+          required
+          type="text"
+          placeholder="Nombre"
+          class="w-full mt-7 px-4 py-3.5 rounded-xl border border-slate-200"
+        >
+
+
+        <input
+          id="contactPhone"
+          required
+          type="tel"
+          placeholder="WhatsApp"
+          class="w-full mt-4 px-4 py-3.5 rounded-xl border border-slate-200"
+        >
+
+
+        <select
+          id="contactType"
+          class="w-full mt-4 px-4 py-3.5 rounded-xl border border-slate-200"
+        >
+
+          <option>Fútbol 5</option>
+          <option>Fútbol 11</option>
+          <option>Torneo</option>
+          <option>Cumpleaños</option>
+          <option>Otro</option>
+
+        </select>
+
+
+        <textarea
+          id="contactMessage"
+          rows="4"
+          placeholder="Contanos qué necesitás..."
+          class="w-full mt-4 px-4 py-3.5 rounded-xl border border-slate-200 resize-none"
+        ></textarea>
+
+
+        <button
+          type="submit"
+          class="w-full mt-5 py-4 rounded-xl bg-slate-950 hover:bg-green-700 text-white font-bold transition"
+        >
+          Consultar por WhatsApp →
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer class="bg-slate-950 text-white">
+
+  <div class="max-w-7xl mx-auto px-5 lg:px-8 py-14">
+
+    <div class="grid md:grid-cols-3 gap-10">
+
+
+      <div>
+
+        <div class="text-2xl font-black">
+          MDQ <span class="text-green-400">Fútbol</span>
+        </div>
+
+        <p class="text-slate-400 mt-5 leading-relaxed max-w-md">
+          Canchas de fútbol 5 y fútbol 11 para jugar con amigos,
+          entrenar, competir y disfrutar.
+        </p>
+
+      </div>
+
+
+      <div>
+
+        <h3 class="font-bold mb-5">
+          Navegación
+        </h3>
+
+        <div class="space-y-3 text-slate-400 text-sm">
+
+          <a href="#inicio" class="block hover:text-green-400">
+            Inicio
+          </a>
+
+          <a href="#canchas" class="block hover:text-green-400">
+            Canchas
+          </a>
+
+          <a href="#servicios" class="block hover:text-green-400">
+            Servicios
+          </a>
+
+          <a href="#contacto" class="block hover:text-green-400">
+            Contacto
+          </a>
+
+        </div>
+
+      </div>
+
+
+      <div>
+
+        <h3 class="font-bold mb-5">
+          Encontranos
+        </h3>
+
+        <div class="text-slate-400 space-y-3 text-sm">
+
+          <p>
+            📍 Mar del Plata, Buenos Aires
+          </p>
+
+          <p>
+            📱 +54 9 223 555-5555
+          </p>
+
+          <p>
+            ⚽ Fútbol 5 · Fútbol 11
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div
+      class="border-t border-white/10 mt-12 pt-7 text-sm text-slate-500"
+    >
+
+      © 2026 MDQ Fútbol · Mar del Plata
+
+    </div>
+
+  </div>
+
+</footer>
+
+
+
+<!-- =========================================================
+     WHATSAPP
+========================================================= -->
+
+<a
+  href="https://wa.me/5492235555555"
+  target="_blank"
+  class="fixed bottom-6 right-6 z-40 w-14 h-14 rounded-full bg-green-500 hover:bg-green-600 text-white flex items-center justify-center shadow-2xl hover:scale-110 transition"
+  aria-label="WhatsApp"
+>
+
+  <span class="text-2xl">
+    ☎
+  </span>
+
+</a>
+
+
+
+<!-- =========================================================
+     MODAL RESERVA
+========================================================= -->
+
+<div
+  id="modal"
+  class="hidden fixed inset-0 z-[100] modal-bg items-center justify-center p-5"
+>
+
+  <div class="bg-white rounded-3xl max-w-lg w-full shadow-2xl">
+
+    <div class="p-7">
+
+      <div class="flex justify-between">
+
+        <div>
+
+          <span class="text-green-600 text-xs font-bold uppercase">
+            Reservar turno
+          </span>
+
+          <h2
+            id="modalTitle"
+            class="text-3xl font-black mt-2"
+          >
+            Fútbol 5
+          </h2>
+
+        </div>
+
+        <button
+          onclick="cerrarModal()"
+          class="w-10 h-10 rounded-xl bg-slate-100"
+        >
+          ✕
+        </button>
+
+      </div>
+
+
+      <div class="bg-slate-50 rounded-2xl p-5 mt-7">
+
+        <div class="flex justify-between">
+
+          <span class="text-slate-500">
+            Precio estimado
+          </span>
+
+          <strong
+            id="modalPrice"
+            class="text-green-600 text-xl"
+          >
+            $40.000
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <form
+        id="bookingForm"
+        class="space-y-4 mt-6"
+      >
+
+        <input
+          id="bookingName"
+          required
+          type="text"
+          placeholder="Nombre"
+          class="w-full px-4 py-3.5 rounded-xl border border-slate-200"
+        >
+
+
+        <input
+          id="bookingPhone"
+          required
+          type="tel"
+          placeholder="WhatsApp"
+          class="w-full px-4 py-3.5 rounded-xl border border-slate-200"
+        >
+
+
+        <input
+          id="bookingDate"
+          required
+          type="date"
+          class="w-full px-4 py-3.5 rounded-xl border border-slate-200"
+        >
+
+
+        <select
+          id="bookingTime"
+          class="w-full px-4 py-3.5 rounded-xl border border-slate-200"
+        >
+
+          <option>18:00</option>
+          <option>19:00</option>
+          <option>20:00</option>
+          <option>21:00</option>
+          <option>22:00</option>
+          <option>23:00</option>
+
+        </select>
+
+
+        <button
+          class="w-full py-4 bg-green-600 hover:bg-green-700 text-white rounded-xl font-bold"
+        >
+          Confirmar por WhatsApp
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script>
+
+
+/* NAVBAR */
+
+const navbar = document.getElementById("navbar");
+
+window.addEventListener("scroll", () => {
+
+  if (window.scrollY > 50) {
+
+    navbar.classList.add(
+      "bg-slate-950/95",
+      "backdrop-blur-xl",
+      "shadow-xl"
+    );
+
+  } else {
+
+    navbar.classList.remove(
+      "bg-slate-950/95",
+      "backdrop-blur-xl",
+      "shadow-xl"
+    );
+
+  }
+
+});
+
+
+
+/* MOBILE */
+
+const menuButton =
+  document.getElementById("menuButton");
+
+const mobileMenu =
+  document.getElementById("mobileMenu");
+
+menuButton.addEventListener("click", () => {
+
+  mobileMenu.classList.toggle("hidden");
+
+});
+
+
+document.querySelectorAll(".mobile-link").forEach(link => {
+
+  link.addEventListener("click", () => {
+
+    mobileMenu.classList.add("hidden");
+
+  });
+
+});
+
+
+
+/* FECHA */
+
+const today = new Date();
+
+const formattedDate =
+  today.toISOString().split("T")[0];
+
+document.getElementById("fecha").value =
+  formattedDate;
+
+document.getElementById("fecha").min =
+  formattedDate;
+
+document.getElementById("bookingDate").value =
+  formattedDate;
+
+document.getElementById("bookingDate").min =
+  formattedDate;
+
+
+
+/* RESERVA RAPIDA */
+
+document
+  .getElementById("reservarButton")
+  .addEventListener("click", () => {
+
+    const tipo =
+      document.getElementById("tipoCancha").value;
+
+    const fecha =
+      document.getElementById("fecha").value;
+
+    const horario =
+      document.getElementById("horario").value;
+
+    const nombre =
+      document.getElementById("nombreReserva").value;
+
+
+    if (!nombre) {
+
+      alert("Escribí tu nombre para continuar.");
+
+      return;
+
+    }
+
+
+    const mensaje =
+      `Hola! Quiero reservar una cancha.%0A%0A` +
+      `Cancha: ${tipo}%0A` +
+      `Fecha: ${fecha}%0A` +
+      `Horario: ${horario}%0A` +
+      `Nombre: ${nombre}`;
+
+
+    window.open(
+      `https://wa.me/5492235555555?text=${mensaje}`,
+      "_blank"
+    );
+
+  });
+
+
+
+/* MODAL */
+
+let canchaSeleccionada = "";
+let precioSeleccionado = 0;
+
+
+function abrirReserva(tipo, precio) {
+
+  canchaSeleccionada = tipo;
+  precioSeleccionado = precio;
+
+
+  document.getElementById(
+    "modalTitle"
+  ).textContent = tipo;
+
+
+  document.getElementById(
+    "modalPrice"
+  ).textContent =
+    "$" + precio.toLocaleString("es-AR");
+
+
+  const modal =
+    document.getElementById("modal");
+
+
+  modal.classList.remove("hidden");
+
+  modal.classList.add("flex");
+
+}
+
+
+function cerrarModal() {
+
+  const modal =
+    document.getElementById("modal");
+
+  modal.classList.add("hidden");
+
+  modal.classList.remove("flex");
+
+}
+
+
+
+/* FORMULARIO RESERVA */
+
+document
+  .getElementById("bookingForm")
+  .addEventListener("submit", event => {
+
+    event.preventDefault();
+
+
+    const nombre =
+      document.getElementById("bookingName").value;
+
+    const telefono =
+      document.getElementById("bookingPhone").value;
+
+    const fecha =
+      document.getElementById("bookingDate").value;
+
+    const hora =
+      document.getElementById("bookingTime").value;
+
+
+    const mensaje =
+      `Hola! Quiero reservar una cancha.%0A%0A` +
+      `Cancha: ${canchaSeleccionada}%0A` +
+      `Fecha: ${fecha}%0A` +
+      `Hora: ${hora}%0A` +
+      `Nombre: ${nombre}%0A` +
+      `WhatsApp: ${telefono}`;
+
+
+    window.open(
+      `https://wa.me/5492235555555?text=${mensaje}`,
+      "_blank"
+    );
+
+  });
+
+
+
+/* FORMULARIO CONTACTO */
+
+document
+  .getElementById("contactForm")
+  .addEventListener("submit", event => {
+
+    event.preventDefault();
+
+
+    const nombre =
+      document.getElementById("contactName").value;
+
+    const telefono =
+      document.getElementById("contactPhone").value;
+
+    const tipo =
+      document.getElementById("contactType").value;
+
+    const mensaje =
+      document.getElementById("contactMessage").value;
+
+
+    const texto =
+      `Hola! Quiero hacer una consulta.%0A%0A` +
+      `Nombre: ${nombre}%0A` +
+      `WhatsApp: ${telefono}%0A` +
+      `Consulta: ${tipo}%0A` +
+      `Mensaje: ${mensaje}`;
+
+
+    window.open(
+      `https://wa.me/5492235555555?text=${texto}`,
+      "_blank"
+    );
+
+  });
+
+
+
+/* FAQ */
+
+document
+  .querySelectorAll(".faq-question")
+  .forEach(question => {
+
+    question.addEventListener("click", () => {
+
+      const answer =
+        question.nextElementSibling;
+
+      const icon =
+        question.querySelector("span");
+
+
+      answer.classList.toggle("hidden");
+
+      icon.textContent =
+        answer.classList.contains("hidden")
+          ? "+"
+          : "−";
+
+    });
+
+  });
+
+
+
+/* SCROLL ANIMATION */
+
+const observer =
+  new IntersectionObserver(
+    entries => {
+
+      entries.forEach(entry => {
+
+        if (entry.isIntersecting) {
+
+          entry.target.classList.add("show");
+
+        }
+
+      });
+
+    },
+    {
+      threshold: .1
+    }
+  );
+
+
+document
+  .querySelectorAll(".reveal")
+  .forEach(element => {
+
+    observer.observe(element);
+
+  });
+
+</script>
+
+
+</body>
+</html>
